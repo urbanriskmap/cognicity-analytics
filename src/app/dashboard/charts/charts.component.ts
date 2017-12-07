@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, , Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-charts',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./charts.component.less']
 })
 export class ChartsComponent implements OnInit {
+  @Input() someValue: number;
+  @Input() otherValue: number;
 
   constructor() { }
 

@@ -1,5 +1,14 @@
 <h3>Dashboard works!</h3>
 <app-map></app-map>
 <app-slider></app-slider>
-<app-charts></app-charts>
-<app-stats></app-stats>
+
+<!-- Parent to child binding -->
+<!-- Refer ViewChild to update charts value and stats value simultaneously -->
+<!-- Or parent / child communicate via service (i.e. msg passing) -->
+<app-charts [someValue]="someValue" [otherValue]="otherValue"></app-charts>
+
+<!-- Parent accesses child's properties & methods (i.e. ref) -->
+<app-stats #stat [statVal]="someValue"></app-stats>
+
+<button (click)="stat.increment()">Increment</button>
+<button (click)="stat.decrement()">Decrement</button>
