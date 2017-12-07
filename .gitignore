@@ -20,6 +20,10 @@ coverage
 # nyc test coverage
 .nyc_output
 
+# e2e
+/e2e/*.js
+/e2e/*.map
+
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
@@ -31,6 +35,11 @@ bower_components
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
+
+# compiled output
+/dist
+/tmp
+/out-tsc
 
 # Dependency directories
 node_modules/
@@ -57,3 +66,6 @@ typings/
 # dotenv environment variables file
 .env
 
+# System Files
+.DS_Store
+Thumbs.db
