@@ -1,3 +1,10 @@
-<p>
-  slider works!
-</p>
+<div class="row">
+  <div class="col-12 col-sm-3">
+    <input type="date" [value]="selectedDate" (change)="dateChanged($event)">
+  </div>
+
+  <div class="col-12 col-sm-9">
+    <p *ngIf="isRefreshing">Loading...</p>
+    <input *ngIf="!isRefreshing && reports" type="range">
+  </div>
+</div>

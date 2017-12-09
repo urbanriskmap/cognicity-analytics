@@ -5,11 +5,18 @@ import { ChartsComponent } from './charts/charts.component';
 import { StatsComponent } from './stats/stats.component';
 import { SliderComponent } from './slider/slider.component';
 import { MapComponent } from './map/map.component';
-
+import { SliderService } from '../services/slider.service';
+import { LayersService } from '../services/layers.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule
+  ],
+  providers: [
+    SliderService,
+    LayersService
   ],
   declarations: [DashboardComponent, ChartsComponent, StatsComponent, SliderComponent, MapComponent]
 })

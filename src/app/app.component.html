@@ -1,7 +1,14 @@
-<div class="navbar">
-  <h2>{{title}}</h2>
+<div class="container-fluid">
+  <div class="row" id="navBar">
+    <div class="col-12 col-sm-6" id="logoBar">
+      <p>{{title}}</p>
+    </div>
+    <div class="col-12 col-sm-6" id="linksBar">
+      <p class="text-right">Home | About | REM</p>
+    </div>
+  </div>
 </div>
 
-<div class="content">
+<div class="dashboard-wrapper">
   <router-outlet></router-outlet>
 </div>

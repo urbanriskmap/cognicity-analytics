@@ -1,14 +1,18 @@
-<h3>Dashboard works!</h3>
-<app-map></app-map>
-<app-slider></app-slider>
+<div class="container-fluid" id="mapWrapper">
+  <app-map #map></app-map>
+</div>
 
-<!-- Parent to child binding -->
-<!-- Refer ViewChild to update charts value and stats value simultaneously -->
-<!-- Or parent / child communicate via service (i.e. msg passing) -->
-<app-charts [someValue]="someValue" [otherValue]="otherValue"></app-charts>
+<div class="container-fluid" id="sliderWrapper">
+  <app-slider></app-slider>
+</div>
 
-<!-- Parent accesses child's properties & methods (i.e. ref) -->
-<app-stats #stat [statVal]="someValue"></app-stats>
-
-<button (click)="stat.increment()">Increment</button>
-<button (click)="stat.decrement()">Decrement</button>
+<div class="container-fluid" id="analyticsWrapper">
+  <div class="row">
+    <div class="col-12 col-md-8" id="chartsWrapper">
+      <app-charts [someValue]="someValue" [otherValue]="otherValue"></app-charts>
+    </div>
+    <div class="col-12 col-md-4" id="statsWrapper">
+      <app-stats #stat [statVal]="someValue"></app-stats>
+    </div>
+  </div>
+</div>
