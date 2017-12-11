@@ -46,21 +46,25 @@ export class LayersService {
             [4, '#cc2a41']
           ]
         },
-        'fill-opacity': 0.7,
+        'fill-opacity': 0.6,
         'fill-outline-color': '#000000'
       }
     });
   }
 
   updateFloodAreas(floodStates, floodAreas, map) {
-    // Reset flood areas data
-    map.getSource('flood_areas')
-    .setData(floodAreas);
-
+    // Store floodAreas properties
     const updatedData = floodAreas;
 
+    // Update floodAreas properties
     for (const area in floodAreas.features) {
       if (floodAreas.features[area]) {
+        // Remove max_state property for all areas
+        if (floodAreas.features[area].properties.hasOwnProperty('max_state')) {
+          delete floodAreas.features[area].properties.max_state;
+        }
+
+        // Compare area_id's, add max_state property
         for (const state of floodStates) {
           if (floodAreas.features[area].properties.area_id === state.area_id) {
             updatedData.features[area].properties.max_state = parseInt(state.max_state, 10);

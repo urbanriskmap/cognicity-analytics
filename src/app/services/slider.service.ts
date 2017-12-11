@@ -93,7 +93,6 @@ export class SliderService {
       .get(endpoint)
       .subscribe(response => {
         if (response['statusCode'] === 200) {
-          console.log('Resolving flood data');
           resolve(response['result']);
         } else {
           reject(response);

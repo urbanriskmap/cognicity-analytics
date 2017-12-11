@@ -30,11 +30,11 @@ export class MapComponent implements OnInit {
       preserveDrawingBuffer: true
     });
 
+    // Load neighborhood polygons
     this.sliderService.getFloodAreas('jbd')
     .then(geojsonData => {
       this.floodAreas = geojsonData;
       this.layersService.loadFloodAreas(this.floodAreas, this.map);
-      console.log('Areas loaded');
     })
     .catch(error => {
       throw JSON.stringify(error);

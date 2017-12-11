@@ -10,8 +10,8 @@ import { LayersService } from '../../services/layers.service';
 export class SliderComponent implements OnInit {
   dateNow = new Date();
   selectedDate: string;
-  loadingReports: boolean;
-  loadingFloodAreas: boolean;
+  refreshingReports: boolean;
+  refreshingFloodAreas: boolean;
   reports: object;
   @Input() map: object;
   @Input() floodAreas: object;
@@ -26,8 +26,8 @@ export class SliderComponent implements OnInit {
   dateChanged(event) {
     // Async requests to server, load map layers
     if (event.srcElement.value) {
-      this.loadingReports = true;
-      this.loadingFloodAreas = true;
+      this.refreshingReports = true;
+      this.refreshingFloodAreas = true;
       this.updateReports(event.srcElement.value);
       this.updateFloodAreas(event.srcElement.value);
     }
@@ -38,11 +38,11 @@ export class SliderComponent implements OnInit {
     .then(geojsonData => {
       // pass to map, charts & stats
       this.reports = geojsonData;
-      this.loadingReports = false;
+      this.refreshingReports = false;
       this.layersService.renderReports(this.reports, this.map);
     })
     .catch(error => {
-      this.loadingReports = false;
+      this.refreshingReports = false;
       throw JSON.stringify(error);
     });
   }
@@ -50,13 +50,11 @@ export class SliderComponent implements OnInit {
   updateFloodAreas(date) {
     this.sliderService.getFloodAreasArchive(date)
     .then(data => {
-      if (data['length'] > 0) {
-        this.layersService.updateFloodAreas(data, this.floodAreas, this.map);
-      }
-      this.loadingFloodAreas = false;
+      this.layersService.updateFloodAreas(data, this.floodAreas, this.map);
+      this.refreshingFloodAreas = false;
     })
     .catch(error => {
-      this.loadingFloodAreas = false;
+      this.refreshingFloodAreas = false;
       throw JSON.stringify(error);
     });
   }
