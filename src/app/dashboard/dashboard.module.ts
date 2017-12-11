@@ -8,6 +8,7 @@ import { MapComponent } from './map/map.component';
 import { SliderService } from '../services/slider.service';
 import { LayersService } from '../services/layers.service';
 import { HttpClientModule } from '@angular/common/http';
+import { RangeComponent } from './slider/range/range.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { HttpClientModule } from '@angular/common/http';
     SliderService,
     LayersService
   ],
-  declarations: [DashboardComponent, ChartsComponent, StatsComponent, SliderComponent, MapComponent]
+  declarations: [DashboardComponent, ChartsComponent, StatsComponent, SliderComponent, MapComponent, RangeComponent]
 })
 export class DashboardModule { }

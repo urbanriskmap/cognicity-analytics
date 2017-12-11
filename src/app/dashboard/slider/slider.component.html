@@ -1,10 +1,9 @@
-<div class="row">
-  <div class="col-12 col-sm-3">
-    <input type="date" [value]="selectedDate" (change)="dateChanged($event)">
-  </div>
+<input id="dateSelector" type="date" [value]="selectedDate" (change)="dateChanged($event)">
+<div id="hintWrapper">
+  <p *ngIf="refreshingReports && refreshingFloodAreas">Loading...</p>
+</div>
 
-  <div class="col-12 col-sm-9">
-    <p *ngIf="refreshingReports && refreshingFloodAreas">Loading...</p>
-    <input *ngIf="!(refreshingReports && refreshingFloodAreas) && reports" type="range">
-  </div>
+<div id="rangeWrapper">
+  <app-range></app-range>
+  <!-- <app-range *ngIf="!(refreshingReports && refreshingFloodAreas) && reports" ></app-range> -->
 </div>
