@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-12 col-sm-9">
-    <p *ngIf="isRefreshing">Loading...</p>
-    <input *ngIf="!isRefreshing && reports" type="range">
+    <p *ngIf="loadingReports && loadingFloodAreas">Loading...</p>
+    <input *ngIf="!(loadingReports && loadingFloodAreas) && reports" type="range">
   </div>
 </div>

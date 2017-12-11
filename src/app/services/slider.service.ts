@@ -5,14 +5,33 @@ import * as topojson from 'topojson-client';
 
 @Injectable()
 export class SliderService {
-  geojsonData: object;
 
   constructor(private http: HttpClient) { }
 
+  getFloodAreas(city) {
+    const endpoint = environment.data_server + 'floods?city=' + city;
+
+    return new Promise((resolve, reject) => {
+      this.http
+      .get(endpoint)
+      .subscribe(response => {
+        if (response['statusCode'] === 200) {
+          const topojsonData = response['result'];
+          if (topojsonData && topojsonData.objects) {
+            const geojsonData = topojson.feature(topojsonData, topojsonData.objects.output);
+            resolve(geojsonData);
+          }
+        } else {
+          reject(response);
+        }
+      });
+    });
+  }
+
   // Get date in YYYY-MM-DD format
-  // Parse into start & end dates, 7 days apart
+  // Return start & end dates, 7 days apart
   // in ISO 8601 format string
-  getReportsArchive(selectedDate) {
+  formatTimePeriod(selectedDate) {
     // Store as [YYYY, MM, DD]
     const dateValues = selectedDate.split('-', 3);
 
@@ -36,12 +55,16 @@ export class SliderService {
       (new Date(endMilliseconds)).toUTCString()
     )).toISOString().replace('.', '%2B');
 
-    const endpoint = environment.data_server + 'reports/archive?start='
-      + startDatetime.replace('Z', '0') + '&end='
-      + endDatetime.replace('Z', '0');
+    return {
+      start: startDatetime.replace('Z', '0'),
+      end: endDatetime.replace('Z', '0')
+    };
+  }
 
-    // const headers = new HttpHeaders();
-    // headers.append('Access-Control-Allow-Origin', '*');
+  getReportsArchive(selectedDate) {
+    const endpoint = environment.data_server + 'reports/archive?start='
+      + this.formatTimePeriod(selectedDate).start + '&end='
+      + this.formatTimePeriod(selectedDate).end;
 
     return new Promise((resolve, reject) => {
       this.http
@@ -50,9 +73,28 @@ export class SliderService {
         if (response['statusCode'] === 200) {
           const topojsonData = response['result'];
           if (topojsonData && topojsonData.objects) {
-            this.geojsonData = topojson.feature(topojsonData, topojsonData.objects.output);
-            resolve(this.geojsonData);
+            const geojsonData = topojson.feature(topojsonData, topojsonData.objects.output);
+            resolve(geojsonData);
           }
+        } else {
+          reject(response);
+        }
+      });
+    });
+  }
+
+  getFloodAreasArchive(selectedDate) {
+    const endpoint = environment.data_server + 'floods/archive?start='
+      + this.formatTimePeriod(selectedDate).start + '&end='
+      + this.formatTimePeriod(selectedDate).end;
+
+    return new Promise((resolve, reject) => {
+      this.http
+      .get(endpoint)
+      .subscribe(response => {
+        if (response['statusCode'] === 200) {
+          console.log('Resolving flood data');
+          resolve(response['result']);
         } else {
           reject(response);
         }

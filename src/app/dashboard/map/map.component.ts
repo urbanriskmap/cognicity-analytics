@@ -1,6 +1,7 @@
 import { Component, Input, Output, OnInit } from '@angular/core';
 import mapboxgl from 'mapbox-gl';
 import { LayersService } from '../../services/layers.service';
+import { SliderService } from '../../services/slider.service';
 
 @Component({
   selector: 'app-map',
@@ -10,9 +11,11 @@ import { LayersService } from '../../services/layers.service';
   ]
 })
 export class MapComponent implements OnInit {
+  floodAreas: object;
   @Output() map: mapboxgl.Map;
 
-  constructor(private layersService: LayersService) { }
+  constructor(private layersService: LayersService,
+    private sliderService: SliderService) { }
 
   ngOnInit() {
     const self = this;
@@ -25,6 +28,16 @@ export class MapComponent implements OnInit {
       style: 'mapbox://styles/mapbox/light-v9',
       hash: false,
       preserveDrawingBuffer: true
+    });
+
+    this.sliderService.getFloodAreas('jbd')
+    .then(geojsonData => {
+      this.floodAreas = geojsonData;
+      this.layersService.loadFloodAreas(this.floodAreas, this.map);
+      console.log('Areas loaded');
+    })
+    .catch(error => {
+      throw JSON.stringify(error);
     });
   }
 }
