@@ -3,7 +3,5 @@
   <p *ngIf="refreshingReports && refreshingFloodAreas">Loading...</p>
 </div>
 
-<div id="rangeWrapper">
-  <app-range></app-range>
-  <!-- <app-range *ngIf="!(refreshingReports && refreshingFloodAreas) && reports" ></app-range> -->
-</div>
+<app-range (rangeChanged)="rangeChanged($event)"></app-range>
+<!-- <app-range *ngIf="!(refreshingReports && refreshingFloodAreas) && reports" ></app-range> -->

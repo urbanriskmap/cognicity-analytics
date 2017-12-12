@@ -1,10 +1,12 @@
-<div id="rangeBase">
-  <div id="rangeFill">
+<div id="rangeWrapper" (mousemove)="dragStart($event)">
+  <div id="rangeBase">
+    <div id="rangeFill" style="margin-top: {{upperBound}}px;">
+    </div>
   </div>
+
+  <button class="rangeKnob" id="knobUpper" (mousedown)="touchStart($event)">
+  </button>
+
+  <button class="rangeKnob" id="knobLower" (mousedown)="touchStart($event)">
+  </button>
 </div>
-
-<button class="rangeKnob" id="knobUpper">
-</button>
-
-<button class="rangeKnob" id="knobLower">
-</button>

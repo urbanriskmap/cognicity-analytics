@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,17 @@ export class DashboardComponent implements OnInit {
 
   constructor() { }
 
+  resizeComponents() {
+    const mapHeight = $(window).height() - $('#navBar').height() - $('#analyticsWrapper').height();
+    $('#mapWrapper').height(mapHeight);
+    $('#sliderWrapper').height(mapHeight - 30);
+  }
+
   ngOnInit() {
+    this.resizeComponents();
+    $(window).resize(() => {
+      this.resizeComponents();
+    });
   }
 
 }

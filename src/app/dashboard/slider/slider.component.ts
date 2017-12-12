@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit } from '@angular/core';
 import { SliderService } from '../../services/slider.service';
 import { LayersService } from '../../services/layers.service';
 
@@ -57,5 +57,11 @@ export class SliderComponent implements OnInit {
       this.refreshingFloodAreas = false;
       throw JSON.stringify(error);
     });
+  }
+
+  rangeChanged(event) {
+    console.log(event);
+    // use 'time' service to convert knob positions to datetime filters
+    // use 'layers' service to update reports & flood areas
   }
 }
