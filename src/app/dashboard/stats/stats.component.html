@@ -1,4 +1,11 @@
+<h2 *ngIf="isRefreshing">...</h2>
+<h2 *ngIf="!isRefreshing">{{reportsCount}}</h2>
 <p>
-  stats works!
+  Reports
 </p>
-<h2>{{statVal}}</h2>
+<br>
+<h2 *ngIf="isRefreshing">...</h2>
+<h2 *ngIf="!isRefreshing">{{floodAreasCount}}</h2>
+<p>
+  Flooded areas
+</p>

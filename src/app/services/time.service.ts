@@ -47,6 +47,16 @@ export class TimeService {
     };
   }
 
+  formatTimestamp(reportsGeojson) {
+    for (const report in reportsGeojson.features) {
+      if (reportsGeojson.features[report]) {
+        reportsGeojson.features[report].properties.created_at =
+          Date.parse(reportsGeojson.features[report].properties.created_at);
+      }
+    }
+    return reportsGeojson;
+  }
+
   getKnobDateTime(range, startDate) {
     const steps = range.totalDays * (24 / range.intervalHours);
     const millisecondsPerStep = range.intervalHours * 60 * 60 * 1000;

@@ -6,18 +6,12 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./stats.component.less']
 })
 export class StatsComponent implements OnInit {
-  @Input() statVal: number;
+  @Input() floodAreasCount: number;
+  @Input() reportsCount: number;
+  @Input() isRefreshing: boolean;
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  increment() {
-    this.statVal += 1;
-  }
-
-  decrement() {
-    this.statVal -= 1;
   }
 }

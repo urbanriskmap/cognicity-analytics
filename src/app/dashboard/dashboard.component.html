@@ -3,7 +3,7 @@
 </div>
 
 <div id="sliderWrapper">
-  <app-slider [map]="map.map" [floodAreas]="map.floodAreas"></app-slider>
+  <app-slider [map]="map.map" [floodAreas]="map.floodAreas" #slider></app-slider>
 </div>
 
 <div class="container-fluid" id="analyticsWrapper">
@@ -12,7 +12,11 @@
       <app-charts [someValue]="someValue" [otherValue]="otherValue"></app-charts>
     </div>
     <div class="col-12 col-md-4" id="statsWrapper">
-      <app-stats #stat [statVal]="someValue"></app-stats>
+      <app-stats
+        [floodAreasCount]="slider.floodAreasCount"
+        [reportsCount]="slider.reportsCount"
+        [isRefreshing]="slider.refreshingStats.reports || slider.refreshingStats.floodAreas">
+      </app-stats>
     </div>
   </div>
 </div>

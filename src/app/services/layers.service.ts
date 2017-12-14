@@ -11,27 +11,38 @@ export class LayersService {
       map.removeSource('reports');
     }
 
-    for (const report in reportsGeojson.features) {
-      if (reportsGeojson.features[report]) {
-        reportsGeojson.features[report].properties.created_at =
-          Date.parse(reportsGeojson.features[report].properties.created_at);
+    return new Promise((resolve, reject) => {
+      const reports = {
+        id: 'reports',
+        type: 'circle',
+        source: {
+          type: 'geojson',
+          data: reportsGeojson
+        },
+        paint: {
+          'circle-color': '#31aade',
+          'circle-radius': 4,
+          'circle-stroke-width': 1,
+          'circle-stroke-color': '#ffffff'
+        }
+      };
+
+      resolve(map.addLayer(reports));
+    });
+  }
+
+  // range: {start: date_milliseconds, end: date_milliseconds}
+  getReportsCount(map, range) {
+    const reports = map.getSource('reports')._data.features;
+    let reportsCount = 0;
+
+    for (const report of reports) {
+      if (report.properties.created_at >= range.start && report.properties.created_at <= range.end) {
+        reportsCount += 1;
       }
     }
 
-    return map.addLayer({
-      id: 'reports',
-      type: 'circle',
-      source: {
-        type: 'geojson',
-        data: reportsGeojson
-      },
-      paint: {
-        'circle-color': '#31aade',
-        'circle-radius': 4,
-        'circle-stroke-width': 1,
-        'circle-stroke-color': '#ffffff'
-      }
-    });
+    return reportsCount;
   }
 
   loadFloodAreas(floodAreasGeojson, map) {
@@ -63,6 +74,7 @@ export class LayersService {
   updateFloodAreas(floodStates, floodAreas, map) {
     // Store floodAreas properties
     const updatedData = floodAreas;
+    let floodAreasCount = 0;
 
     // Update floodAreas properties
     for (const area in floodAreas.features) {
@@ -76,6 +88,7 @@ export class LayersService {
         for (const state of floodStates) {
           if (floodAreas.features[area].properties.area_id === state.area_id) {
             updatedData.features[area].properties.max_state = parseInt(state.max_state, 10);
+            floodAreasCount += 1;
           }
         }
       }
@@ -84,6 +97,8 @@ export class LayersService {
     // Set updated data
     map.getSource('flood_areas')
     .setData(updatedData);
+
+    return floodAreasCount;
   }
 
   filterLayer(map, layer, filter) {
