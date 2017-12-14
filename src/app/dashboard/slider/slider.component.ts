@@ -39,7 +39,7 @@ export class SliderComponent implements OnInit {
       this.refreshingFloodAreas = true;
 
       // Use event.srcElement.value as race condition prevents this.selectedDate to update in time
-      this.selectedTimePeriod = this.timeService.format(event.srcElement.value);
+      this.selectedTimePeriod = this.timeService.format(event.srcElement.value, true);
 
       // Bind slider markings
       this.dateTimeMarks = this.timeService.getKnobDateTime({
@@ -79,8 +79,20 @@ export class SliderComponent implements OnInit {
   }
 
   updateRange(range) {
-    console.log(range);
-    // use 'time' service to convert knob positions to datetime filters
-    // use 'layers' service to update reports & flood areas
+    const startDate = range.upper.dateMilliseconds;
+    const endDate = range.lower.dateMilliseconds;
+
+    // Filter reports layer
+    const filter = ['all', ['>=', 'created_at', startDate], ['<=', 'created_at', endDate]];
+    this.layersService.filterLayer(this.map, 'reports', filter);
+
+    // Update flood areas layer
+    const timePeriod = this.timeService.format({
+      start: startDate,
+      end: endDate
+    }, false);
+    this.httpService.getFloodAreasArchive(timePeriod)
+    .then(data => this.layersService.updateFloodAreas(data, this.floodAreas, this.map))
+    .catch(error => console.log(JSON.stringify(error)));
   }
 }

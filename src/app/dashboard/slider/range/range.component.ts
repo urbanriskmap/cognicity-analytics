@@ -127,11 +127,6 @@ export class RangeComponent implements OnInit {
       // Update values & UI
       if (thresholdCrossed && limitsChecked && crossingChecked) {
         this.knobStep[this.selectedKnobId] += stepChange;
-        // Pass data to parent components
-        this.rangeChanged.emit({
-          upper: this.markings[this.knobStep.knobUpper],
-          lower: this.markings[this.knobStep.knobLower]
-        });
 
         const newPositionPx = this.knobStep[this.selectedKnobId] * this.rangeStepPx;
 
@@ -164,6 +159,11 @@ export class RangeComponent implements OnInit {
   dragEnd() {
     if (this.isSliderActive) {
       this.isSliderActive = false;
+      // Pass data to parent components
+      this.rangeChanged.emit({
+        upper: this.markings[this.knobStep.knobUpper],
+        lower: this.markings[this.knobStep.knobLower]
+      });
     }
   }
 }

@@ -10,6 +10,14 @@ export class LayersService {
       map.removeLayer('reports');
       map.removeSource('reports');
     }
+
+    for (const report in reportsGeojson.features) {
+      if (reportsGeojson.features[report]) {
+        reportsGeojson.features[report].properties.created_at =
+          Date.parse(reportsGeojson.features[report].properties.created_at);
+      }
+    }
+
     return map.addLayer({
       id: 'reports',
       type: 'circle',
@@ -76,5 +84,9 @@ export class LayersService {
     // Set updated data
     map.getSource('flood_areas')
     .setData(updatedData);
+  }
+
+  filterLayer(map, layer, filter) {
+    map.setFilter(layer, filter);
   }
 }
