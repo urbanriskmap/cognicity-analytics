@@ -7,8 +7,11 @@ import * as $ from 'jquery';
   styleUrls: ['./range.component.less']
 })
 export class RangeComponent implements OnInit {
-  rangeTotalDays = 7; // Slider represents 7 days
-  rangeIntervalHours = 4; // Step size in hours
+  @Input() rangeSettings: {
+    totalDays: number,
+    intervalHours: number
+  };
+  @Input() markings: object[];
   knobHeight: number;
   totalSteps: number;
   sliderTopOffset: number;
@@ -22,8 +25,6 @@ export class RangeComponent implements OnInit {
   @Output() rangeChanged = new EventEmitter();
 
   constructor() {
-    this.isMobile = /Mobi/.test(navigator.userAgent) ? true : false;
-    this.totalSteps = this.rangeTotalDays * (24 / this.rangeIntervalHours);
   }
 
   setRangeUnits() {
@@ -31,12 +32,14 @@ export class RangeComponent implements OnInit {
       ($('#sliderWrapper').height() - 80) - (($('#sliderWrapper').height() - 80) % this.totalSteps)
     );
     this.sliderHeightPx = $('#rangeWrapper').height();
+
     // Pixels represented by each step, given step size in hours
     this.rangeStepPx = this.sliderHeightPx / this.totalSteps;
     this.sliderTopOffset = $('#rangeBase').offset().top;
   }
 
   ngOnInit() {
+    this.totalSteps = this.rangeSettings.totalDays * (24 / this.rangeSettings.intervalHours);
     this.knobHeight = $('#knobUpper').height();
 
     // Set initial knob positions
@@ -126,9 +129,8 @@ export class RangeComponent implements OnInit {
         this.knobStep[this.selectedKnobId] += stepChange;
         // Pass data to parent components
         this.rangeChanged.emit({
-          selectedRange: this.knobStep,
-          totalDays: this.rangeTotalDays,
-          intervalHours: this.rangeIntervalHours
+          upper: this.markings[this.knobStep.knobUpper],
+          lower: this.markings[this.knobStep.knobLower]
         });
 
         const newPositionPx = this.knobStep[this.selectedKnobId] * this.rangeStepPx;
@@ -137,12 +139,18 @@ export class RangeComponent implements OnInit {
           $('#' + this.selectedKnobId).css({
             top: (newPositionPx - this.knobHeight) + 'px'
           });
+          $('#' + this.selectedKnobId + 'Hover').css({
+            top: (newPositionPx - this.knobHeight) + 'px'
+          });
           $('#rangeFill').css({
             'margin-top': (newPositionPx - this.knobHeight) + 'px',
             'height': ((this.knobStep.knobLower - this.knobStep.knobUpper) * this.rangeStepPx) + 'px'
           });
         } else if (this.selectedKnobId === 'knobLower') {
           $('#' + this.selectedKnobId).css({
+            bottom: (this.sliderHeightPx - newPositionPx - this.knobHeight) + 'px'
+          });
+          $('#' + this.selectedKnobId + 'Hover').css({
             bottom: (this.sliderHeightPx - newPositionPx - this.knobHeight) + 'px'
           });
           $('#rangeFill').css({

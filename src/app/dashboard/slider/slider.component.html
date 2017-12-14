@@ -4,4 +4,9 @@
   <ng-template #elseBlock>Reference date</ng-template>
 </div>
 
-<app-range *ngIf="!(refreshingReports && refreshingFloodAreas) && reports" (rangeChanged)="rangeChanged($event)"></app-range>
+<app-range
+  *ngIf="!(refreshingReports && refreshingFloodAreas) && reports"
+  [markings]="dateTimeMarks"
+  [rangeSettings]="rangeSettings"
+  (rangeChanged)="updateRange($event)">
+</app-range>

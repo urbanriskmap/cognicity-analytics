@@ -1,7 +1,7 @@
 import { Component, Input, Output, OnInit } from '@angular/core';
 import mapboxgl from 'mapbox-gl';
 import { LayersService } from '../../services/layers.service';
-import { SliderService } from '../../services/slider.service';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-map',
@@ -15,7 +15,7 @@ export class MapComponent implements OnInit {
   @Output() map: mapboxgl.Map;
 
   constructor(private layersService: LayersService,
-    private sliderService: SliderService) { }
+    private httpService: HttpService) { }
 
   ngOnInit() {
     const self = this;
@@ -31,7 +31,7 @@ export class MapComponent implements OnInit {
     });
 
     // Load neighborhood polygons
-    this.sliderService.getFloodAreas('jbd')
+    this.httpService.getFloodAreas('jbd')
     .then(geojsonData => {
       this.floodAreas = geojsonData;
       this.layersService.loadFloodAreas(this.floodAreas, this.map);

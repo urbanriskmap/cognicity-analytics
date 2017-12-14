@@ -8,6 +8,16 @@
   // border: 1px solid red;
 }
 
+#rangeMarks {
+  position: absolute;
+  top: 0;
+  left: 46px;
+  & table, tr, td {
+    margin: 0;
+    padding: 0;
+  }
+}
+
 #rangeBase {
   margin-left: 21px;
   width: 16px;
@@ -23,25 +33,39 @@
 }
 
 .rangeKnob {
+  position: absolute;
+  left: 15px;
   &#knobUpper {
     top: -6px;
   }
   &#knobLower {
     bottom: -6px;
   }
-  position: absolute;
-  left: 15px;
   width: 28px;
   height: 12px;
   border: 1px solid @dark-gray;
   border-radius: 6px;
   background-color: @snow-white;
-  float: left;
   outline: none;
   &:hover {
     background-color: @light-gray;
   }
   &:active {
     background-color: @medium-gray;
+  }
+}
+
+.knobHoverText {
+  position: absolute;
+  left: 46px;
+  .textlight-mixin(12px, @dark-gray);
+  line-height: 12px;
+  margin: 0;
+  padding: 0;
+  &#knobUpperHover {
+    top: -6px;
+  }
+  &#knobLowerHover {
+    bottom: -6px;
   }
 }
