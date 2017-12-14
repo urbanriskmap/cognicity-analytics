@@ -1,7 +1,7 @@
 <input id="dateSelector" type="date" [value]="selectedDate" (change)="dateChanged($event)">
 <div id="hintWrapper">
-  <p *ngIf="refreshingReports && refreshingFloodAreas">Loading...</p>
+  <p *ngIf="refreshingReports && refreshingFloodAreas; else elseBlock">Loading...</p>
+  <ng-template #elseBlock>Reference date</ng-template>
 </div>
 
-<app-range (rangeChanged)="rangeChanged($event)"></app-range>
-<!-- <app-range *ngIf="!(refreshingReports && refreshingFloodAreas) && reports" ></app-range> -->
+<app-range *ngIf="!(refreshingReports && refreshingFloodAreas) && reports" (rangeChanged)="rangeChanged($event)"></app-range>
