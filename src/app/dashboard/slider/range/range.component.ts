@@ -12,6 +12,7 @@ export class RangeComponent implements OnInit {
     intervalHours: number
   };
   @Input() markings: object[];
+  @Input() knobStep: {knobUpper: number, knobLower: number};
   knobHeight: number;
   totalSteps: number;
   sliderTopOffset: number;
@@ -21,7 +22,6 @@ export class RangeComponent implements OnInit {
   isSliderActive: boolean;
   selectedKnobId: string;
   dragPosition: number;
-  knobStep: {knobUpper: number, knobLower: number};
   @Output() rangeChanged = new EventEmitter();
 
   constructor() {
@@ -42,11 +42,8 @@ export class RangeComponent implements OnInit {
     this.totalSteps = this.rangeSettings.totalDays * (24 / this.rangeSettings.intervalHours);
     this.knobHeight = $('#knobUpper').height();
 
-    // Set initial knob positions
-    this.knobStep = {
-      knobUpper: 0,
-      knobLower: this.totalSteps
-    };
+    // TODO: Set initial knob positions
+    // this.resetKnobs();
 
     // Bind screen pixel values to slider units
     this.setRangeUnits();

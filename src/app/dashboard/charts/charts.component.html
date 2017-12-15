@@ -1,5 +1,15 @@
 <div id="chartsMenu">
-  Reports vs. flooded areas
+  <button
+    *ngFor="let type of chartTypes"
+    [id]="type.id + 'Button'"
+    [class]="type.class"
+    (click)="changeChart($event)">
+    {{type.title}}
+  </button>
 </div>
-<div id="chartWrapper">
+
+<div id="activityWrapper" class="charts">
+</div>
+
+<div id="sourceWrapper" class="charts">
 </div>

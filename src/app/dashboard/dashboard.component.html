@@ -1,8 +1,8 @@
 <div class="container-fluid" id="mapWrapper">
   <app-map
     (finishedLoading)="slider.initData()"
-    #map
-  ></app-map>
+    #map>
+  </app-map>
 </div>
 
 <div id="sliderWrapper">
@@ -11,6 +11,7 @@
     [floodAreas]="map.floodAreas"
     (drawChart)="chart.drawChart($event)"
     (updateChart)="chart.updateChart($event)"
+    (updateChartScale)="chart.updateScale($event)"
     #slider>
   </app-slider>
 </div>
@@ -24,9 +25,9 @@
     </div>
     <div class="col-12 col-md-4" id="statsWrapper">
       <app-stats
+        [isRefreshing]="slider.refreshingStats.reports || slider.refreshingStats.floodAreas"
         [floodAreasCount]="slider.floodAreasCount"
-        [reportsCount]="slider.reportsCount"
-        [isRefreshing]="slider.refreshingStats.reports || slider.refreshingStats.floodAreas">
+        [reportsCount]="slider.reportsCount">
       </app-stats>
     </div>
   </div>

@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { LayersService } from '../../services/layers.service';
 import { TimeService } from '../../services/time.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-slider',
@@ -17,11 +18,13 @@ export class SliderComponent implements OnInit {
   reports: object;
   refreshingLayers = {reports: false, floodAreas: false};
   @Output() refreshingStats = {reports: true, floodAreas: true};
+  @Output() knobStep: {knobUpper: number, knobLower: number};
   @Output() dateTimeMarks: object[];
   @Output() floodAreasCount: number;
   @Output() reportsCount: number;
   @Output() drawChart = new EventEmitter();
   @Output() updateChart = new EventEmitter();
+  @Output() updateChartScale = new EventEmitter();
   @Output() rangeSettings = {
     totalDays: 7, // Slider represents 7 days
     intervalHours: 4 // Step size in hours
@@ -34,6 +37,21 @@ export class SliderComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  resetKnobs() {
+    this.knobStep = {
+      knobUpper: 0,
+      knobLower: this.rangeSettings.totalDays * (24 / this.rangeSettings.intervalHours)
+    };
+    $('#knobUpper').css({top: '0px'});
+    $('#knobUpperHover').css({top: '0px'});
+    $('#rangeFill').css({
+      'margin-top': '0px',
+      height: '100%'
+    });
+    $('#knobLower').css({bottom: '0px'});
+    $('#knobLowerHover').css({bottom: '0px'});
   }
 
   updateReports(date) {
@@ -72,7 +90,7 @@ export class SliderComponent implements OnInit {
     });
   }
 
-  dateChanged(event) {
+  dateChanged(event, isInitializing) {
     // Async requests to server, load map layers
     if (event.srcElement.value) {
       this.refreshingLayers = {reports: true, floodAreas: true};
@@ -86,21 +104,36 @@ export class SliderComponent implements OnInit {
         totalDays: this.rangeSettings.totalDays
       }, this.selectedTimePeriod.start);
 
+      // Set knob positions to full scale
+      this.resetKnobs();
+
       this.updateReports(this.selectedTimePeriod);
       this.updateFloodAreas(this.selectedTimePeriod);
-      // Trigger chart update
-      this.drawChart.emit(this.selectedTimePeriod);
+
+      if (isInitializing) {
+        // Draw chart
+        this.drawChart.emit(this.selectedTimePeriod);
+      } else {
+        // Update chart
+        this.updateChart.emit(this.selectedTimePeriod);
+      }
     }
   }
 
   initData() {
-    this.dateChanged({srcElement: {value: this.selectedDate}});
+    // Mock date selection while DOM elements initialize
+    const event = {srcElement: {value: this.selectedDate}};
+
+    this.dateChanged(event, true);
   }
 
   updateRange(range) {
     this.refreshingStats = {reports: true, floodAreas: true};
     const startDate = range.upper.dateMilliseconds;
     const endDate = range.lower.dateMilliseconds;
+
+    // Update chart time scale
+    this.updateChartScale.emit(range);
 
     // Filter reports layer
     const filter = ['all', ['>=', 'created_at', startDate], ['<=', 'created_at', endDate]];

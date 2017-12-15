@@ -1,4 +1,4 @@
-<input id="dateSelector" type="date" [value]="selectedDate" (change)="dateChanged($event)">
+<input id="dateSelector" type="date" [value]="selectedDate" (change)="dateChanged($event, false)">
 <div id="hintWrapper" *ngIf="refreshingLayers.reports && refreshingLayers.floodAreas; then thenBlock else elseBlock">
 </div>
 <ng-template #thenBlock>
@@ -11,6 +11,7 @@
 
 <app-range
   *ngIf="!(refreshingReports && refreshingFloodAreas) && reports"
+  [knobStep]="knobStep"
   [markings]="dateTimeMarks"
   [rangeSettings]="rangeSettings"
   (rangeChanged)="updateRange($event)">
