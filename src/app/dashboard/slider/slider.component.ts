@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { LayersService } from '../../services/layers.service';
 import { TimeService } from '../../services/time.service';
@@ -18,12 +18,14 @@ export class SliderComponent implements OnInit {
   refreshingLayers = {reports: false, floodAreas: false};
   @Output() refreshingStats = {reports: true, floodAreas: true};
   @Output() dateTimeMarks: object[];
+  @Output() floodAreasCount: number;
+  @Output() reportsCount: number;
+  @Output() drawChart = new EventEmitter();
+  @Output() updateChart = new EventEmitter();
   @Output() rangeSettings = {
     totalDays: 7, // Slider represents 7 days
     intervalHours: 4 // Step size in hours
   };
-  @Output() floodAreasCount: number;
-  @Output() reportsCount: number;
 
   constructor(private httpService: HttpService,
     private layersService: LayersService,
@@ -50,6 +52,8 @@ export class SliderComponent implements OnInit {
 
       this.updateReports(this.selectedTimePeriod);
       this.updateFloodAreas(this.selectedTimePeriod);
+      // Trigger chart update
+      this.drawChart.emit(this.selectedTimePeriod);
     }
   }
 

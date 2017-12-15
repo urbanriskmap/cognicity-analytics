@@ -3,13 +3,21 @@
 </div>
 
 <div id="sliderWrapper">
-  <app-slider [map]="map.map" [floodAreas]="map.floodAreas" #slider></app-slider>
+  <app-slider
+    [map]="map.map"
+    [floodAreas]="map.floodAreas"
+    (drawChart)="chart.drawChart($event)"
+    (updateChart)="chart.updateChart($event)"
+    #slider>
+  </app-slider>
 </div>
 
 <div class="container-fluid" id="analyticsWrapper">
   <div class="row">
     <div class="col-12 col-md-8" id="chartsWrapper">
-      <app-charts [someValue]="someValue" [otherValue]="otherValue"></app-charts>
+      <app-charts
+        #chart>
+      </app-charts>
     </div>
     <div class="col-12 col-md-4" id="statsWrapper">
       <app-stats

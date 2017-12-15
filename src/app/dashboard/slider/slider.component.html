@@ -1,10 +1,13 @@
 <input id="dateSelector" type="date" [value]="selectedDate" (change)="dateChanged($event)">
-<div id="hintWrapper">
-  <p *ngIf="refreshingLayers.reports && refreshingLayers.floodAreas; else elseBlock">
-    Loading...
-  </p>
-  <ng-template #elseBlock>Reference date</ng-template>
+<div id="hintWrapper" *ngIf="refreshingLayers.reports && refreshingLayers.floodAreas; then thenBlock else elseBlock">
 </div>
+<ng-template #thenBlock>
+  <p>Loading...</p>
+</ng-template>
+<ng-template #elseBlock>
+  <p *ngIf="!reports">Select date</p>
+  <p *ngIf="reports">Select range</p>
+</ng-template>
 
 <app-range
   *ngIf="!(refreshingReports && refreshingFloodAreas) && reports"

@@ -67,4 +67,22 @@ export class HttpService {
       });
     });
   }
+
+  getTimeseries(dataType, timePeriod) {
+    const endpoint = environment.data_server + dataType + '/timeseries?start='
+      + timePeriod.start + '&end='
+      + timePeriod.end;
+
+    return new Promise((resolve, reject) => {
+      this.http
+      .get(endpoint)
+      .subscribe(response => {
+        if (response['statusCode'] === 200) {
+          resolve(response['result']);
+        } else {
+          reject(response);
+        }
+      });
+    });
+  }
 }

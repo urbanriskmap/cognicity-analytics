@@ -11,7 +11,7 @@ import { HttpService } from '../../services/http.service';
   ]
 })
 export class MapComponent implements OnInit {
-  floodAreas: object;
+  @Output() floodAreas: object;
   @Output() map: mapboxgl.Map;
 
   constructor(private layersService: LayersService,
