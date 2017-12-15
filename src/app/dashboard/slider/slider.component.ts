@@ -36,27 +36,6 @@ export class SliderComponent implements OnInit {
   ngOnInit() {
   }
 
-  dateChanged(event) {
-    // Async requests to server, load map layers
-    if (event.srcElement.value) {
-      this.refreshingLayers = {reports: true, floodAreas: true};
-
-      // Use event.srcElement.value as race condition prevents this.selectedDate to update in time
-      this.selectedTimePeriod = this.timeService.format(event.srcElement.value, true);
-
-      // Bind slider markings
-      this.dateTimeMarks = this.timeService.getKnobDateTime({
-        intervalHours: this.rangeSettings.intervalHours,
-        totalDays: this.rangeSettings.totalDays
-      }, this.selectedTimePeriod.start);
-
-      this.updateReports(this.selectedTimePeriod);
-      this.updateFloodAreas(this.selectedTimePeriod);
-      // Trigger chart update
-      this.drawChart.emit(this.selectedTimePeriod);
-    }
-  }
-
   updateReports(date) {
     this.httpService.getReportsArchive(date)
     .then(geojsonData => {
@@ -91,6 +70,31 @@ export class SliderComponent implements OnInit {
       this.refreshingStats.floodAreas = false;
       throw JSON.stringify(error);
     });
+  }
+
+  dateChanged(event) {
+    // Async requests to server, load map layers
+    if (event.srcElement.value) {
+      this.refreshingLayers = {reports: true, floodAreas: true};
+
+      // Use event.srcElement.value as race condition prevents this.selectedDate to update in time
+      this.selectedTimePeriod = this.timeService.format(event.srcElement.value, true);
+
+      // Bind slider markings
+      this.dateTimeMarks = this.timeService.getKnobDateTime({
+        intervalHours: this.rangeSettings.intervalHours,
+        totalDays: this.rangeSettings.totalDays
+      }, this.selectedTimePeriod.start);
+
+      this.updateReports(this.selectedTimePeriod);
+      this.updateFloodAreas(this.selectedTimePeriod);
+      // Trigger chart update
+      this.drawChart.emit(this.selectedTimePeriod);
+    }
+  }
+
+  initData() {
+    this.dateChanged({srcElement: {value: this.selectedDate}});
   }
 
   updateRange(range) {

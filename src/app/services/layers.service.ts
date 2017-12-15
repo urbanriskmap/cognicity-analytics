@@ -11,22 +11,22 @@ export class LayersService {
       map.removeSource('reports');
     }
 
-    return new Promise((resolve, reject) => {
-      const reports = {
-        id: 'reports',
-        type: 'circle',
-        source: {
-          type: 'geojson',
-          data: reportsGeojson
-        },
-        paint: {
-          'circle-color': '#31aade',
-          'circle-radius': 4,
-          'circle-stroke-width': 1,
-          'circle-stroke-color': '#ffffff'
-        }
-      };
+    const reports = {
+      id: 'reports',
+      type: 'circle',
+      source: {
+        type: 'geojson',
+        data: reportsGeojson
+      },
+      paint: {
+        'circle-color': '#31aade',
+        'circle-radius': 4,
+        'circle-stroke-width': 1,
+        'circle-stroke-color': '#ffffff'
+      }
+    };
 
+    return new Promise(resolve => {
       resolve(map.addLayer(reports));
     });
   }
@@ -46,7 +46,7 @@ export class LayersService {
   }
 
   loadFloodAreas(floodAreasGeojson, map) {
-    return map.addLayer({
+    const floodAreas = {
       id: 'flood_areas',
       type: 'fill',
       source: {
@@ -68,6 +68,10 @@ export class LayersService {
         'fill-opacity': 0.6,
         'fill-outline-color': '#000000'
       }
+    };
+
+    return new Promise(resolve => {
+      resolve(map.addLayer(floodAreas));
     });
   }
 

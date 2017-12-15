@@ -11,8 +11,6 @@ import * as $ from 'jquery';
 export class ChartsComponent implements OnInit {
   @Input() someValue: number;
   @Input() otherValue: number;
-  // reportsData: {t: string, y: number}[];
-  // floodsData: {t: string, y: number}[];
   reportsData: {t: string, y: number}[] = [];
   floodsData: {t: string, y: number}[] = [];
   chart: Chart;
@@ -29,7 +27,7 @@ export class ChartsComponent implements OnInit {
         '<canvas id="chartInset"></canvas>'
       );
 
-      const chart_ctx = $('#chartInset').get(0).getContext('2d');
+      const chart_ctx = $('#chartInset').get(0)['getContext']('2d');
       chart_ctx.canvas.width = $('#chartWrapper').width();
       chart_ctx.canvas.height = $('#chartWrapper').height();
 
@@ -37,6 +35,7 @@ export class ChartsComponent implements OnInit {
       .then(reports => {
         this.httpService.getTimeseries('floods', timePeriod)
         .then(floods => {
+
           for (const report of reports) {
             this.reportsData.push({
               t: report.ts,

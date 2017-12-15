@@ -24,8 +24,8 @@ export class TimeService {
       )).toString());
 
       // Start and end dateTime in milliseconds, 7 days apart
-      startMilliseconds = dateMilliseconds - (3 * 24 * 60 * 60 * 1000);
-      endMilliseconds = dateMilliseconds + (4 * 24 * 60 * 60 * 1000) - 1;
+      startMilliseconds = dateMilliseconds - (6 * 24 * 60 * 60 * 1000);
+      endMilliseconds = dateMilliseconds + (1 * 24 * 60 * 60 * 1000) - 1;
     } else {
       // Else if input is in milliseconds {start: number, end: number}
       startMilliseconds = selectedDate.start;

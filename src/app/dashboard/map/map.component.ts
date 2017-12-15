@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import mapboxgl from 'mapbox-gl';
 import { LayersService } from '../../services/layers.service';
 import { HttpService } from '../../services/http.service';
@@ -13,6 +13,7 @@ import { HttpService } from '../../services/http.service';
 export class MapComponent implements OnInit {
   @Output() floodAreas: object;
   @Output() map: mapboxgl.Map;
+  @Output() finishedLoading = new EventEmitter();
 
   constructor(private layersService: LayersService,
     private httpService: HttpService) { }
@@ -30,14 +31,19 @@ export class MapComponent implements OnInit {
       preserveDrawingBuffer: true
     });
 
-    // Load neighborhood polygons
-    this.httpService.getFloodAreas('jbd')
-    .then(geojsonData => {
-      this.floodAreas = geojsonData;
-      this.layersService.loadFloodAreas(this.floodAreas, this.map);
-    })
-    .catch(error => {
-      throw JSON.stringify(error);
+    self.map.on('style.load', () => {
+      // Load neighborhood polygons
+      self.httpService.getFloodAreas('jbd')
+      .then(geojsonData => {
+        self.floodAreas = geojsonData;
+        self.layersService.loadFloodAreas(self.floodAreas, self.map)
+        .then(() => {
+          self.finishedLoading.emit();
+        });
+      })
+      .catch(error => {
+        throw JSON.stringify(error);
+      });
     });
   }
 }

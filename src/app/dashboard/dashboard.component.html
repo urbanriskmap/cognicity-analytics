@@ -1,5 +1,8 @@
 <div class="container-fluid" id="mapWrapper">
-  <app-map #map></app-map>
+  <app-map
+    (finishedLoading)="slider.initData()"
+    #map
+  ></app-map>
 </div>
 
 <div id="sliderWrapper">
