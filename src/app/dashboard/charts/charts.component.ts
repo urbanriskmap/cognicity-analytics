@@ -11,6 +11,10 @@ import * as $ from 'jquery';
 export class ChartsComponent implements OnInit {
   @Input() someValue: number;
   @Input() otherValue: number;
+  @Input() reportsSource: {aggregates: number[], labels: string[]} = {
+    aggregates: [],
+    labels: []
+  };
   chartTypes = [
     {id: 'activity', title: 'Reporting activity', class: 'tabButton selected'},
     {id: 'source', title: 'Reporting source', class: 'tabButton'}

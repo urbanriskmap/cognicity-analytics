@@ -17,6 +17,7 @@ export class SliderComponent implements OnInit {
   selectedTimePeriod: {start: string, end: string};
   reports: object;
   refreshingLayers = {reports: false, floodAreas: false};
+  @Output() reportsSource: {aggregates: number[], labels: string[]};
   @Output() refreshingStats = {reports: true, floodAreas: true};
   @Output() knobStep: {knobUpper: number, knobLower: number};
   @Output() dateTimeMarks: object[];
@@ -59,12 +60,20 @@ export class SliderComponent implements OnInit {
     .then(geojsonData => {
       // pass to map, charts & stats
       this.reports = this.timeService.formatTimestamp(geojsonData);
+
       this.layersService.renderReports(this.reports, this.map)
       .then(() => {
-        this.reportsCount = this.layersService.getReportsCount(this.map, {
+        const aggregates = this.layersService.getReportsCount(this.map, {
           start: Date.parse(date.start.replace('%2B', '.')),
           end: Date.parse(date.end.replace('%2B', '.'))
         });
+        this.reportsCount = aggregates.qlue + aggregates.grasp + aggregates.detik;
+
+        this.reportsSource = {
+          aggregates: [aggregates.qlue, aggregates.grasp, aggregates.detik],
+          labels: ['Qlue', 'Grasp', 'Detik']
+        };
+
         this.refreshingLayers.reports = false;
         this.refreshingStats.reports = false;
       });
@@ -138,8 +147,15 @@ export class SliderComponent implements OnInit {
     // Filter reports layer
     const filter = ['all', ['>=', 'created_at', startDate], ['<=', 'created_at', endDate]];
     this.layersService.filterLayer(this.map, 'reports', filter);
-    this.reportsCount = this.layersService.getReportsCount(this.map, {start: startDate, end: endDate});
+
+    const aggregates = this.layersService.getReportsCount(this.map, {start: startDate, end: endDate});
+    this.reportsCount = aggregates.qlue + aggregates.grasp + aggregates.detik;
     this.refreshingStats.reports = false;
+
+    this.reportsSource = {
+      aggregates: [aggregates.qlue, aggregates.grasp, aggregates.detik],
+      labels: ['Qlue', 'Grasp', 'Detik']
+    };
 
     // Update flood areas layer
     const timePeriod = this.timeService.format({

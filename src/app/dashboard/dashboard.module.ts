@@ -10,6 +10,8 @@ import { LayersService } from '../services/layers.service';
 import { TimeService } from '../services/time.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RangeComponent } from './slider/range/range.component';
+import { ActivityChartComponent } from './charts/activity-chart/activity-chart.component';
+import { SourceChartComponent } from './charts/source-chart/source-chart.component';
 
 @NgModule({
   imports: [
@@ -21,6 +23,15 @@ import { RangeComponent } from './slider/range/range.component';
     LayersService,
     TimeService
   ],
-  declarations: [DashboardComponent, ChartsComponent, StatsComponent, SliderComponent, MapComponent, RangeComponent]
+  declarations: [
+    DashboardComponent,
+    ChartsComponent,
+    StatsComponent,
+    SliderComponent,
+    MapComponent,
+    RangeComponent,
+    ActivityChartComponent,
+    SourceChartComponent
+  ]
 })
 export class DashboardModule { }

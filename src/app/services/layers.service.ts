@@ -34,11 +34,11 @@ export class LayersService {
   // range: {start: date_milliseconds, end: date_milliseconds}
   getReportsCount(map, range) {
     const reports = map.getSource('reports')._data.features;
-    let reportsCount = 0;
+    const reportsCount = {qlue: 0, grasp: 0, detik: 0};
 
     for (const report of reports) {
       if (report.properties.created_at >= range.start && report.properties.created_at <= range.end) {
-        reportsCount += 1;
+        reportsCount[report.properties.source] += 1;
       }
     }
 

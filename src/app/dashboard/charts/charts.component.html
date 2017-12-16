@@ -18,6 +18,8 @@
 </div>
 
 <div id="sourceWrapper" class="charts">
-  <app-source-chart>
+  <app-source-chart
+    *ngIf="(reportsSource && reportsSource.aggregates.length) && selectedChart==='source'"
+    [reportsSource]="reportsSource">
   </app-source-chart>
 </div>
