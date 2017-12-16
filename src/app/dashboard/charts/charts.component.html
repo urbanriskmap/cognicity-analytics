@@ -9,7 +9,15 @@
 </div>
 
 <div id="activityWrapper" class="charts">
+  <app-activity-chart
+    *ngIf="(reportsData.length || floodsData.length) && selectedChart==='activity'"
+    [reportsData]="reportsData"
+    [floodsData]="floodsData"
+    [scaleLimits]="scaleLimits">
+  </app-activity-chart>
 </div>
 
 <div id="sourceWrapper" class="charts">
+  <app-source-chart>
+  </app-source-chart>
 </div>
