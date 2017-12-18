@@ -20,7 +20,12 @@ export class SliderComponent implements OnInit {
   @Output() reportsSource: {aggregates: number[], labels: string[]};
   @Output() refreshingStats = {reports: true, floodAreas: true};
   @Output() knobStep: {knobUpper: number, knobLower: number};
-  @Output() dateTimeMarks: object[];
+  @Output() dateTimeMarks: {
+    dateMilliseconds: number,
+    day: number,
+    month: string,
+    time: string
+  }[];
   @Output() floodAreasCount: number;
   @Output() reportsCount: number;
   @Output() drawChart = new EventEmitter();
@@ -168,5 +173,12 @@ export class SliderComponent implements OnInit {
       this.refreshingStats.floodAreas = false;
     })
     .catch(error => console.log(JSON.stringify(error)));
+  }
+
+  get enableSlider() {
+    return (
+      !(this.refreshingLayers.reports && this.refreshingLayers.floodAreas)
+      && this.reports
+    );
   }
 }

@@ -11,7 +11,12 @@ export class RangeComponent implements OnInit {
     totalDays: number,
     intervalHours: number
   };
-  @Input() markings: object[];
+  @Input() markings: {
+    dateMilliseconds: number,
+    day: number,
+    month: string,
+    time: string
+  }[];
   @Input() knobStep: {knobUpper: number, knobLower: number};
   knobHeight: number;
   totalSteps: number;

@@ -10,7 +10,7 @@
 </ng-template>
 
 <app-range
-  *ngIf="!(refreshingReports && refreshingFloodAreas) && reports"
+  *ngIf="enableSlider"
   [knobStep]="knobStep"
   [markings]="dateTimeMarks"
   [rangeSettings]="rangeSettings"

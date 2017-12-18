@@ -57,7 +57,12 @@ export class TimeService {
     return reportsGeojson;
   }
 
-  getKnobDateTime(range, startDate) {
+  public getKnobDateTime(range, startDate): {
+    dateMilliseconds: number,
+    day: number,
+    month: string,
+    time: string
+  }[] {
     const steps = range.totalDays * (24 / range.intervalHours);
     const millisecondsPerStep = range.intervalHours * 60 * 60 * 1000;
     const startMilliseconds = Date.parse((new Date(startDate.replace('%2B', '.'))).toString());
