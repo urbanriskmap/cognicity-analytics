@@ -4,11 +4,18 @@
       <p>{{title}}</p>
     </div>
     <div class="col-12 col-sm-6" id="linksBar">
-      <p class="text-right">
+      <p class="text-right" *ngIf="auth.isAuthenticated(); then thenBlock else elseBlock">
+      </p>
+      <ng-template #thenBlock>
         <a routerLink="/" routerLinkActive="active">Home</a>
         &nbsp;&#124;&nbsp;
         <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-      </p>
+      </ng-template>
+      <ng-template #elseBlock>
+        <a (click)="auth.login()">Home</a>
+        &nbsp;&#124;&nbsp;
+        <a (click)="auth.login()">Dashboard</a>
+      </ng-template>
     </div>
   </div>
 </div>

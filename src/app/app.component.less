@@ -9,9 +9,14 @@
     }
   }
   & #linksBar {
-    & p {
-      margin: 10px 0 0 0;
+    padding-top: 10px;
+    .textlight-mixin(14px, @snow-white);
+    text-align: right;
+    & a {
       .textlight-mixin(14px, @snow-white);
+      &:hover {
+        color: @light-gray;
+      }
     }
   }
 }
