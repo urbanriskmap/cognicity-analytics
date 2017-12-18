@@ -105,7 +105,7 @@ export class ActivityChartComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('scaleLimits')) {
-      if (changes.scaleLimits.currentValue) {
+      if (changes.scaleLimits.currentValue && this.activityChart) {
         this.activityChart.options.scales.xAxes[0].time.min = this.scaleLimits.min;
         this.activityChart.options.scales.xAxes[0].time.max = this.scaleLimits.max;
         this.activityChart.update();
