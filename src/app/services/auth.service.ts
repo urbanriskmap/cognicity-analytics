@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, CanActivate } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import { environment } from '../../environments/environment';
 
 @Injectable()
-export class AuthService {
+export class AuthService implements CanActivate {
   auth0 = new auth0.WebAuth({
     clientID: environment.auth0_client_id,
     domain: environment.auth0_domain,
@@ -27,7 +27,7 @@ export class AuthService {
         this.setSession(authResult);
         this.router.navigate(['/dashboard']);
       } else if (err) {
-        this.router.navigate(['/']);
+        this.router.navigate(['']);
         console.log(err);
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
@@ -48,7 +48,7 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // Go back to the home route
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
   }
 
   public isAuthenticated(): boolean {
@@ -56,5 +56,14 @@ export class AuthService {
     // access token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
+  }
+
+  canActivate() {
+    if (this.isAuthenticated()) {
+      return true;
+    }
+
+    this.router.navigate(['']);
+    return false;
   }
 }

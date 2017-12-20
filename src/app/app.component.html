@@ -10,11 +10,11 @@
         <a routerLink="/" routerLinkActive="active">Home</a>
         &nbsp;&#124;&nbsp;
         <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        &nbsp;&#124;&nbsp;
+        <a (click)="auth.logout()">Log Out</a>
       </ng-template>
       <ng-template #elseBlock>
-        <a (click)="auth.login()">Home</a>
-        &nbsp;&#124;&nbsp;
-        <a (click)="auth.login()">Dashboard</a>
+        <a (click)="auth.login()">Log In</a>
       </ng-template>
     </div>
   </div>
