@@ -9,7 +9,7 @@ import { AuthService } from './services/auth.service';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'callback', component: CallbackComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthService] },
+  { path: 'dashboard', component: DashboardComponent }, // , canActivate: [AuthService] },
   { path: '**', redirectTo: '' }
 ];
 
