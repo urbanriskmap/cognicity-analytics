@@ -1,0 +1,26 @@
+@import "../styles.scss";
+
+#navBar {
+  background-color: $steel-gray;
+  & #logoBar {
+    & p {
+      margin: 6px 0 0 0;
+      @include textlight(18px, $snow-white);
+    }
+  }
+  & #linksBar {
+    padding-top: 10px;
+    @include textlight(14px, $snow-white);
+    text-align: right;
+    & a {
+      @include textlight(14px, $snow-white);
+      &:hover {
+        color: $light-gray;
+      }
+    }
+  }
+}
+
+.dashboard-wrapper {
+
+}

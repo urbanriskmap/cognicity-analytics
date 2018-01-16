@@ -6,6 +6,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { AuthService } from './services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { CallbackComponent } from './callback/callback.component';
+import { CustomMaterialsModule } from './custom-materials.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CallbackComponent } from './callback/callback.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DashboardModule
+    DashboardModule,
+    CustomMaterialsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-@import "../../../../styles.less";
+@import "../../../../styles.scss";
 
 #rangeWrapper {
   position: absolute;
@@ -22,13 +22,13 @@
   margin-left: 21px;
   width: 16px;
   height: 100%;
-  border: 2px solid fade(@medium-gray, 25%);
+  border: 2px solid fade($medium-gray, 25%);
   border-radius: 8px;
   & #rangeFill {
     height: 100%;
     margin-top: 0px;
     border: none;
-    background-color: fade(@banjir-blue, 50%);
+    background-color: fade($banjir-blue, 50%);
   }
 }
 
@@ -43,22 +43,22 @@
   }
   width: 28px;
   height: 12px;
-  border: 1px solid @dark-gray;
+  border: 1px solid $dark-gray;
   border-radius: 6px;
-  background-color: @snow-white;
+  background-color: $snow-white;
   outline: none;
   &:hover {
-    background-color: @light-gray;
+    background-color: $light-gray;
   }
   &:active {
-    background-color: @medium-gray;
+    background-color: $medium-gray;
   }
 }
 
 .knobHoverText {
   position: absolute;
   left: 46px;
-  .textlight-mixin(12px, @dark-gray);
+  @include textlight(12px, $dark-gray);
   line-height: 12px;
   margin: 0;
   padding: 0;

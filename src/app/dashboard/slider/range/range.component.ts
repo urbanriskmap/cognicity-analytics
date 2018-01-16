@@ -4,7 +4,7 @@ import * as $ from 'jquery';
 @Component({
   selector: 'app-range',
   templateUrl: './range.component.html',
-  styleUrls: ['./range.component.less']
+  styleUrls: ['./range.component.scss']
 })
 export class RangeComponent implements OnInit {
   @Input() rangeSettings: {

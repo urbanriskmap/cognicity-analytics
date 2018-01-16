@@ -5,7 +5,7 @@ import * as $ from 'jquery';
 @Component({
   selector: 'app-activity-chart',
   templateUrl: './activity-chart.component.html',
-  styleUrls: ['./activity-chart.component.less']
+  styleUrls: ['./activity-chart.component.scss']
 })
 export class ActivityChartComponent implements OnInit, OnChanges {
   activityChart: Chart;

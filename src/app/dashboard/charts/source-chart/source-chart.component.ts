@@ -5,7 +5,7 @@ import * as $ from 'jquery';
 @Component({
   selector: 'app-source-chart',
   templateUrl: './source-chart.component.html',
-  styleUrls: ['./source-chart.component.less']
+  styleUrls: ['./source-chart.component.scss']
 })
 export class SourceChartComponent implements OnInit, OnChanges {
   sourceChart: Chart;

@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+@import "/assets/fonts/roboto/css/fonts.css";
+@import "~mapbox-gl/dist/mapbox-gl.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+// @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~@angular/material/theming";
+
+@include mat-core();
+
+$candy-app-primary: mat-palette($mat-blue);
+$candy-app-accent:  mat-palette($mat-blue);
+$candy-app-warn:    mat-palette($mat-green);
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+@include angular-material-theme($candy-app-theme);
+
+$dark-gray: #2f2f2f;
+$steel-gray: #424242;
+$medium-gray: #808080;
+$light-gray: #dcdcdc;
+$snow-white: #ffffff;
+$banjir-blue: #31aade;
+$bencana-red: #c1272d;
+
+//_Font styles Variables_
+@mixin textlight($var, $col) {
+  font-family: "Roboto-Light", "Roboto", "Open Sans";
+  font-size: $var;
+  color: $col;
+}
+
+@mixin textregular($var, $col) {
+  font-family: "Roboto", "Roboto", "Open Sans";
+  font-size: $var;
+  color: $col;
+}
+
+@mixin textmedium($var, $col) {
+  font-family: "Roboto-Medium", "Roboto", "Open Sans";
+  font-size: $var;
+  color: $col;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}

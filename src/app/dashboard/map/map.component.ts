@@ -7,7 +7,7 @@ import { HttpService } from '../../services/http.service';
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: [
-    './map.component.less'
+    './map.component.scss'
   ]
 })
 export class MapComponent implements OnInit {

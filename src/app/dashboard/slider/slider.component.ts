@@ -7,7 +7,7 @@ import * as $ from 'jquery';
 @Component({
   selector: 'app-slider',
   templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.less']
+  styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent implements OnInit {
   @Input() map: object;
