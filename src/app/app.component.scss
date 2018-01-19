@@ -1,21 +1,33 @@
 @import "../styles.scss";
 
 #navBar {
-  background-color: $steel-gray;
-  & #logoBar {
-    & p {
-      margin: 6px 0 0 0;
-      @include textlight(18px, $snow-white);
+  min-height: 42px;
+
+  & mat-toolbar-row {
+    height: 100%;
+
+    & #logoBar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-left: 10px;
+      width: 180px;
     }
-  }
-  & #linksBar {
-    padding-top: 10px;
-    @include textlight(14px, $snow-white);
-    text-align: right;
-    & a {
+
+    & #linksBar {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin-right: 10px;
+      padding-top: 10px;
       @include textlight(14px, $snow-white);
-      &:hover {
-        color: $light-gray;
+      text-align: right;
+
+      & a {
+        @include textlight(14px, $snow-white);
+        &:hover {
+          color: $light-gray;
+        }
       }
     }
   }
