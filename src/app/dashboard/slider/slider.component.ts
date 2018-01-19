@@ -1,8 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import * as $ from 'jquery';
+
 import { HttpService } from '../../services/http.service';
 import { LayersService } from '../../services/layers.service';
 import { TimeService } from '../../services/time.service';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-slider',

@@ -1,10 +1,7 @@
-<h4 class="" *ngIf="auth.isAuthenticated()">
-  You are logged in! Click dashboard link from menu bar...
+<h4 class="subheading-1" *ngIf="auth.isAuthenticated()">
+  You are logged in! Click <b>Dashboard</b> link from menu bar
 </h4>
 
-<h4 *ngIf="!auth.isAuthenticated()">
+<h4 class="subheading-1" *ngIf="!auth.isAuthenticated()">
   You are not logged in! Please <a (click)="auth.login()">Log In</a> to view dashboard.
 </h4>
-
-<button mat-button>Hello</button>
-<mat-checkbox>Test checkbox</mat-checkbox>
