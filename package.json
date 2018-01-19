@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/urbanriskmap/cognicity-analytics#readme",
   "dependencies": {
+    "@angular-devkit/core": "0.0.28",
     "@angular/common": "^5.0.0",
     "@angular/compiler": "^5.0.0",
     "@angular/core": "^5.0.0",
