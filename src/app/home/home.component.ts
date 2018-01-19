@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-// import { CustomMaterialsModule } from '../custom-materials.module';
 
 @Component({
   selector: 'app-home',
