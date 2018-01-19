@@ -29,4 +29,7 @@
 #statsWrapper {
   background-color: $dark-gray;
   height: 300px;
+  & #disclaimer {
+    @include textlight(12px, $snow-white);
+  }
 }
