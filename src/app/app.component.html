@@ -1,7 +1,6 @@
 <div class="container-fluid">
   <div class="row" id="navBar">
     <div class="col-12 col-sm-6" id="logoBar">
-      <p>{{title}}</p>
     </div>
     <div class="col-12 col-sm-6" id="linksBar">
       <p class="text-right" *ngIf="auth.isAuthenticated(); then thenBlock else elseBlock">

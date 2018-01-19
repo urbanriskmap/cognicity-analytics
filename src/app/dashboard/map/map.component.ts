@@ -30,6 +30,9 @@ export class MapComponent implements OnInit {
       hash: false,
       preserveDrawingBuffer: true
     });
+    // Add zoom and rotation controls to the map.
+    self.map.addControl(new mapboxgl.NavigationControl());
+
 
     self.map.on('style.load', () => {
       // Load neighborhood polygons
