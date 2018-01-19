@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import mapboxgl from 'mapbox-gl';
+import * as mapboxgl from 'mapbox-gl';
+
 import { LayersService } from '../../services/layers.service';
 import { HttpService } from '../../services/http.service';
 
@@ -15,8 +16,10 @@ export class MapComponent implements OnInit {
   @Output() map: mapboxgl.Map;
   @Output() finishedLoading = new EventEmitter();
 
-  constructor(private layersService: LayersService,
-    private httpService: HttpService) { }
+  constructor(
+    private layersService: LayersService,
+    private httpService: HttpService
+  ) { }
 
   ngOnInit() {
     const self = this;

@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit } from '@angular/core';
-import Chart from 'chart.js';
+import * as Chart from 'chart.js';
 import { HttpService } from '../../services/http.service';
 import * as $ from 'jquery';
 

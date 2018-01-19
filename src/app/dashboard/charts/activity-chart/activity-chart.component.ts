@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import Chart from 'chart.js';
+import * as Chart from 'chart.js';
 import * as $ from 'jquery';
 
 @Component({
