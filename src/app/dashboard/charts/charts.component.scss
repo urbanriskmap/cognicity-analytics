@@ -15,12 +15,12 @@
       border-left: 1px solid $snow-white;
     }
     background-color: $dark-gray;
-    color: fade($snow-white, 70%);
+    color: $snow-white;
     outline: none;
     &.selected {
       background-color: $dark-gray;
       border-bottom: 1px solid $dark-gray;
-      color: $snow-white;
+      color: $banjir-blue;
     }
     &:active {
       background-color: $steel-gray;
