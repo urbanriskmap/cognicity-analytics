@@ -6,11 +6,18 @@
 
 #sliderWrapper {
   position: absolute;
-  top: 45px;
+  top: 60px;
   left: 15px;
   height: 640px;
   // border: 1px solid blue;
   z-index: 1500;
+}
+
+#legendWrapper {
+  position: fixed;
+  top: 60px;
+  right: 15px;
+  // z-index: 1500;
 }
 
 #chartsWrapper {
