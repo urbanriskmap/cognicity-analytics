@@ -1,10 +1,14 @@
-<div class="container-fluid">
-  <div class="row" id="navBar">
-    <div class="col-12 col-sm-6" id="logoBar">
+<mat-toolbar id="navBar">
+  <mat-toolbar-row>
+    <div id="logoBar">
+      <img src="assets/images/petaLogo.svg">
+      <p>&nbsp;&nbsp;&#124;&nbsp;Analytics&nbsp;dashboard</p>
     </div>
-    <div class="col-12 col-sm-6" id="linksBar">
-      <p class="text-right" *ngIf="auth.isAuthenticated(); then thenBlock else elseBlock">
+
+    <div id="linksBar">
+      <p *ngIf="auth.isAuthenticated(); then thenBlock else elseBlock">
       </p>
+
       <ng-template #thenBlock>
         <a routerLink="/" routerLinkActive="active">Home</a>
         &nbsp;&#124;&nbsp;
@@ -12,12 +16,13 @@
         &nbsp;&#124;&nbsp;
         <a (click)="auth.logout()">Log Out</a>
       </ng-template>
+
       <ng-template #elseBlock>
         <a (click)="auth.login()">Log In</a>
       </ng-template>
     </div>
-  </div>
-</div>
+  </mat-toolbar-row>
+</mat-toolbar>
 
 <div class="dashboard-wrapper">
   <router-outlet></router-outlet>
