@@ -10,6 +10,7 @@ import { MapComponent } from './map/map.component';
 import { RangeComponent } from './slider/range/range.component';
 import { ActivityChartComponent } from './charts/activity-chart/activity-chart.component';
 import { SourceChartComponent } from './charts/source-chart/source-chart.component';
+import { LegendComponent } from './legend/legend.component';
 
 import { HttpService } from '../services/http.service';
 import { LayersService } from '../services/layers.service';
@@ -34,7 +35,8 @@ import { TimeService } from '../services/time.service';
     MapComponent,
     RangeComponent,
     ActivityChartComponent,
-    SourceChartComponent
+    SourceChartComponent,
+    LegendComponent
   ]
 })
 export class DashboardModule { }
