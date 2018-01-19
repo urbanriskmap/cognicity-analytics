@@ -1,7 +1,7 @@
 @import "../styles.scss";
 
 #navBar {
-  min-height: 42px;
+  min-height: 48px;
 
   & mat-toolbar-row {
     height: 100%;
@@ -10,8 +10,21 @@
       position: absolute;
       top: 0;
       left: 0;
+      margin-top: 4px;
       margin-left: 10px;
-      width: 180px;
+
+      & img {
+        width: 150px;
+        float: left;
+      }
+      & p {
+        @include textlight(12px, $snow-white);
+        margin: 0;
+        margin-top: 27px;
+        padding: 0;
+        float: left;
+        line-height: 16px;
+      }
     }
 
     & #linksBar {
@@ -25,8 +38,11 @@
 
       & a {
         @include textlight(14px, $snow-white);
+        text-decoration: none;
         &:hover {
-          color: $light-gray;
+          cursor: pointer;
+          color: mat-color($mat-light-blue, 300);
+          text-decoration: none;
         }
       }
     }

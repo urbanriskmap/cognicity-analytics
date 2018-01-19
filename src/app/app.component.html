@@ -1,6 +1,9 @@
 <mat-toolbar id="navBar">
   <mat-toolbar-row>
-    <img src="/assets/logo.svg" id="logoBar">
+    <div id="logoBar">
+      <img src="assets/images/petaLogo.svg">
+      <p>&nbsp;&nbsp;&#124;&nbsp;Analytics&nbsp;dashboard</p>
+    </div>
 
     <div id="linksBar">
       <p *ngIf="auth.isAuthenticated(); then thenBlock else elseBlock">
