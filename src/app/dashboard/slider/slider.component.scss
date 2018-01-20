@@ -1,12 +1,10 @@
 @import "../../../styles.scss";
 
-#dateSelector {
-  border: 1px solid $dark-gray;
-  border-radius: 6px;
-  outline: none;
-}
+.dateWrapper {
+  width: 140px;
+  position: absolute;
 
-#hintWrapper {
-  height: 30px;
-  // border: 1px solid green;
+  &#endDateWrapper {
+    bottom: 0;
+  }
 }

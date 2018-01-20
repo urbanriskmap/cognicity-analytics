@@ -1,13 +1,23 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkTableModule } from '@angular/cdk/table';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+// import {
+//   MAT_MOMENT_DATE_FORMATS,
+//   MomentDateAdapter
+// } from '@angular/material-moment-adapter';
+import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import {
   MatButtonModule,
   MatCheckboxModule,
+  MatDatepickerModule,
   MatDialogModule,
   MatDialog,
   MatDialogRef,
+  MatInputModule,
+  MatNativeDateModule,
   MatRadioModule,
   MatSelectModule,
   MatToolbarModule
@@ -23,7 +33,10 @@ import {
     CdkTableModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatDialogModule,
+    MatInputModule,
+    MatNativeDateModule,
     MatRadioModule,
     MatSelectModule,
     MatToolbarModule

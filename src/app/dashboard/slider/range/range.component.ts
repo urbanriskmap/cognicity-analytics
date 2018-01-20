@@ -18,7 +18,7 @@ export class RangeComponent implements OnInit {
     time: string
   }[];
   @Input() knobStep: {knobUpper: number, knobLower: number};
-  knobHeight: number;
+  halfKnobHt: number;
   totalSteps: number;
   sliderTopOffset: number;
   sliderHeightPx: number;
@@ -33,8 +33,10 @@ export class RangeComponent implements OnInit {
   }
 
   setRangeUnits() {
+    const clearRangeHt = $('#sliderWrapper').height() - (2 * $('#startDateWrapper').height());
+
     $('#rangeWrapper').height(
-      ($('#sliderWrapper').height() - 80) - (($('#sliderWrapper').height() - 80) % this.totalSteps)
+      (clearRangeHt) - (clearRangeHt % this.totalSteps)
     );
     this.sliderHeightPx = $('#rangeWrapper').height();
 
@@ -45,10 +47,7 @@ export class RangeComponent implements OnInit {
 
   ngOnInit() {
     this.totalSteps = this.rangeSettings.totalDays * (24 / this.rangeSettings.intervalHours);
-    this.knobHeight = $('#knobUpper').height();
-
-    // TODO: Set initial knob positions
-    // this.resetKnobs();
+    this.halfKnobHt = $('#knobUpper').height() / 2;
 
     // Bind screen pixel values to slider units
     this.setRangeUnits();
@@ -134,21 +133,21 @@ export class RangeComponent implements OnInit {
 
         if (this.selectedKnobId === 'knobUpper') {
           $('#' + this.selectedKnobId).css({
-            top: (newPositionPx - this.knobHeight) + 'px'
+            top: (newPositionPx - this.halfKnobHt) + 'px'
           });
           $('#' + this.selectedKnobId + 'Hover').css({
-            top: (newPositionPx - this.knobHeight) + 'px'
+            top: (newPositionPx - this.halfKnobHt) + 'px'
           });
           $('#rangeFill').css({
-            'margin-top': (newPositionPx - this.knobHeight) + 'px',
+            'margin-top': (newPositionPx - this.halfKnobHt) + 'px',
             'height': ((this.knobStep.knobLower - this.knobStep.knobUpper) * this.rangeStepPx) + 'px'
           });
         } else if (this.selectedKnobId === 'knobLower') {
           $('#' + this.selectedKnobId).css({
-            bottom: (this.sliderHeightPx - newPositionPx - this.knobHeight) + 'px'
+            bottom: (this.sliderHeightPx - newPositionPx - this.halfKnobHt) + 'px'
           });
           $('#' + this.selectedKnobId + 'Hover').css({
-            bottom: (this.sliderHeightPx - newPositionPx - this.knobHeight) + 'px'
+            bottom: (this.sliderHeightPx - newPositionPx - this.halfKnobHt) + 'px'
           });
           $('#rangeFill').css({
             'height': ((this.knobStep.knobLower - this.knobStep.knobUpper) * this.rangeStepPx) + 'px'

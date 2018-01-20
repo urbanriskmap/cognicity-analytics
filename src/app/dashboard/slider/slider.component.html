@@ -1,13 +1,19 @@
-<input id="dateSelector" type="date" [value]="selectedDate" (change)="dateChanged($event, false)">
-<div id="hintWrapper" *ngIf="refreshingLayers.reports && refreshingLayers.floodAreas; then thenBlock else elseBlock">
-</div>
-<ng-template #thenBlock>
-  <p>Loading...</p>
-</ng-template>
-<ng-template #elseBlock>
-  <p *ngIf="!reports">Select date</p>
-  <p *ngIf="reports">Select range</p>
-</ng-template>
+<mat-form-field id="startDateWrapper" class="dateWrapper">
+  <input matInput
+    [matDatepicker]="startDatePicker"
+    placeholder="Start MM/DD/YY"
+    [(value)]="startDate"
+    [min]="dateLimits.start.min"
+    [max]="dateLimits.start.max"
+    (dateChange)="dateInteraction('start', $event, false)">
+  <mat-datepicker-toggle
+    matSuffix
+    [for]="startDatePicker">
+  </mat-datepicker-toggle>
+  <mat-datepicker
+    #startDatePicker>
+  </mat-datepicker>
+</mat-form-field>
 
 <app-range
   *ngIf="enableSlider"
@@ -16,3 +22,20 @@
   [rangeSettings]="rangeSettings"
   (rangeChanged)="updateRange($event)">
 </app-range>
+
+<mat-form-field id="endDateWrapper" class="dateWrapper">
+  <input matInput
+    [matDatepicker]="endDatePicker"
+    placeholder="End MM/DD/YY"
+    [(value)]="endDate"
+    [min]="dateLimits.end.min"
+    [max]="dateLimits.end.max"
+    (dateChange)="dateInteraction('end', $event, false)">
+  <mat-datepicker-toggle
+    matSuffix
+    [for]="endDatePicker">
+  </mat-datepicker-toggle>
+  <mat-datepicker
+    #endDatePicker>
+  </mat-datepicker>
+</mat-form-field>

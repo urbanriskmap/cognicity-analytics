@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import { FormControl } from '@angular/forms';
 
 import { HttpService } from '../../services/http.service';
 import { LayersService } from '../../services/layers.service';
@@ -13,8 +14,18 @@ import { TimeService } from '../../services/time.service';
 export class SliderComponent implements OnInit {
   @Input() map: object;
   @Input() floodAreas: object;
-  dateNow = new Date();
-  selectedDate: string;
+  dateLimits = {
+    end: {
+      min: null,
+      max: new Date()
+    },
+    start: {
+      min: new Date(2016, 11, 8),
+      max: null
+    }
+  };
+  startDate: Date;
+  endDate: Date;
   selectedTimePeriod: {start: string, end: string};
   reports: object;
   refreshingLayers = {reports: false, floodAreas: false};
@@ -40,10 +51,23 @@ export class SliderComponent implements OnInit {
   constructor(private httpService: HttpService,
     private layersService: LayersService,
     private timeService: TimeService) {
-    this.selectedDate = this.dateNow.toISOString().split('T', 1)[0];
+      this.dateLimits.end.min = this.getOtherDate('end', this.dateLimits.start.min);
+      this.dateLimits.start.max = this.getOtherDate('start', this.dateLimits.end.max);
+
+      this.endDate = this.dateLimits.end.max;
+      this.startDate = this.getOtherDate('start', this.endDate);
+  }
+
+  getOtherDate(type, date) {
+    if (type === 'start') {
+      return new Date(Date.parse(date.toString()) - ((7 * 24 * 60 * 60 * 1000) - 1));
+    } else if (type === 'end') {
+      return new Date(Date.parse(date.toString()) + ((7 * 24 * 60 * 60 * 1000) - 1));
+    }
   }
 
   ngOnInit() {
+
   }
 
   resetKnobs() {
@@ -105,41 +129,66 @@ export class SliderComponent implements OnInit {
     });
   }
 
-  dateChanged(event, isInitializing) {
-    // Async requests to server, load map layers
-    if (event.srcElement.value) {
-      this.refreshingLayers = {reports: true, floodAreas: true};
-
-      // Use event.srcElement.value as race condition prevents this.selectedDate to update in time
-      this.selectedTimePeriod = this.timeService.format(event.srcElement.value, true);
-
-      // Bind slider markings
-      this.dateTimeMarks = this.timeService.getKnobDateTime({
-        intervalHours: this.rangeSettings.intervalHours,
-        totalDays: this.rangeSettings.totalDays
-      }, this.selectedTimePeriod.start);
-
-      // Set knob positions to full scale
-      this.resetKnobs();
-
-      this.updateReports(this.selectedTimePeriod);
-      this.updateFloodAreas(this.selectedTimePeriod);
-
-      if (isInitializing) {
-        // Draw chart
-        this.drawChart.emit(this.selectedTimePeriod);
-      } else {
-        // Update chart
-        this.updateChart.emit(this.selectedTimePeriod);
+  dateInteraction(type: string, event: any, isInitializing: boolean) {
+    if (event.value && event.value >= event.target.min && event.value <= event.target.max) {
+      // Autofill other date
+      if (type === 'start') {
+        this.endDate = this.getOtherDate('end', event.value);
+        // Use event.value to manually update startDate
+        // as race condition(?) prevents to update it in time
+        this.startDate = event.value;
+      } else if (type === 'end') {
+        this.endDate = event.value;
+        this.startDate = this.getOtherDate('start', event.value);
       }
+    } else {
+      // reset dates
+      // show invalid date msg,
+      this.endDate = new Date();
+      this.startDate = this.getOtherDate('start', this.endDate);
+    }
+
+    this.refreshingLayers = {reports: true, floodAreas: true};
+
+    // Format date values and store in timePeriod object
+    this.selectedTimePeriod = this.timeService.format(
+      Date.parse((this.startDate).toISOString()),
+      Date.parse((this.endDate).toISOString())
+    );
+
+    // Bind slider markings
+    this.dateTimeMarks = this.timeService.getKnobDateTime({
+      intervalHours: this.rangeSettings.intervalHours,
+      totalDays: this.rangeSettings.totalDays
+    }, this.selectedTimePeriod.start);
+
+    // Set knob positions to full scale
+    this.resetKnobs();
+
+    this.updateReports(this.selectedTimePeriod);
+    this.updateFloodAreas(this.selectedTimePeriod);
+
+    if (isInitializing) {
+      // Draw chart
+      this.drawChart.emit(this.selectedTimePeriod);
+    } else {
+      // Update chart
+      this.updateChart.emit(this.selectedTimePeriod);
     }
   }
 
   initData() {
     // Mock date selection while DOM elements initialize
-    const event = {srcElement: {value: this.selectedDate}};
+    const event = {
+      target: {
+        min: this.dateLimits.end.min,
+        max: this.dateLimits.end.max
+      },
+      value: this.dateLimits.end.max
+    };
 
-    this.dateChanged(event, true);
+    // Trigger get reports, flood areas, draw charts
+    this.dateInteraction('end', event, true);
   }
 
   updateRange(range) {
@@ -164,10 +213,7 @@ export class SliderComponent implements OnInit {
     };
 
     // Update flood areas layer
-    const timePeriod = this.timeService.format({
-      start: startDate,
-      end: endDate
-    }, false);
+    const timePeriod = this.timeService.format(startDate, endDate);
     this.httpService.getFloodAreasArchive(timePeriod)
     .then(data => {
       this.floodAreasCount = this.layersService.updateFloodAreas(data, this.floodAreas, this.map);

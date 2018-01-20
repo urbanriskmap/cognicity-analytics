@@ -47,7 +47,6 @@ export class ChartsComponent implements OnInit {
   prepareActivityData(timePeriod) {
     this.reportsData = [];
     this.floodsData = [];
-
     this.httpService.getTimeseries('reports', timePeriod)
     .then(reports => {
       this.httpService.getTimeseries('floods', timePeriod)

@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   resizeComponents() {
     const mapHeight = $(window).height() - $('#navBar').height() - $('#analyticsWrapper').height();
     $('#mapWrapper').height(mapHeight);
-    $('#sliderWrapper').height(mapHeight - 30);
+    $('#sliderWrapper').height(mapHeight - 24);
   }
 
   ngOnInit() {

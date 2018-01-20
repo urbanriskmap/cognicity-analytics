@@ -1,16 +1,15 @@
 @import "../../styles.scss";
 
 #mapWrapper {
-  height: 700px;
+  height: 700px; // Overwritten by DashboardComponent.resizeComponents()
 }
 
 #sliderWrapper {
   position: absolute;
-  top: 45px;
+  top: 6px;
   left: 15px;
-  height: 640px;
+  height: 640px; // Overwritten by DashboardComponent.resizeComponents()
   // border: 1px solid blue;
-  z-index: 1500;
 }
 
 #chartsWrapper {

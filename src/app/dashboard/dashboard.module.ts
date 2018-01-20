@@ -12,6 +12,8 @@ import { ActivityChartComponent } from './charts/activity-chart/activity-chart.c
 import { SourceChartComponent } from './charts/source-chart/source-chart.component';
 import { LegendComponent } from './legend/legend.component';
 
+import { CustomMaterialsModule } from '../custom-materials.module';
+
 import { HttpService } from '../services/http.service';
 import { LayersService } from '../services/layers.service';
 import { TimeService } from '../services/time.service';
@@ -20,7 +22,8 @@ import { TimeService } from '../services/time.service';
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    CustomMaterialsModule
   ],
   providers: [
     HttpService,

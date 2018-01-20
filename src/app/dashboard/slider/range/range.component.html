@@ -4,15 +4,27 @@
     </div>
   </div>
 
-  <button class="rangeKnob" id="knobUpper" (mousedown)="touchStart($event)">
+  <button mat-raised-button
+    class="rangeKnob"
+    id="knobUpper"
+    (mousedown)="touchStart($event)">
   </button>
-  <button class="rangeKnob" id="knobLower" (mousedown)="touchStart($event)">
+  <button mat-raised-button
+    class="rangeKnob"
+    id="knobLower"
+    (mousedown)="touchStart($event)">
   </button>
 
-  <p class="knobHoverText" id="knobUpperHover" [style.opacity]="isSliderActive ? 1 : 0.4">
+  <p
+    class="knobHoverText"
+    id="knobUpperHover"
+    [style.opacity]="isSliderActive ? 1 : 0.4">
     {{markings[knobStep.knobUpper].time}}&nbsp;{{markings[knobStep.knobUpper].month}}&nbsp;{{markings[knobStep.knobUpper].day}}
   </p>
-  <p class="knobHoverText" id="knobLowerHover" [style.opacity]="isSliderActive ? 1 : 0.4">
+  <p
+    class="knobHoverText"
+    id="knobLowerHover"
+    [style.opacity]="isSliderActive ? 1 : 0.4">
     {{markings[knobStep.knobLower].time}}&nbsp;{{markings[knobStep.knobLower].month}}&nbsp;{{markings[knobStep.knobLower].day}}
   </p>
 </div>
