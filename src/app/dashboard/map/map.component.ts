@@ -34,7 +34,7 @@ export class MapComponent implements OnInit {
       preserveDrawingBuffer: true
     });
     // Add zoom and rotation controls to the map.
-    self.map.addControl(new mapboxgl.NavigationControl());
+    self.map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
 
     self.map.on('style.load', () => {

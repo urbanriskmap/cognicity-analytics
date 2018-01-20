@@ -12,6 +12,13 @@
   // border: 1px solid blue;
 }
 
+#legendWrapper {
+  position: fixed;
+  top: 60px;
+  right: 15px;
+  // z-index: 1500;
+}
+
 #chartsWrapper {
   background-color: $dark-gray;
   height: 300px;
@@ -21,4 +28,7 @@
 #statsWrapper {
   background-color: $dark-gray;
   height: 300px;
+  & #disclaimer {
+    @include textlight(12px, $snow-white);
+  }
 }
