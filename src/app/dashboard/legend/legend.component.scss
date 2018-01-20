@@ -3,28 +3,29 @@
 #legendDiv {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 10px;
-  border-radius:7px;
+  border-radius:6px;
   @include textregular(12px, $dark-gray);
+
   & #header {
     @include textmedium(14px, $dark-gray);
     border-bottom: solid 1px $light-gray;
   }
+
   & .legend {
     padding: 2px;
-    valign: center;
-  & .square {
-    border: 1px solid #ccc;
-    float: left;
-    width: 12px;
-    height: 12px;
-    margin-right: 8px;
-  }
+    & .square {
+      border: 1px solid #ccc;
+      float: left;
+      width: 12px;
+      height: 12px;
+      margin-right: 8px;
+    }
 
-  /* alert colors */
-  & .flood { font-size: 16px;}
-  & .alert1 { background-color: #a0a9f7; }
-  & .alert2 { background-color: #ffff00; }
-  & .alert3 { background-color: #ff8300; }
-  & .alert4 { background-color: #cc2a41; }
+    // alert colors
+    & .flood { font-size: 16px; }
+    & .alert1 { background-color: #a0a9f7; }
+    & .alert2 { background-color: #ffff00; }
+    & .alert3 { background-color: #ff8300; }
+    & .alert4 { background-color: #cc2a41; }
   }
 }

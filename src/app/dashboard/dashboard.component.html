@@ -1,4 +1,4 @@
-<div class="container-fluid" id="mapWrapper">
+<div id="mapWrapper">
   <app-map
     (finishedLoading)="slider.initData()"
     #map>
@@ -21,21 +21,23 @@
   </app-legend>
 </div>
 
-<div class="container-fluid" id="analyticsWrapper">
-  <div class="row">
-    <div class="col-12 col-md-8" id="chartsWrapper">
-      <app-charts
-        [reportsSource]="slider.reportsSource"
-        #chart>
-      </app-charts>
-    </div>
-    <div class="col-12 col-md-4" id="statsWrapper">
-      <app-stats
-        [isRefreshing]="slider.refreshingStats.reports || slider.refreshingStats.floodAreas"
-        [floodAreasCount]="slider.floodAreasCount"
-        [reportsCount]="slider.reportsCount">
-      </app-stats>
-      <p id="disclaimer">Note: The number of flooded areas does not mean the whole area is flooded. It shows that there are floods happening within those counted areas</p>
-    </div>
+<div id="analyticsWrapper">
+  <div id="chartsWrapper">
+    <app-charts
+      [reportsSource]="slider.reportsSource"
+      #chart>
+    </app-charts>
+  </div>
+
+  <div id="statsWrapper">
+    <app-stats
+      [isRefreshing]="slider.refreshingStats.reports || slider.refreshingStats.floodAreas"
+      [floodAreasCount]="slider.floodAreasCount"
+      [reportsCount]="slider.reportsCount">
+    </app-stats>
+
+    <p id="disclaimer">
+      Note: The number of flooded areas does not mean the whole area is flooded. It shows that there are floods happening within those counted areas
+    </p>
   </div>
 </div>

@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CdkTableModule } from '@angular/cdk/table';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-// import {
-//   MAT_MOMENT_DATE_FORMATS,
-//   MomentDateAdapter
-// } from '@angular/material-moment-adapter';
 import {
   FormsModule,
   ReactiveFormsModule
@@ -42,8 +38,7 @@ import {
     MatToolbarModule
   ],
   providers: [
-    MatDialog,
-    // MatDialogRef
+    MatDialog
   ]
 })
 export class CustomMaterialsModule { }
