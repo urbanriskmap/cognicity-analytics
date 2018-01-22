@@ -76,6 +76,9 @@ export class LayersService {
   }
 
   updateFloodAreas(floodStates, floodAreas, map) {
+    // TODO: Compare district_id properties,
+    // Pass to a report service
+
     // Store floodAreas properties
     const updatedData = floodAreas;
     let floodAreasCount = 0;
