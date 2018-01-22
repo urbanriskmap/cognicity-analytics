@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'callback', component: CallbackComponent },
   { path: 'dashboard', component: DashboardComponent }, // TODO , canActivate: [AuthService] },
-  { path: 'report', component: ReportComponent },
+  { path: 'report', component: ReportComponent }, // TODO: create service that checks required params are provided
   { path: '**', redirectTo: '' }
 ];
 
