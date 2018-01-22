@@ -2,18 +2,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class LayersService {
-  districts = {
-    '3171': { name: 'Jakarta Selatan',
-      reportsCount: 0, minDepth: null, maxDepth: null, parentAreaCount: 0, localAreaCount: 0, parentAreaNames: []},
-    '3172': { name: 'Jakarta Timur',
-      reportsCount: 0, minDepth: null, maxDepth: null, parentAreaCount: 0, localAreaCount: 0, parentAreaNames: []},
-    '3173': { name: 'Jakarta Pusat',
-      reportsCount: 0, minDepth: null, maxDepth: null, parentAreaCount: 0, localAreaCount: 0, parentAreaNames: []},
-    '3174': { name: 'Jakarta Barat',
-      reportsCount: 0, minDepth: null, maxDepth: null, parentAreaCount: 0, localAreaCount: 0, parentAreaNames: []},
-    '3175': { name: 'Jakarta Utara',
-      reportsCount: 0, minDepth: null, maxDepth: null, parentAreaCount: 0, localAreaCount: 0, parentAreaNames: []}
-  };
 
   constructor() { }
 
@@ -43,56 +31,70 @@ export class LayersService {
     });
   }
 
-  // range: {start: date_milliseconds, end: date_milliseconds}
-  getReportsCount(map, range) {
-    const reports = map.getSource('reports')._data.features;
-    // Reset reports count by source to 0
-    const reportsCount = {qlue: 0, grasp: 0, detik: 0};
-    // Reset reports count by district to 0
-    for (const district in this.districts) {
-      if (this.districts[district]) {
-        this.districts[district].reportsCount = 0;
-        this.districts[district].minDepth = null;
-        this.districts[district].maxDepth = null;
+
+  getReportsCount(map, {start, end}, districts): Promise<{
+    aggregates: {
+      qlue: number,
+      grasp: number,
+      detik: number
+    },
+    districts: any
+  }> {
+    return new Promise(resolve => {
+      const reports = map.getSource('reports')._data.features;
+      // Reset reports count by source to 0
+      const reportsCount = {qlue: 0, grasp: 0, detik: 0};
+      // Reset reports count by district to 0
+      for (const district in districts) {
+        if (districts[district]) {
+          districts[district].reportsCount = 0;
+          districts[district].minDepth = null;
+          districts[district].maxDepth = null;
+        }
       }
-    }
 
-    for (const report of reports) {
-      if (report.properties.created_at >= range.start && report.properties.created_at <= range.end) {
-        // Increment total reports count
-        reportsCount[report.properties.source] += 1;
+      for (const report of reports) {
+        if (report.properties.created_at >= start && report.properties.created_at <= end) {
+          // Increment total reports count
+          reportsCount[report.properties.source] += 1;
 
-        const districtId = report.properties.tags.district_id;
+          const districtId = report.properties.tags.district_id;
 
-        if (districtId) {
-          // Increment reports count by districts
-          this.districts[districtId].reportsCount += 1;
+          if (districtId) {
+            const currentDistrict = districts[districtId];
+            // Increment reports count by districts
+            currentDistrict.reportsCount += 1;
 
-          if (report.properties.report_data && report.properties.report_data.flood_depth) {
-            // Update min depth by district
-            if (this.districts[districtId].minDepth) {
-              if (report.properties.report_data.flood_depth < this.districts[districtId].minDepth) {
-                this.districts[districtId].minDepth = report.properties.report_data.flood_depth;
+            if (report.properties.report_data && report.properties.report_data.flood_depth) {
+              // Update min depth by district
+              if (currentDistrict.minDepth) {
+                if (report.properties.report_data.flood_depth < currentDistrict.minDepth) {
+                  currentDistrict.minDepth = report.properties.report_data.flood_depth;
+                }
+              } else {
+                currentDistrict.minDepth = report.properties.report_data.flood_depth;
               }
-            } else {
-              this.districts[districtId].minDepth = report.properties.report_data.flood_depth;
-            }
 
-            // Update max depth by district
-            if (this.districts[districtId].maxDepth) {
-              if (report.properties.report_data.flood_depth > this.districts[districtId].maxDepth) {
-                this.districts[districtId].maxDepth = report.properties.report_data.flood_depth;
+              // Update max depth by district
+              if (currentDistrict.maxDepth) {
+                if (report.properties.report_data.flood_depth > currentDistrict.maxDepth) {
+                  currentDistrict.maxDepth = report.properties.report_data.flood_depth;
+                }
+              } else {
+                currentDistrict.maxDepth = report.properties.report_data.flood_depth;
               }
-            } else {
-              this.districts[districtId].maxDepth = report.properties.report_data.flood_depth;
             }
           }
         }
       }
-    }
 
-    return reportsCount;
+      resolve({
+        aggregates: reportsCount,
+        districts: districts
+      });
+    });
   }
+
 
   loadFloodAreas(floodAreasGeojson, map) {
     const floodAreas = {
@@ -124,62 +126,71 @@ export class LayersService {
     });
   }
 
-  updateFloodAreas(floodStates, floodAreas, map) {
-    // Store floodAreas properties
-    const updatedData = floodAreas;
-    let floodAreasCount = 0;
-    // Reset areas count by district to 0
-    for (const district in this.districts) {
-      if (this.districts[district]) {
-        this.districts[district].localAreaCount = 0;
-        this.districts[district].parentAreaCount = 0;
-        this.districts[district].parentAreaNames = [];
-      }
-    }
 
-    // Update floodAreas properties
-    for (const area in floodAreas.features) {
-      if (floodAreas.features[area]) {
-        // Remove max_state property for all areas
-        if (floodAreas.features[area].properties.hasOwnProperty('max_state')) {
-          delete floodAreas.features[area].properties.max_state;
+  updateFloodAreas(floodStates, floodAreas, map, districts): Promise<{
+    total: number,
+    districts: any
+  }> {
+    return new Promise(resolve => {
+      // Store floodAreas properties
+      const updatedData = floodAreas;
+      let floodAreasCount = 0;
+      // Reset areas count by district to 0
+      for (const district in districts) {
+        if (districts[district]) {
+          districts[district].localAreaCount = 0;
+          districts[district].parentAreaCount = 0;
+          districts[district].parentAreaNames = [];
         }
+      }
 
-        // Compare area_id's, add max_state property
-        for (const state of floodStates) {
-          const localAreaId = floodAreas.features[area].properties.area_id;
+      // TODO: Extract & pass RW last update stamp (for all data)
 
-          if (localAreaId === state.area_id) {
-            updatedData.features[area].properties.max_state = parseInt(state.max_state, 10);
-            floodAreasCount += 1;
+      // Update floodAreas properties
+      for (const area in floodAreas.features) {
+        if (floodAreas.features[area]) {
+          // Remove max_state property for all areas
+          if (floodAreas.features[area].properties.hasOwnProperty('max_state')) {
+            delete floodAreas.features[area].properties.max_state;
+          }
 
-            const parentAreaName = floodAreas.features[area].properties.parent_name;
-            const districtId = floodAreas.features[area].properties.district_id;
+          // Compare area_id's, add max_state property
+          for (const state of floodStates) {
+            const localAreaId = floodAreas.features[area].properties.area_id;
 
-            // Increment local area count
-            this.districts[districtId].localAreaCount += 1;
+            if (localAreaId === state.area_id) {
+              updatedData.features[area].properties.max_state = parseInt(state.max_state, 10);
+              floodAreasCount += 1;
 
-            // Check if parentAreas array has current parent area
-            if (this.districts[districtId].parentAreaNames.indexOf(parentAreaName) === -1) {
-              // Parent name does not exist for current district
-              // Increment parent area count
-              this.districts[districtId].parentAreaCount += 1;
-              // Push parent area name
-              this.districts[districtId].parentAreaNames.push(parentAreaName);
+              const parentAreaName = floodAreas.features[area].properties.parent_name;
+              const districtId = floodAreas.features[area].properties.district_id;
+              const currentDistrict = districts[districtId];
+
+              // Increment local area count
+              currentDistrict.localAreaCount += 1;
+
+              // Check if parentAreas array has current parent area
+              if (currentDistrict.parentAreaNames.indexOf(parentAreaName) === -1) {
+                // Parent name does not exist for current district
+                // Increment parent area count
+                currentDistrict.parentAreaCount += 1;
+                // Push parent area name
+                currentDistrict.parentAreaNames.push(parentAreaName);
+              }
             }
           }
         }
       }
-    }
 
-    // TODO: Pass this to report service
-    console.log(this.districts);
+      // Set updated data
+      map.getSource('flood_areas')
+      .setData(updatedData);
 
-    // Set updated data
-    map.getSource('flood_areas')
-    .setData(updatedData);
-
-    return floodAreasCount;
+      resolve({
+        total: floodAreasCount,
+        districts: districts
+      });
+    });
   }
 
   filterLayer(map, layer, filter) {
