@@ -45,6 +45,7 @@ export class TimeService {
     month: string,
     time: string
   }[] {
+    const offsetMilliseconds = (new Date()).getTimezoneOffset() * 60 * 1000;
     const steps = range.totalDays * (24 / range.intervalHours);
     const millisecondsPerStep = range.intervalHours * 60 * 60 * 1000;
     const startMilliseconds = Date.parse((new Date(startDate.replace('%2B', '.'))).toString());
@@ -52,10 +53,10 @@ export class TimeService {
     const dateTimeMarks = [];
 
     for (let step = 0; step <= steps; step++) {
-      const dateTime = new Date(startMilliseconds + (millisecondsPerStep * step));
+      const dateTime = new Date(startMilliseconds + (millisecondsPerStep * step) - offsetMilliseconds);
 
       dateTimeMarks.push({
-        dateMilliseconds: startMilliseconds + (millisecondsPerStep * step),
+        dateMilliseconds: startMilliseconds + (millisecondsPerStep * step) - offsetMilliseconds,
         day: dateTime.getDate(),
         month: monthMap[dateTime.getMonth()],
         time: (dateTime.getHours() < 10 ? '0' + dateTime.getHours() : dateTime.getHours())

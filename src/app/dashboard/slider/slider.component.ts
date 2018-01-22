@@ -51,7 +51,8 @@ export class SliderComponent implements OnInit {
   constructor(private httpService: HttpService,
     private layersService: LayersService,
     private timeService: TimeService) {
-      // Remove minutes / seconds / millisec from date
+      // Round off time to next hour:00:00
+      this.dateLimits.end.max.setHours(this.dateLimits.end.max.getHours() + 1);
       this.dateLimits.end.max.setMinutes(0);
       this.dateLimits.end.max.setSeconds(0);
       this.dateLimits.end.max.setMilliseconds(0);
@@ -65,8 +66,10 @@ export class SliderComponent implements OnInit {
 
   getOtherDate(type, date) {
     if (type === 'start') {
+      // substract 7 days (in milliseconds) to get start date
       return new Date(Date.parse(date.toString()) - (7 * 24 * 60 * 60 * 1000));
     } else if (type === 'end') {
+      // add 7 days (in milliseconds) to get end date
       return new Date(Date.parse(date.toString()) + (7 * 24 * 60 * 60 * 1000));
     }
   }

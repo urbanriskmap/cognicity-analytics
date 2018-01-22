@@ -1,11 +1,51 @@
-<p>
-  report works!
-</p>
-
 <button
-*ngFor="let button of exportButtons"
-[id]="button.type + 'Button'"
-[class]="button.class"
-(click)="button($event)">
-{{button.name}}
+  *ngFor="let button of exportButtons"
+  class="outputButtons"
+  [id]="button.type + 'Button'"
+  [title]="button.tooltip"
+  (click)="output(button.type)">
+  {{button.name}}
 </button>
+
+<table>
+  <tr
+    class="tableHeaders">
+    <td>
+      {{tableHeaders.district}}
+    </td>
+    <td>
+      {{tableHeaders.totalReports}}
+    </td>
+    <td>
+      {{tableHeaders.totalFloodedAreas.parent}}
+    </td>
+    <td>
+      {{tableHeaders.totalFloodedAreas.local}}
+    </td>
+    <td>
+      {{tableHeaders.heightRange}}
+    </td>
+  </tr>
+
+  <tr
+    *ngFor="let row of tableData"
+    class="tableData">
+    <td>
+      {{row.district}}
+    </td>
+    <td>
+      {{row.totalReports}}
+    </td>
+    <td>
+      {{row.totalFloodedAreas.parent}}
+    </td>
+    <td>
+      {{row.totalFloodedAreas.local}}
+    </td>
+    <td>
+      Min: {{row.heightRange.min}} cm,
+      <br>
+      Max: {{row.heightRange.max}} cm
+    </td>
+  </tr>
+</table>
