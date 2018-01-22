@@ -1,3 +1,11 @@
 <p>
   report works!
 </p>
+
+<button
+*ngFor="let button of exportButtons"
+[id]="button.type + 'Button'"
+[class]="button.class"
+(click)="button($event)">
+{{button.name}}
+</button>
