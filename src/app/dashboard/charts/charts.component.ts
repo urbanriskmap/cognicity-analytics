@@ -9,8 +9,6 @@ import * as $ from 'jquery';
   styleUrls: ['./charts.component.scss']
 })
 export class ChartsComponent implements OnInit {
-  @Input() someValue: number;
-  @Input() otherValue: number;
   @Input() reportsSource: {aggregates: number[], labels: string[]} = {
     aggregates: [],
     labels: []

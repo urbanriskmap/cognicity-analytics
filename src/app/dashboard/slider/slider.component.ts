@@ -51,6 +51,11 @@ export class SliderComponent implements OnInit {
   constructor(private httpService: HttpService,
     private layersService: LayersService,
     private timeService: TimeService) {
+      // Remove minutes / seconds / millisec from date
+      this.dateLimits.end.max.setMinutes(0);
+      this.dateLimits.end.max.setSeconds(0);
+      this.dateLimits.end.max.setMilliseconds(0);
+
       this.dateLimits.end.min = this.getOtherDate('end', this.dateLimits.start.min);
       this.dateLimits.start.max = this.getOtherDate('start', this.dateLimits.end.max);
 
@@ -60,9 +65,9 @@ export class SliderComponent implements OnInit {
 
   getOtherDate(type, date) {
     if (type === 'start') {
-      return new Date(Date.parse(date.toString()) - ((7 * 24 * 60 * 60 * 1000) - 1));
+      return new Date(Date.parse(date.toString()) - (7 * 24 * 60 * 60 * 1000));
     } else if (type === 'end') {
-      return new Date(Date.parse(date.toString()) + ((7 * 24 * 60 * 60 * 1000) - 1));
+      return new Date(Date.parse(date.toString()) + (7 * 24 * 60 * 60 * 1000));
     }
   }
 
@@ -143,8 +148,8 @@ export class SliderComponent implements OnInit {
       }
     } else {
       // reset dates
-      // show invalid date msg,
-      this.endDate = new Date();
+      // TODO: show invalid date msg
+      this.endDate = this.dateLimits.end.max;
       this.startDate = this.getOtherDate('start', this.endDate);
     }
 

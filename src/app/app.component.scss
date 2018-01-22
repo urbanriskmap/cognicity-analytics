@@ -44,6 +44,9 @@
           color: mat-color($mat-light-blue, 300);
           text-decoration: none;
         }
+        &.active {
+          color: mat-color($mat-light-blue, 300);
+        }
       }
     }
   }
