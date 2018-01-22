@@ -30,6 +30,10 @@
   </div>
 
   <div id="statsWrapper">
+    <div id="reportTools">
+      <a routerLink="/report">Generate report</a>
+    </div>
+
     <app-stats
       [isRefreshing]="slider.refreshingStats.reports || slider.refreshingStats.floodAreas"
       [floodAreasCount]="slider.floodAreasCount"

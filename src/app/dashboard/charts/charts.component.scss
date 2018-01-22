@@ -20,7 +20,7 @@
     &.selected {
       background-color: $dark-gray;
       border-bottom: 1px solid $dark-gray;
-      color: $banjir-blue;
+      color: mat-color($mat-light-blue, 300);
     }
     &:active {
       background-color: $steel-gray;

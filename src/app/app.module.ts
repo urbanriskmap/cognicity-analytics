@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CallbackComponent } from './callback/callback.component';
+import { ReportComponent } from './report/report.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -15,7 +16,8 @@ import { AuthService } from './services/auth.service';
   declarations: [
     AppComponent,
     HomeComponent,
-    CallbackComponent
+    CallbackComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
