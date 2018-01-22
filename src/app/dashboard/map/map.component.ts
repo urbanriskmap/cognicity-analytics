@@ -28,7 +28,8 @@ export class MapComponent implements OnInit {
       attributionControl: false,
       container: 'mapContainer',
       center: [106.84, -6.15],
-      zoom: 10,
+      zoom: 11,
+      minZoom: 9,
       style: 'mapbox://styles/mapbox/light-v9',
       hash: false,
       preserveDrawingBuffer: true
