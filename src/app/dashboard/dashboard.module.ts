@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
 import { ChartsComponent } from './charts/charts.component';
@@ -23,7 +24,8 @@ import { TimeService } from '../services/time.service';
   imports: [
     CommonModule,
     HttpClientModule,
-    CustomMaterialsModule
+    CustomMaterialsModule,
+    RouterModule
   ],
   providers: [
     HttpService,

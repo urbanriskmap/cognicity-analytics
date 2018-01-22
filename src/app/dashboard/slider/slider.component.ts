@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
 import { LayersService } from '../../services/layers.service';
 import { TimeService } from '../../services/time.service';
+import { TableService } from '../../services/table.service';
 
 @Component({
   selector: 'app-slider',
@@ -47,10 +48,12 @@ export class SliderComponent implements OnInit {
     totalDays: 7, // Slider represents 7 days
     intervalHours: 4 // Step size in hours
   };
+  @Output() generatingTableData = false;
 
   constructor(private httpService: HttpService,
     private layersService: LayersService,
-    private timeService: TimeService) {
+    private timeService: TimeService,
+    private tableService: TableService) {
       // Round off time to next hour:00:00
       this.dateLimits.end.max.setHours(this.dateLimits.end.max.getHours() + 1);
       this.dateLimits.end.max.setMinutes(0);
@@ -75,7 +78,6 @@ export class SliderComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   resetKnobs() {
@@ -93,6 +95,29 @@ export class SliderComponent implements OnInit {
     $('#knobLowerHover').css({bottom: '0px'});
   }
 
+  countReports(range) {
+    this.layersService.getReportsCount(this.map, range, this.tableService.districts)
+    .then(counts => {
+      // Store reports count sum
+      this.reportsCount = counts.aggregates.qlue +
+        counts.aggregates.grasp +
+        counts.aggregates.detik;
+
+      // Store reports count by source
+      this.reportsSource = {
+        aggregates: [
+          counts.aggregates.qlue,
+          counts.aggregates.grasp,
+          counts.aggregates.detik
+        ],
+        labels: ['Qlue', 'Grasp', 'Detik']
+      };
+
+      // Update districts with reports count breakdown
+      this.tableService.districts = counts.districts;
+    });
+  }
+
   updateReports(date) {
     this.httpService.getReportsArchive(date)
     .then(geojsonData => {
@@ -101,24 +126,20 @@ export class SliderComponent implements OnInit {
 
       this.layersService.renderReports(this.reports, this.map)
       .then(() => {
-        const aggregates = this.layersService.getReportsCount(this.map, {
+        this.countReports({
           start: Date.parse(date.start.replace('%2B', '.')),
           end: Date.parse(date.end.replace('%2B', '.'))
         });
-        this.reportsCount = aggregates.qlue + aggregates.grasp + aggregates.detik;
-
-        this.reportsSource = {
-          aggregates: [aggregates.qlue, aggregates.grasp, aggregates.detik],
-          labels: ['Qlue', 'Grasp', 'Detik']
-        };
 
         this.refreshingLayers.reports = false;
         this.refreshingStats.reports = false;
+        this.generatingTableData = false;
       });
     })
     .catch(error => {
       this.refreshingLayers.reports = false;
       this.refreshingStats.reports = false;
+      this.generatingTableData = false;
       throw JSON.stringify(error);
     });
   }
@@ -126,13 +147,25 @@ export class SliderComponent implements OnInit {
   updateFloodAreas(date) {
     this.httpService.getFloodAreasArchive(date)
     .then(data => {
-      this.floodAreasCount = this.layersService.updateFloodAreas(data, this.floodAreas, this.map);
+
+      this.layersService.updateFloodAreas(
+        data, this.floodAreas, this.map, this.tableService.districts
+      ).then(areas => {
+        // Store total flood areas count
+        this.floodAreasCount = areas.total;
+
+        // Update districts with parent, local areas count breakdown
+        this.tableService.districts = areas.districts;
+      });
+
       this.refreshingLayers.floodAreas = false;
       this.refreshingStats.floodAreas = false;
+      this.generatingTableData = false;
     })
     .catch(error => {
       this.refreshingLayers.floodAreas = false;
       this.refreshingStats.floodAreas = false;
+      this.generatingTableData = false;
       throw JSON.stringify(error);
     });
   }
@@ -157,6 +190,7 @@ export class SliderComponent implements OnInit {
     }
 
     this.refreshingLayers = {reports: true, floodAreas: true};
+    this.generatingTableData = true;
 
     // Format date values and store in timePeriod object
     this.selectedTimePeriod = this.timeService.format(
@@ -211,23 +245,18 @@ export class SliderComponent implements OnInit {
     const filter = ['all', ['>=', 'created_at', startDate], ['<=', 'created_at', endDate]];
     this.layersService.filterLayer(this.map, 'reports', filter);
 
-    const aggregates = this.layersService.getReportsCount(this.map, {start: startDate, end: endDate});
-    this.reportsCount = aggregates.qlue + aggregates.grasp + aggregates.detik;
+    // Update reports count
+    this.countReports({
+      start: startDate,
+      end: endDate
+    });
+
     this.refreshingStats.reports = false;
 
-    this.reportsSource = {
-      aggregates: [aggregates.qlue, aggregates.grasp, aggregates.detik],
-      labels: ['Qlue', 'Grasp', 'Detik']
-    };
-
-    // Update flood areas layer
-    const timePeriod = this.timeService.format(startDate, endDate);
-    this.httpService.getFloodAreasArchive(timePeriod)
-    .then(data => {
-      this.floodAreasCount = this.layersService.updateFloodAreas(data, this.floodAreas, this.map);
-      this.refreshingStats.floodAreas = false;
-    })
-    .catch(error => console.log(JSON.stringify(error)));
+    // Update flood areas layer and store area counts
+    this.updateFloodAreas(
+      this.timeService.format(startDate, endDate)
+    );
   }
 
   get enableSlider() {

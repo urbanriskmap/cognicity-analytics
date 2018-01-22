@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { TableService } from '../services/table.service';
 
 @Component({
   selector: 'app-report',
@@ -15,21 +16,10 @@ export class ReportComponent implements OnInit {
       parent: 'Number of Flood Affected Kelurahan',
       local: 'Number of Flood Affected RWs'
     },
-    heightRange: 'Range of Flood Height (cm)'
+    depthRange: 'Range of Flood Depths (cm)'
   };
 
-  tableData: {
-    district: string,
-    totalReports: number,
-    totalFloodedAreas: {
-      parent: number,
-      local: number
-    },
-    heightRange: {
-      min: number,
-      max: number
-    }
-  }[];
+  tableData = [];
 
   exportButtons = [{
       type: 'print',
@@ -43,35 +33,24 @@ export class ReportComponent implements OnInit {
     }
   ];
 
-  constructor() {
-    // Placeholder table data
-    this.tableData = [
-      {district: 'North', totalReports: 8, totalFloodedAreas: {
-        parent: 3, local: 2
-      }, heightRange: {
-        min: 7, max: 78
-      }},
-      {district: 'South', totalReports: 8, totalFloodedAreas: {
-        parent: 3, local: 2
-      }, heightRange: {
-        min: 7, max: 78
-      }},
-      {district: 'East', totalReports: 8, totalFloodedAreas: {
-        parent: 3, local: 2
-      }, heightRange: {
-        min: 7, max: 78
-      }},
-      {district: 'West', totalReports: 8, totalFloodedAreas: {
-        parent: 3, local: 2
-      }, heightRange: {
-        min: 7, max: 78
-      }},
-      {district: 'Greater', totalReports: 8, totalFloodedAreas: {
-        parent: 3, local: 2
-      }, heightRange: {
-        min: 7, max: 78
-      }}
-    ];
+  constructor(private tableService: TableService) {
+    for (const i in this.tableService.districts) {
+      if (this.tableService.districts[i]) {
+        const district = this.tableService.districts[i];
+        this.tableData.push({
+          district: district.name,
+          totalReports: district.reportsCount,
+          totalFloodedAreas: {
+            parent: district.parentAreaCount,
+            local: district.localAreaCount
+          },
+          depthRange: {
+            min: district.minDepth,
+            max: district.maxDepth
+          }
+        });
+      }
+    }
   }
 
   output(type) {

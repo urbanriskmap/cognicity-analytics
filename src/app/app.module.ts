@@ -11,6 +11,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { CustomMaterialsModule } from './custom-materials.module';
 
 import { AuthService } from './services/auth.service';
+import { TableService } from './services/table.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,10 @@ import { AuthService } from './services/auth.service';
     DashboardModule,
     CustomMaterialsModule
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    TableService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -48,6 +48,7 @@
       padding-left: 10px;
       border-bottom: 1px solid white;
       text-align: right;
+
       & a {
         line-height: 32px;
         color: $snow-white;
@@ -56,6 +57,12 @@
           color: mat-color($mat-light-blue, 300);
           text-decoration: none;
         }
+      }
+
+      #spinner {
+        position: absolute;
+        top: 2px;
+        right: 10px;
       }
     }
 

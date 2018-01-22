@@ -31,7 +31,21 @@
 
   <div id="statsWrapper">
     <div id="reportTools">
-      <a href="/report">Generate report</a>
+      <a
+        [routerLink]="['/report']"
+        [queryParams]="{
+          start: slider.selectedTimePeriod.start,
+          end: slider.selectedTimePeriod.end,
+          updated: 'null'
+        }"
+        *ngIf="!slider.generatingTableData && slider.selectedTimePeriod">
+        Generate report
+      </a>
+      <mat-spinner
+        id="spinner"
+        diameter="26"
+        *ngIf="slider.generatingTableData">
+      </mat-spinner>
     </div>
 
     <app-stats

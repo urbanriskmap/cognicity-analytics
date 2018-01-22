@@ -16,6 +16,7 @@ import {
   MatNativeDateModule,
   MatRadioModule,
   MatSelectModule,
+  MatProgressSpinnerModule,
   MatToolbarModule
 } from '@angular/material';
 
@@ -35,6 +36,7 @@ import {
     MatNativeDateModule,
     MatRadioModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
     MatToolbarModule
   ],
   providers: [

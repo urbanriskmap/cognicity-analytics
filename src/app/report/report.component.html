@@ -23,7 +23,7 @@
       {{tableHeaders.totalFloodedAreas.local}}
     </td>
     <td>
-      {{tableHeaders.heightRange}}
+      {{tableHeaders.depthRange}}
     </td>
   </tr>
 
@@ -42,10 +42,15 @@
     <td>
       {{row.totalFloodedAreas.local}}
     </td>
-    <td>
-      Min: {{row.heightRange.min}} cm,
+    <td
+      *ngIf="row.totalReports > 0">
+      Min: {{row.depthRange.min}} cm,
       <br>
-      Max: {{row.heightRange.max}} cm
+      Max: {{row.depthRange.max}} cm
+    </td>
+    <td
+      *ngIf="row.totalReports == 0">
+      N/A
     </td>
   </tr>
 </table>
