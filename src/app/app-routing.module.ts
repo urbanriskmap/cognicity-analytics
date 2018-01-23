@@ -7,13 +7,14 @@ import { CallbackComponent } from './callback/callback.component';
 import { ReportComponent } from './report/report.component';
 
 import { AuthService } from './services/auth.service';
+import { TableService } from './services/table.service';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'callback', component: CallbackComponent },
-  { path: 'dashboard', component: DashboardComponent }, // TODO , canActivate: [AuthService] },
-  { path: 'report', component: ReportComponent }, // TODO: create service that checks required params are provided
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthService] },
+  { path: 'report', component: ReportComponent, canActivate: [TableService] },
   { path: '**', redirectTo: '' }
 ];
 

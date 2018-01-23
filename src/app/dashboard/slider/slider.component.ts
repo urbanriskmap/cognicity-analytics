@@ -34,6 +34,7 @@ export class SliderComponent implements OnInit {
   lastAreaUpdate: string;
   reports: object;
   refreshingLayers = {reports: false, floodAreas: false};
+  generatingTableData = false;
   @Output() reportsSource: {aggregates: number[], labels: string[]};
   @Output() refreshingStats = {reports: true, floodAreas: true};
   @Output() knobStep: {knobUpper: number, knobLower: number};
@@ -52,7 +53,6 @@ export class SliderComponent implements OnInit {
     totalDays: 7, // Slider represents 7 days
     intervalHours: 4 // Step size in hours
   };
-  @Output() generatingTableData = false;
 
   constructor(private httpService: HttpService,
     private layersService: LayersService,
@@ -141,12 +141,14 @@ export class SliderComponent implements OnInit {
         this.refreshingLayers.reports = false;
         this.refreshingStats.reports = false;
         this.generatingTableData = false;
+        this.tableService.allowReport = true;
       });
     })
     .catch(error => {
       this.refreshingLayers.reports = false;
       this.refreshingStats.reports = false;
       this.generatingTableData = false;
+      this.tableService.allowReport = false;
       throw JSON.stringify(error);
     });
   }
@@ -174,11 +176,13 @@ export class SliderComponent implements OnInit {
       this.refreshingLayers.floodAreas = false;
       this.refreshingStats.floodAreas = false;
       this.generatingTableData = false;
+      this.tableService.allowReport = true;
     })
     .catch(error => {
       this.refreshingLayers.floodAreas = false;
       this.refreshingStats.floodAreas = false;
       this.generatingTableData = false;
+      this.tableService.allowReport = false;
       throw JSON.stringify(error);
     });
   }
@@ -204,6 +208,7 @@ export class SliderComponent implements OnInit {
 
     this.refreshingLayers = {reports: true, floodAreas: true};
     this.generatingTableData = true;
+    this.tableService.allowReport = false;
 
     // Format date values and store in timePeriod object
     this.selectedDateRange = this.timeService.format(

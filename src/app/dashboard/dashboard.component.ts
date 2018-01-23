@@ -7,8 +7,6 @@ import * as $ from 'jquery';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  someValue = 1;
-  otherValue = 5;
 
   constructor() { }
 

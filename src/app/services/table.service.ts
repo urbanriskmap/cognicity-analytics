@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router, CanActivate } from '@angular/router';
 
 @Injectable()
 export class TableService {
@@ -15,6 +16,17 @@ export class TableService {
       reportsCount: 0, minDepth: null, maxDepth: null, parentAreaCount: 0, localAreaCount: 0, parentAreaNames: []}
   };
 
-  constructor() { }
+  allowReport = false;
 
+  constructor(public router: Router) { }
+
+  canActivate() {
+    console.log(this.allowReport);
+    if (this.allowReport) {
+      return true;
+    }
+
+    this.router.navigate(['/dashboard']);
+    return false;
+  }
 }
