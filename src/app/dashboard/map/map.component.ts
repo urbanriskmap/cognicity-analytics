@@ -23,14 +23,14 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     const self = this;
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYXNiYXJ2ZSIsImEiOiI4c2ZpNzhVIn0.A1lSinnWsqr7oCUo0UMT7w';
+    mapboxgl.accessToken = 'pk.eyJ1IjoidXJiYW5yaXNrbWFwIiwiYSI6ImNpdmVhc2VwZTAwNmYydXFrOThrMWxmcGIifQ.Dl07iYeyvtqJxOVXa9_A0A';
     self.map = new mapboxgl.Map({
       attributionControl: false,
       container: 'mapContainer',
       center: [106.84, -6.15],
       zoom: 11,
-      minZoom: 9,
-      style: 'mapbox://styles/mapbox/light-v9',
+      minZoom: 10,
+      style: 'mapbox://styles/urbanriskmap/cjcs5ffxd08kg2qoit2v6uilo',
       hash: false,
       preserveDrawingBuffer: true
     });
