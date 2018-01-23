@@ -27,7 +27,11 @@ export class SliderComponent implements OnInit {
   };
   startDate: Date;
   endDate: Date;
-  selectedTimePeriod: {start: string, end: string};
+
+  selectedDateRange: {start: string, end: string};
+  selectedTimeframe: {start: string, end: string};
+
+  lastAreaUpdate: string;
   reports: object;
   refreshingLayers = {reports: false, floodAreas: false};
   @Output() reportsSource: {aggregates: number[], labels: string[]};
@@ -96,26 +100,29 @@ export class SliderComponent implements OnInit {
   }
 
   countReports(range) {
-    this.layersService.getReportsCount(this.map, range, this.tableService.districts)
-    .then(counts => {
-      // Store reports count sum
-      this.reportsCount = counts.aggregates.qlue +
-        counts.aggregates.grasp +
-        counts.aggregates.detik;
+    const counts = this.layersService.getReportsCount(
+      this.map,
+      range,
+      this.tableService.districts
+    );
 
-      // Store reports count by source
-      this.reportsSource = {
-        aggregates: [
-          counts.aggregates.qlue,
-          counts.aggregates.grasp,
-          counts.aggregates.detik
-        ],
-        labels: ['Qlue', 'Grasp', 'Detik']
-      };
+    // Store reports count sum
+    this.reportsCount = counts.aggregates.qlue +
+      counts.aggregates.grasp +
+      counts.aggregates.detik;
 
-      // Update districts with reports count breakdown
-      this.tableService.districts = counts.districts;
-    });
+    // Store reports count by source
+    this.reportsSource = {
+      aggregates: [
+        counts.aggregates.qlue,
+        counts.aggregates.grasp,
+        counts.aggregates.detik
+      ],
+      labels: ['Qlue', 'Grasp', 'Detik']
+    };
+
+    // Update districts with reports count breakdown
+    this.tableService.districts = counts.districts;
   }
 
   updateReports(date) {
@@ -148,15 +155,21 @@ export class SliderComponent implements OnInit {
     this.httpService.getFloodAreasArchive(date)
     .then(data => {
 
-      this.layersService.updateFloodAreas(
-        data, this.floodAreas, this.map, this.tableService.districts
-      ).then(areas => {
-        // Store total flood areas count
-        this.floodAreasCount = areas.total;
+      const areas = this.layersService.updateFloodAreas(
+        data,
+        this.floodAreas,
+        this.map,
+        this.tableService.districts
+      );
 
-        // Update districts with parent, local areas count breakdown
-        this.tableService.districts = areas.districts;
-      });
+      // Store total flood areas count
+      this.floodAreasCount = areas.total;
+
+      // Update districts with parent, local areas count breakdown
+      this.tableService.districts = areas.districts;
+
+      // Update last updated date for flood affected areas
+      this.lastAreaUpdate = areas.lastUpdate;
 
       this.refreshingLayers.floodAreas = false;
       this.refreshingStats.floodAreas = false;
@@ -193,29 +206,30 @@ export class SliderComponent implements OnInit {
     this.generatingTableData = true;
 
     // Format date values and store in timePeriod object
-    this.selectedTimePeriod = this.timeService.format(
+    this.selectedDateRange = this.timeService.format(
       Date.parse((this.startDate).toISOString()),
       Date.parse((this.endDate).toISOString())
     );
+    this.selectedTimeframe = this.selectedDateRange;
 
     // Bind slider markings
     this.dateTimeMarks = this.timeService.getKnobDateTime({
       intervalHours: this.rangeSettings.intervalHours,
       totalDays: this.rangeSettings.totalDays
-    }, this.selectedTimePeriod.start);
+    }, this.selectedDateRange.start);
 
     // Set knob positions to full scale
     this.resetKnobs();
 
-    this.updateReports(this.selectedTimePeriod);
-    this.updateFloodAreas(this.selectedTimePeriod);
+    this.updateReports(this.selectedDateRange);
+    this.updateFloodAreas(this.selectedDateRange);
 
     if (isInitializing) {
       // Draw chart
-      this.drawChart.emit(this.selectedTimePeriod);
+      this.drawChart.emit(this.selectedDateRange);
     } else {
       // Update chart
-      this.updateChart.emit(this.selectedTimePeriod);
+      this.updateChart.emit(this.selectedDateRange);
     }
   }
 
@@ -238,6 +252,11 @@ export class SliderComponent implements OnInit {
     const startDate = range.upper.dateMilliseconds;
     const endDate = range.lower.dateMilliseconds;
 
+    this.selectedTimeframe = this.timeService.format(
+      startDate,
+      endDate
+    );
+
     // Update chart time scale
     this.updateChartScale.emit(range);
 
@@ -254,9 +273,7 @@ export class SliderComponent implements OnInit {
     this.refreshingStats.reports = false;
 
     // Update flood areas layer and store area counts
-    this.updateFloodAreas(
-      this.timeService.format(startDate, endDate)
-    );
+    this.updateFloodAreas(this.selectedTimeframe);
   }
 
   get enableSlider() {

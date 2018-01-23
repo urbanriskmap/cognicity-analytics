@@ -34,11 +34,11 @@
       <a
         [routerLink]="['/report']"
         [queryParams]="{
-          start: slider.selectedTimePeriod.start,
-          end: slider.selectedTimePeriod.end,
-          updated: 'null'
+          start: slider.selectedTimeframe.start,
+          end: slider.selectedTimeframe.end,
+          updated: slider.lastAreaUpdate
         }"
-        *ngIf="!slider.generatingTableData && slider.selectedTimePeriod">
+        *ngIf="!slider.generatingTableData && slider.selectedTimeframe">
         Generate report
       </a>
       <mat-spinner
