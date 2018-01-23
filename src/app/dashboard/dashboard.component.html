@@ -3,6 +3,11 @@
     (finishedLoading)="slider.initData()"
     #map>
   </app-map>
+
+  <div id="legendWrapper">
+    <app-legend>
+    </app-legend>
+  </div>
 </div>
 
 <div id="sliderWrapper">
@@ -14,11 +19,6 @@
     (updateChartScale)="chart.updateScale($event)"
     #slider>
   </app-slider>
-</div>
-
-<div id="legendWrapper">
-  <app-legend>
-  </app-legend>
 </div>
 
 <div id="analyticsWrapper">

@@ -6,7 +6,7 @@
 
 @include mat-core();
 
-$dashboard-primary: mat-palette($mat-light-blue);
+$dashboard-primary: mat-palette($mat-grey, 800);
 $dashboard-accent:  mat-palette($mat-light-blue);
 $dashboard-warn:    mat-palette($mat-deep-orange);
 $dashboard-theme:   mat-dark-theme($dashboard-primary, $dashboard-accent, $dashboard-warn);
@@ -21,12 +21,12 @@ $dashboard-theme:   mat-dark-theme($dashboard-primary, $dashboard-accent, $dashb
   @include angular-material-theme($alt-theme-light);
 }
 
-$dark-gray: #2f2f2f;
+$dark-gray: mat-color($mat-grey, 800);
 $steel-gray: #424242;
 $medium-gray: #808080;
 $light-gray: #dcdcdc;
 $snow-white: #ffffff;
-$banjir-blue: #31aade;
+$banjir-blue: mat-color($mat-light-blue, 500);
 $bencana-red: #c1272d;
 
 //_Font styles Variables_
