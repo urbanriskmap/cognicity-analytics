@@ -1,56 +1,71 @@
-<button
-  *ngFor="let button of exportButtons"
-  class="outputButtons"
-  [id]="button.type + 'Button'"
-  [title]="button.tooltip"
-  (click)="output(button.type)">
-  {{button.name}}
-</button>
+<div id="exportControl">
+  <button mat-raised-button
+    *ngFor="let button of exportButtons"
+    class="outputButtons"
+    [id]="button.type + 'Button'"
+    [title]="button.tooltip"
+    (click)="output(button.type)">
+    {{button.name}}
+  </button>
+</div>
 
-<table>
-  <tr
-    class="tableHeaders">
-    <td>
-      {{tableHeaders.district}}
-    </td>
-    <td>
-      {{tableHeaders.totalReports}}
-    </td>
-    <td>
-      {{tableHeaders.totalFloodedAreas.parent}}
-    </td>
-    <td>
-      {{tableHeaders.totalFloodedAreas.local}}
-    </td>
-    <td>
-      {{tableHeaders.depthRange}}
-    </td>
-  </tr>
+<div id="reportWrapper">
+  <h3 class="header">Petabencana.id Flood Report Analytics</h3>
+    <p class="header">  Report from {{startDate}} to {{endDate}} </p>
+    <p class="header"> Generated on {{currentDate}} </p>
 
-  <tr
-    *ngFor="let row of tableData"
-    class="tableData">
-    <td>
-      {{row.district}}
-    </td>
-    <td>
-      {{row.totalReports}}
-    </td>
-    <td>
-      {{row.totalFloodedAreas.parent}}
-    </td>
-    <td>
-      {{row.totalFloodedAreas.local}}
-    </td>
-    <td
-      *ngIf="row.totalReports > 0">
-      Min: {{row.depthRange.min}} cm,
-      <br>
-      Max: {{row.depthRange.max}} cm
-    </td>
-    <td
-      *ngIf="row.totalReports == 0">
-      N/A
-    </td>
-  </tr>
-</table>
+  <div id="tableWrapper">
+    <table>
+      <tr class="tableHeaders">
+        <td>
+          {{tableHeaders.district}}
+        </td>
+        <td>
+          {{tableHeaders.totalReports}}
+        </td>
+        <td>
+          {{tableHeaders.totalFloodedAreas.parent}}
+        </td>
+        <td>
+          {{tableHeaders.totalFloodedAreas.local}}
+        </td>
+        <td>
+          {{tableHeaders.depthRange}}
+        </td>
+      </tr>
+
+      <tr
+      *ngFor="let row of tableData"
+      class="tableData">
+        <td>
+          {{row.district}}
+        </td>
+        <td>
+          {{row.totalReports}}
+        </td>
+        <td>
+          {{row.totalFloodedAreas.parent}}
+        </td>
+        <td>
+          {{row.totalFloodedAreas.local}}
+        </td>
+        <td
+        *ngIf="row.totalReports > 0">
+        Min: {{row.depthRange.min}} cm,
+        <br>
+        Max: {{row.depthRange.max}} cm
+        </td>
+        <td
+        *ngIf="row.totalReports == 0">
+        N/A
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="logoWrapper">
+    <img id="bnpbLogo" class="logo" src="../../assets/images/bnpb_logo.png">
+    <img id="usaidLogo" class="logo" src="../../assets/images/USAID-logo.png">
+    <img id="PetaLogo" class="logo" src="../../assets/images/petaLogo_dark.svg">
+  </div>
+</div>
