@@ -53,6 +53,10 @@ export class RangeComponent implements OnInit {
     this.setRangeUnits();
     $(window).resize(() => this.setRangeUnits());
 
+    $(document).on('mousemove', (event) => {
+      this.dragStart(event);
+    });
+
     $(document).on('mouseup', () => {
       this.dragEnd();
     });

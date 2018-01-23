@@ -6,12 +6,20 @@
 
 @include mat-core();
 
-$dashboard-primary: mat-palette($mat-grey, 50);
+$dashboard-primary: mat-palette($mat-light-blue);
 $dashboard-accent:  mat-palette($mat-light-blue);
 $dashboard-warn:    mat-palette($mat-deep-orange);
 $dashboard-theme:   mat-dark-theme($dashboard-primary, $dashboard-accent, $dashboard-warn);
 
 @include angular-material-theme($dashboard-theme);
+
+.altTheme {
+  $alt-theme-primary: mat-palette($mat-light-blue);
+  $alt-theme-accent:  mat-palette($mat-light-blue);
+  $alt-theme-light:   mat-light-theme($alt-theme-primary, $alt-theme-accent);
+
+  @include angular-material-theme($alt-theme-light);
+}
 
 $dark-gray: #2f2f2f;
 $steel-gray: #424242;
