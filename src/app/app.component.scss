@@ -1,6 +1,10 @@
 @import "../styles.scss";
 
 #navBar {
+  @media print {
+    display: none;
+  }
+
   min-height: 48px;
 
   & mat-toolbar-row {

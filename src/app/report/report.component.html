@@ -1,18 +1,11 @@
-<div id="exportControl">
-  <button mat-raised-button
-    *ngFor="let button of exportButtons"
-    class="outputButtons"
-    [id]="button.type + 'Button'"
-    [title]="button.tooltip"
-    (click)="output(button.type)">
-    {{button.name}}
-  </button>
+<div id="pageLogo">
+  <img id="PetaLogo" class="logo" src="../../assets/images/petaLogo_dark.svg">
 </div>
 
 <div id="reportWrapper">
-  <h3 class="header mat-title">Petabencana.id Flood Report Analytics</h3>
+  <h3 class="header mat-title">Flood Report</h3>
   <p class="mat-body-1">
-    <b>Timeframe</b><br>
+    <b>Time period</b><br>
     Start: {{startDate}}<br>
     End: {{endDate}}<br>
     <b>Last RW status update:</b> {{lastUpdate}}<br>
@@ -68,9 +61,21 @@
     </table>
   </div>
 
-  <div id="logoWrapper">
-    <img id="bnpbLogo" class="logo" src="../../assets/images/bnpb_logo.png">
-    <img id="usaidLogo" class="logo" src="../../assets/images/USAID-logo.png">
-    <img id="PetaLogo" class="logo" src="../../assets/images/petaLogo_dark.svg">
-  </div>
+  <table id="logoWrapper">
+    <tr>
+      <td
+        *ngFor="let logo of projectLogos">
+        <img [id]="logo.id" [src]="logo.src">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="exportControl">
+  <button mat-raised-button
+    class="outputButton"
+    title="Click to print report"
+    (click)="output('print')">
+    Print
+  </button>
 </div>

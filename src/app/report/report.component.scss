@@ -1,38 +1,29 @@
 @import "../../styles.scss";
 
-#exportControl {
-  display: block;
-  margin: 10px;
-  margin-right: auto;
-  margin-left: auto;
-  max-width: 200px;
-
-  & .outputButtons {
-    width: 80px;
-    height: 30px;
-    margin: 5px;
-    background-color: $dark-gray;
-    @include textlight(12px, $snow-white);
-
-    &:hover {
-      cursor: pointer;
-      color: mat-color($mat-light-blue, 300);
-      text-decoration: none;
-    }
-
-    &.active {
-      color: mat-color($mat-light-blue, 300);
-    }
+#pageLogo {
+  @media print {
+    display: block;
+    max-width: 200px;
+    text-align: center;
+    margin: 0 auto 0 auto;
+  }
+  @media screen {
+    display: none;
   }
 }
 
-#reportWrapper{
+#reportWrapper {
+  @media print {
+    margin: 8px auto 0 auto;
+  }
+
+  @media screen {
+    margin: 24px auto 0 auto;
+  }
+
   max-width: 800px;
   border-top: solid 2px $dark-gray;
   border-bottom: solid 2px $dark-gray;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
 
   & .header {
     text-align: center;
@@ -59,20 +50,43 @@
   }
 
   & #logoWrapper {
-    margin: 10px;
+    margin: 10px 0 10px 0;
+    width: 100%;
 
-    & .logo {
-      height: 40px;
-      width: auto;
-      margin: 10px;
-    }
+    & tr {
+      & td {
+        height: 40px;
+        vertical-align: middle;
 
-    & #PetaLogo{
-      float: right;
-    }
+        &:first-child {
+          text-align: left;
+        }
 
-    & #usaidLogo{
-      float: left;
+        &:last-child {
+          text-align: right;
+        }
+
+        & img {
+          height: 100%;
+          &#urlLogo {
+            height: 75%;
+          }
+        }
+      }
     }
+  }
+}
+
+#exportControl {
+  @media print {
+    display: none;
+  }
+
+  margin: 10px auto 0 auto;
+  text-align: center;
+
+  & .outputButton {
+    height: 30px;
+    margin-top: 5px;
   }
 }

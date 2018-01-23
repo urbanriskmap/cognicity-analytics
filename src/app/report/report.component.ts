@@ -22,16 +22,10 @@ export class ReportComponent implements OnInit {
 
   tableData = [];
 
-  exportButtons = [{
-      type: 'print',
-      name: 'Print',
-      tooltip: 'Click to print'
-    },
-    {
-      type: 'export',
-      name: 'Export',
-      tooltip: 'Export report data in csv format'
-    }
+  projectLogos = [
+    {id: 'usaidLogo', src: '../../assets/images/usaid_logo.png'},
+    {id: 'bnpbLogo', src: '../../assets/images/bnpb_logo.png'},
+    {id: 'urlLogo', src: '../../assets/images/url_logo.svg'}
   ];
 
   startDate: string;
@@ -63,7 +57,12 @@ export class ReportComponent implements OnInit {
   }
 
   output(type) {
-
+    switch (type) {
+      case 'print':
+        window.print();
+      // case 'export':
+      //
+    }
   }
 
   getDateTime(dateString, adjustOffset) {
@@ -86,5 +85,4 @@ export class ReportComponent implements OnInit {
       this.lastUpdate = this.getDateTime(params['updated'], false);
     });
   }
-
 }
