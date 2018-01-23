@@ -24,7 +24,7 @@ export class ReportComponent implements OnInit {
   exportButtons = [{
       type: 'print',
       name: 'Print',
-      tooltip: 'Click to export a pdf'
+      tooltip: 'Click to print'
     },
     {
       type: 'export',

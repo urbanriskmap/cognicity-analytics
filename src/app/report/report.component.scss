@@ -1,1 +1,69 @@
 @import "../../styles.scss";
+
+#exportControl {
+  display: block;
+  margin: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 200px;
+  & button {
+    width: 80px;
+    height: 30px;
+    margin: 5px;
+    // border: none;
+    background-color: $dark-gray;
+    @include textlight(12px, $snow-white);
+    &:hover {
+      cursor: pointer;
+      color: mat-color($mat-light-blue, 300);
+      text-decoration: none;
+    }
+    &.active {
+      color: mat-color($mat-light-blue, 300);
+    }
+  }
+}
+#reportWrapper{
+  max-width: 800px;
+  border-top: solid 2px $dark-gray;
+  border-bottom: solid 2px $dark-gray;
+  & .header {text-align: center;}
+  & h3 {
+    padding-top: 5px;
+  }
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+#tableWrapper {
+  margin-top: 10px;
+  & table {
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: solid 1px $dark-gray;
+  }
+  & .tableHeaders {
+    @include textmedium(14px, $dark-gray);
+    border-bottom: solid 1px $dark-gray;
+  }
+  & td{
+    padding: 10px;
+    text-align: center;
+
+  }
+}
+
+#logoWrapper {
+  margin: 10px;
+  & .logo {
+    height: 40px;
+    width: auto;
+    margin: 10px;
+  }
+  & #PetaLogo{
+    float: right;
+  }
+  & #usaidLogo{
+    float: left;
+  }
+}
