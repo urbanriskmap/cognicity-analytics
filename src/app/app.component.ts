@@ -8,7 +8,7 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'CogniCity Dashboard';
+  title = 'Dashboard | PetaBencana.id';
 
   constructor(public auth: AuthService) {
     auth.handleAuthentication();
