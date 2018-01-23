@@ -1,11 +1,33 @@
-<h2 *ngIf="isRefreshing">...</h2>
-<h2 *ngIf="!isRefreshing">{{reportsCount}}</h2>
-<p>
-  Reports
-</p>
-<br>
-<h2 *ngIf="isRefreshing">...</h2>
-<h2 *ngIf="!isRefreshing">{{floodAreasCount}}</h2>
-<p>
-  Flooded areas
+<div id="reportStats">
+  <mat-spinner
+    diameter="38"
+    *ngIf="isRefreshing">
+  </mat-spinner>
+  <p
+    *ngIf="!isRefreshing"
+    class="mat-headline">
+    {{reportsCount}}
+  </p>
+  <p class="mat-body-1">
+    Reports
+  </p>
+</div>
+
+<div id="areaStats">
+  <mat-spinner
+    diameter="38"
+    *ngIf="isRefreshing">
+  </mat-spinner>
+  <p
+    *ngIf="!isRefreshing"
+    class="mat-headline">
+    {{floodAreasCount}}
+  </p>
+  <p class="mat-body-1">
+    Flood affected areas
+  </p>
+</div>
+
+<p id="disclaimer" class="mat-caption">
+  Note: The number of flooded areas does not mean the whole area is flooded. It shows that there are floods happening within those counted areas
 </p>

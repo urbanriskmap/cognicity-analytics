@@ -1,7 +1,7 @@
 <mat-form-field id="startDateWrapper" class="dateWrapper altTheme">
   <input matInput
     [matDatepicker]="startDatePicker"
-    placeholder="Start MM/DD/YY"
+    placeholder="Start Date"
     [(value)]="startDate"
     [min]="dateLimits.start.min"
     [max]="dateLimits.start.max"
@@ -26,7 +26,7 @@
 <mat-form-field id="endDateWrapper" class="dateWrapper altTheme">
   <input matInput
     [matDatepicker]="endDatePicker"
-    placeholder="End MM/DD/YY"
+    placeholder="End Date"
     [(value)]="endDate"
     [min]="dateLimits.end.min"
     [max]="dateLimits.end.max"

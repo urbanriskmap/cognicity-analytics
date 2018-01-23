@@ -52,9 +52,12 @@
       & a {
         line-height: 32px;
         color: $snow-white;
+        background-color: mat-color($mat-light-blue, 800);
+        border-radius: 3px;
+        padding: 3px 8px 3px 8px;
         &:hover {
           cursor: pointer;
-          color: mat-color($mat-light-blue, 300);
+          background-color: mat-color($mat-light-blue, 600);
           text-decoration: none;
         }
       }
@@ -64,10 +67,6 @@
         top: 2px;
         right: 10px;
       }
-    }
-
-    & #disclaimer {
-      @include textlight(12px, $snow-white);
     }
   }
 }

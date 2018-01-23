@@ -1,5 +1,18 @@
 @import "../../../styles.scss";
 
-p, h2 {
+div {
+  margin-top: 10px;
   color: $snow-white;
+
+  & p.mat-headline {
+    margin: 0;
+    margin-bottom: 6px;
+  }
+}
+
+p#disclaimer {
+  position: absolute;
+  bottom: 10px;
+  color: $snow-white;
+  margin-right: 10px;
 }
