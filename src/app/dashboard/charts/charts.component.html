@@ -2,7 +2,7 @@
   <button
     *ngFor="let type of chartTypes"
     [id]="type.id + 'Button'"
-    [class]="type.class"
+    [class]="type.class + ' mat-body-1'"
     (click)="changeChart($event)">
     {{type.title}}
   </button>

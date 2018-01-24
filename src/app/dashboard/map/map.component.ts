@@ -30,7 +30,7 @@ export class MapComponent implements OnInit {
       center: [106.84, -6.15],
       zoom: 11,
       minZoom: 10,
-      style: 'mapbox://styles/urbanriskmap/cjcs5ffxd08kg2qoit2v6uilo',
+      style: 'mapbox://styles/urbanriskmap/cjcta37vx0vue2rnxg3z6qynz',
       hash: false,
       preserveDrawingBuffer: true
     });

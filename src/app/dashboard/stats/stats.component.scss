@@ -1,18 +1,13 @@
 @import "../../../styles.scss";
 
 div {
-  margin-top: 10px;
+  margin: 10px;
   color: $snow-white;
-
-  & p.mat-headline {
-    margin: 0;
-    margin-bottom: 6px;
-  }
 }
 
 p#disclaimer {
   position: absolute;
-  bottom: 10px;
+  bottom: 0;
   color: $snow-white;
-  margin-right: 10px;
+  margin: 10px;
 }

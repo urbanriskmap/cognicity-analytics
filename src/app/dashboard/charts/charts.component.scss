@@ -7,23 +7,26 @@
   padding-left: 15px;
   margin-bottom: 10px;
   & .tabButton {
-    height: 32px;
+    height: 33px;
     border: none;
     border-right: 1px solid $snow-white;
     border-bottom: 1px solid $snow-white;
+    border-top: 1px solid $snow-white;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     &:first-of-type {
       border-left: 1px solid $snow-white;
     }
+    cursor: pointer;
     background-color: $dark-gray;
     color: $snow-white;
     outline: none;
-    &.selected {
-      background-color: $dark-gray;
-      border-bottom: 1px solid $dark-gray;
-      color: mat-color($mat-light-blue, 300);
+    &:hover {
+      color: $banjir-blue;
     }
-    &:active {
-      background-color: $steel-gray;
+    &.selected {
+      border-bottom: 1px solid $dark-gray;
+      color: $banjir-blue;
     }
   }
 }
