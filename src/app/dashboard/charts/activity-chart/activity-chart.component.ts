@@ -95,7 +95,29 @@ export class ActivityChartComponent implements OnInit, OnChanges {
               fontColor: '#d0d0d0',
               fontFamily: '"Roboto-Medium", "Roboto", "Open Sans"'
             }
-          }],
+          },
+          {
+            id: 'x2',
+            type: 'time',
+            time: {
+              unit: 'day',
+              unitStepSize: 1,
+              displayFormats: {
+                day: 'MMM D'
+              }
+            },
+            gridLines: {
+              drawOnChartArea: false, // only want the grid lines for one axis to show up
+            },
+            position: 'bottom',
+            ticks: {
+              autoSkip: true,
+              autoSkipPadding: 12,
+              fontColor: '#d0d0d0',
+              fontFamily: '"Roboto-Medium", "Roboto", "Open Sans"'
+            }
+          }
+        ],
         }
       }
     };
