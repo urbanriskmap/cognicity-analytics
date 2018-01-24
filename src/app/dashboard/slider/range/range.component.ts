@@ -42,7 +42,9 @@ export class RangeComponent implements OnInit {
 
     // Pixels represented by each step, given step size in hours
     this.rangeStepPx = this.sliderHeightPx / this.totalSteps;
-    this.sliderTopOffset = $('#rangeBase').offset().top;
+    if ($('#rangeBase').offset()) {
+      this.sliderTopOffset = $('#rangeBase').offset().top;
+    }
   }
 
   ngOnInit() {
