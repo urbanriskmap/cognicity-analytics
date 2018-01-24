@@ -33,10 +33,10 @@ export class SliderComponent implements OnInit {
 
   lastAreaUpdate: string;
   reports: object;
-  refreshingLayers = {reports: false, floodAreas: false};
   generatingTableData = false;
-  @Output() reportsSource: {aggregates: number[], labels: string[]};
+  refreshingLayers = {reports: false, floodAreas: false};
   @Output() refreshingStats = {reports: true, floodAreas: true};
+  @Output() reportsSource: {aggregates: number[], labels: string[]};
   @Output() knobStep: {knobUpper: number, knobLower: number};
   @Output() dateTimeMarks: {
     dateMilliseconds: number,

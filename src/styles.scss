@@ -6,7 +6,7 @@
 
 @include mat-core();
 
-$dashboard-primary: mat-palette($mat-grey, 800);
+$dashboard-primary: mat-palette($mat-grey, 50);
 $dashboard-accent:  mat-palette($mat-light-blue);
 $dashboard-warn:    mat-palette($mat-deep-orange);
 $dashboard-theme:   mat-dark-theme($dashboard-primary, $dashboard-accent, $dashboard-warn);
