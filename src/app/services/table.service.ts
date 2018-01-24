@@ -21,7 +21,6 @@ export class TableService {
   constructor(public router: Router) { }
 
   canActivate() {
-    console.log(this.allowReport);
     if (this.allowReport) {
       return true;
     }
