@@ -21,9 +21,9 @@ $dashboard-theme:   mat-dark-theme($dashboard-primary, $dashboard-accent, $dashb
 }
 
 $dark-gray: mat-color($mat-grey, 800);
-$steel-gray: #424242;
-$medium-gray: #808080;
-$light-gray: #dcdcdc;
+$steel-gray: mat-color($mat-grey, 600);
+$medium-gray: mat-color($mat-grey, 400);;
+$light-gray: mat-color($mat-grey, 200);
 $snow-white: #ffffff;
 $banjir-blue: mat-color($mat-light-blue, 500);
 $bencana-red: #c1272d;

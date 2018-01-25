@@ -1,96 +1,95 @@
 <div class="reportpaneWrapper">
+  <div id="pageLogo">
+    <img id="PetaLogo" class="logo" src="../../assets/images/petaLogo_dark.svg">
+  </div>
 
-<div id="pageLogo">
-  <img id="PetaLogo" class="logo" src="../../assets/images/petaLogo_dark.svg">
-</div>
+  <div id="reportWrapper">
+    <h3 class="header mat-title">Flood Report</h3>
+    <p class="mat-body-1">
+      <b>Time period</b><br>
+      Start: {{startDate}}<br>
+      End: {{endDate}}<br>
+      <b>Last RW status update:</b> {{lastUpdate}}<br>
+      <b>Report generated on:</b> {{currentDate}}
+    </p>
 
-<div id="reportWrapper">
-  <h3 class="header mat-title">Flood Report</h3>
-  <p class="mat-body-1">
-    <b>Time period</b><br>
-    Start: {{startDate}}<br>
-    End: {{endDate}}<br>
-    <b>Last RW status update:</b> {{lastUpdate}}<br>
-    <b>Report generated on:</b> {{currentDate}}
-  </p>
+        <p class="note">
+          Note: The number of flooded areas does not mean the whole area is flooded.
+          It shows that there are floods happening within those counted areas
+        </p>
 
-      <p class="note">
-        Note: The number of flooded areas does not mean the whole area is flooded.
-        It shows that there are floods happening within those counted areas
-      </p>
+    <div id="tableWrapper">
+      <table>
+        <tr class="tableHeaders mat-body-2">
+          <td>
+            {{tableHeaders.district}}
+          </td>
+          <td>
+            {{tableHeaders.totalReports}}
+          </td>
+          <td>
+            {{tableHeaders.totalParent}}
+          </td>
+          <td>
+            {{tableHeaders.localAreas}}
+          </td>
+          <td>
+            {{tableHeaders.depthRange}}
+          </td>
+        </tr>
 
-  <div id="tableWrapper">
-    <table>
-      <tr class="tableHeaders mat-body-2">
-        <td>
-          {{tableHeaders.district}}
-        </td>
-        <td>
-          {{tableHeaders.totalReports}}
-        </td>
-        <td>
-          {{tableHeaders.totalParent}}
-        </td>
-        <td>
-          {{tableHeaders.localAreas}}
-        </td>
-        <td>
-          {{tableHeaders.depthRange}}
-        </td>
-      </tr>
+        <tr
+          *ngFor="let row of tableData"
+          class="tableData mat-body-1">
+          <td>
+            {{row.district}}
+          </td>
+          <td>
+            {{row.totalReports}}
+          </td>
+          <td>
+            {{row.totalParent}}
+          </td>
 
-      <tr
-        *ngFor="let row of tableData"
-        class="tableData mat-body-1">
-        <td>
-          {{row.district}}
-        </td>
-        <td>
-          {{row.totalReports}}
-        </td>
-        <td>
-          {{row.totalParent}}
-        </td>
+          <td
+            *ngIf="row.totalParent > 0"
+            colspan="2">
+            <mat-list
+              *ngFor="let parent of row.parentAreas"
+              class="altTheme mat-caption">
+              <p class="maxState">{{floodStateMap[parent.maxState]}}</p>
+              <p>{{parent.name}}</p>
+              <mat-list-item
+                *ngFor="let local of parent.areas">
+                <p class="mat-caption">{{local.name}}</p>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </mat-list>
+          </td>
+          <td
+            *ngIf="row.totalParent === 0">
+            N/A
+          </td>
+        </tr>
+      </table>
+    </div>
 
+    <table id="logoWrapper">
+      <tr>
         <td
-          *ngIf="row.totalParent > 0"
-          colspan="2">
-          <mat-list
-            *ngFor="let parent of row.parentAreas"
-            class="altTheme mat-caption">
-            <p class="maxState">{{floodStateMap[parent.maxState]}}</p>
-            <p>{{parent.name}}</p>
-            <mat-list-item
-              *ngFor="let local of parent.areas">
-              <p class="mat-caption">{{local.name}}</p>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-          </mat-list>
-        </td>
-        <td
-          *ngIf="row.totalParent === 0">
-          N/A
+          *ngFor="let logo of projectLogos">
+          <img [id]="logo.id" [src]="logo.src">
         </td>
       </tr>
     </table>
   </div>
 
-  <table id="logoWrapper">
-    <tr>
-      <td
-        *ngFor="let logo of projectLogos">
-        <img [id]="logo.id" [src]="logo.src">
-      </td>
-    </tr>
-  </table>
-</div>
-
-<div id="exportControl">
-  <button mat-raised-button
-    class="outputButton"
-    title="Click to print report"
-    (click)="output('print')">
-    Print
-  </button>
-</div>
+  <div id="exportControl">
+    <button mat-raised-button
+      class="outputButton"
+      title="Click to print report"
+      (click)="output('print')">
+      Print
+    </button>
+  </div>
 </div>

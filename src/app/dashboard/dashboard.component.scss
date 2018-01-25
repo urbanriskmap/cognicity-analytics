@@ -2,6 +2,7 @@
 
 #mapWrapper {
   position: absolute;
+  top: 48px;
   width: 100%;
   height: 700px; // Overwritten by DashboardComponent.resizeComponents()
   margin: 0;
