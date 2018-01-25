@@ -10,8 +10,6 @@ import { TableService } from '../services/table.service';
 })
 
 export class ReportComponent implements OnInit {
-
-
   tableData = [];
 
   projectLogos = [
@@ -20,12 +18,7 @@ export class ReportComponent implements OnInit {
     {id: 'urlLogo', src: '../../assets/images/url_logo.svg'}
   ];
 
-  floodStateMap = {
-    '1': 'Use caution',
-    '2': 'Minor: 10-70cm',
-    '3': 'Moderate: 71-150cm',
-    '4': 'Severe: Greater than 150cm'
-  };
+  floodState: string;
 
   startDate: string;
   endDate: string;

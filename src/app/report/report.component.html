@@ -42,7 +42,7 @@
             {{ 'table.localAreas' | translate }}
           </td>
           <td>
-            {{ 'table.depthRange' | translate }}
+            {{ 'table.localAreas' | translate }}
           </td>
         </tr>
 
@@ -65,7 +65,7 @@
             <mat-list
               *ngFor="let parent of row.parentAreas"
               class="altTheme mat-caption">
-              <p class="maxState">{{floodStateMap[parent.maxState]}}</p>
+              <p class="maxState">{{ 'table.floodStates.fs' + parent.maxState | translate }}</p>
               <p>{{parent.name}}</p>
               <mat-list-item
                 *ngFor="let local of parent.areas">
