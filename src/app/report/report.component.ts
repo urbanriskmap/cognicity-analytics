@@ -34,7 +34,7 @@ export class ReportComponent implements OnInit {
 
   constructor(
     private tableService: TableService,
-    private translate: TranslateService
+    private translate: TranslateService,
     private route: ActivatedRoute
   ) {
     for (const i in this.tableService.districts) {
