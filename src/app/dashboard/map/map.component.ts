@@ -27,7 +27,7 @@ export class MapComponent implements OnInit {
     self.map = new mapboxgl.Map({
       attributionControl: false,
       container: 'mapContainer',
-      center: [106.84, -6.15],
+      center: [106.86, -6.17],
       zoom: 11,
       // minZoom: 10,
       style: 'mapbox://styles/urbanriskmap/cjcta37vx0vue2rnxg3z6qynz',
