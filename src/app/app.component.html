@@ -24,7 +24,8 @@
       <mat-form-field id="langMenu">
         <mat-select
           placeholder="Language"
-          (change)="changeLanguage($event)">
+          (change)="changeLanguage($event)"
+          [(value)]="selectLang">
           <mat-option
             *ngFor="let lang of languages"
             [value]="lang.code">

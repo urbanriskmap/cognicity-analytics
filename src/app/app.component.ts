@@ -12,6 +12,7 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   title = 'Dashboard | PetaBencana.id';
   languages = env.locales.supportedLanguages;
+  selectLang = env.locales.defaultLanguage;
 
   constructor(
     private translate: TranslateService,

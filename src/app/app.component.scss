@@ -41,11 +41,10 @@
       right: 0;
       margin-right: 10px;
       padding-top: 10px;
-      @include textlight(14px, $snow-white);
       text-align: right;
 
       & a {
-        @include textlight(14px, $snow-white);
+        @include textlight(12px, $snow-white);
         text-decoration: none;
         &:hover {
           cursor: pointer;
@@ -58,12 +57,10 @@
       }
 
       & #langMenu {
-        // position: absolute;
-        // top: 4px;
-        // right: 0;
-        // margin-right: 10px;
+        margin-top: -2px;
+        margin-left: 10px;
         float: right;
-        width: 120px;
+        width: 80px;
         font-size: 12px;
         height: 38px;
       }
