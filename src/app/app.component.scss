@@ -56,6 +56,17 @@
           color: mat-color($mat-light-blue, 300);
         }
       }
+
+      & #langMenu {
+        // position: absolute;
+        // top: 4px;
+        // right: 0;
+        // margin-right: 10px;
+        float: right;
+        width: 120px;
+        font-size: 12px;
+        height: 38px;
+      }
     }
   }
 }

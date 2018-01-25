@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
+import { environment as env } from '../environments/environment';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -9,8 +11,20 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'Dashboard | PetaBencana.id';
+  languages = env.locales.supportedLanguages;
 
-  constructor(public auth: AuthService) {
+  constructor(
+    private translate: TranslateService,
+    public auth: AuthService
+  ) {
     auth.handleAuthentication();
+    // this language will be used as a fallback when a translation isn't found in the current language
+    this.translate.setDefaultLang(env.locales.defaultLanguage);
+    // the lang to use, if the lang isn't available, it will use the current loader to get them
+    this.translate.use(env.locales.defaultLanguage);
+  }
+
+  changeLanguage(event) {
+    this.translate.use(event.value);
   }
 }

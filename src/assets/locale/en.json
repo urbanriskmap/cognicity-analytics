@@ -1,5 +1,5 @@
-en: {
-  "logo_title": "Analytics Dashboard",
+{
+  "logo_title": "  | Analytics dashboard",
   "nav_buttons": {
       "dashboard": "Dashboard",
       "desilting": "Desilting",
@@ -51,6 +51,6 @@ en: {
       "2": "Minor: 10-70cm",
       "3": "Moderate: 71-150cm",
       "4": "Severe: Greater than 150cm"
-    },
+    }
   }
 }

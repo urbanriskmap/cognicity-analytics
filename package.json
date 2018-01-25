@@ -37,6 +37,8 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "@ngx-translate/core": "^9.1.1",
+    "@ngx-translate/http-loader": "^2.0.1",
     "auth0-js": "^8.12.1",
     "chart.js": "^2.5.0",
     "core-js": "^2.4.1",

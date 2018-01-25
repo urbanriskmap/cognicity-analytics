@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 import { DashboardComponent } from './dashboard.component';
 import { ChartsComponent } from './charts/charts.component';
@@ -23,14 +23,15 @@ import { TimeService } from '../services/time.service';
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule,
     CustomMaterialsModule,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ],
   providers: [
     HttpService,
     LayersService,
-    TimeService
+    TimeService,
+    TranslatePipe
   ],
   declarations: [
     DashboardComponent,

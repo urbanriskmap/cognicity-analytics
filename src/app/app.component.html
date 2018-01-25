@@ -4,7 +4,7 @@
       <a href="https://petabencana.id">
         <img src="assets/images/petaLogo.svg">
       </a>
-      <p>&nbsp;&nbsp;&#124;&nbsp;Analytics&nbsp;dashboard</p>
+      <p>{{ 'logo_title' | translate }}</p>
     </div>
 
     <div id="linksBar">
@@ -20,6 +20,18 @@
       <ng-template #elseBlock>
         <a (click)="auth.login()">Log In</a>
       </ng-template>
+
+      <mat-form-field id="langMenu">
+        <mat-select
+          placeholder="Language"
+          (change)="changeLanguage($event)">
+          <mat-option
+            *ngFor="let lang of languages"
+            [value]="lang.code">
+              {{ lang.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

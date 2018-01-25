@@ -9,9 +9,16 @@ import { ReportComponent } from './report/report.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { CustomMaterialsModule } from './custom-materials.module';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader, TranslatePipe } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AuthService } from './services/auth.service';
 import { TableService } from './services/table.service';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/locale/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -24,11 +31,20 @@ import { TableService } from './services/table.service';
     BrowserModule,
     AppRoutingModule,
     DashboardModule,
-    CustomMaterialsModule
+    CustomMaterialsModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     AuthService,
-    TableService
+    TableService,
+    TranslatePipe
   ],
   bootstrap: [AppComponent]
 })
