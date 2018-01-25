@@ -3,6 +3,15 @@
     <img id="PetaLogo" class="logo" src="../../assets/images/petaLogo_dark.svg">
   </div>
 
+  <div id="exportControl">
+    <button mat-raised-button
+      class="outputButton"
+      title="Click to print report"
+      (click)="output('print')">
+      Print
+    </button>
+  </div>
+
   <div id="reportWrapper">
     <h3 class="header mat-title">Flood Report</h3>
     <p class="mat-body-1">
@@ -82,14 +91,5 @@
         </td>
       </tr>
     </table>
-  </div>
-
-  <div id="exportControl">
-    <button mat-raised-button
-      class="outputButton"
-      title="Click to print report"
-      (click)="output('print')">
-      Print
-    </button>
   </div>
 </div>

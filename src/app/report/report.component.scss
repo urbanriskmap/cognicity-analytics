@@ -24,6 +24,19 @@
     }
   }
 
+  & #exportControl {
+    @media print {
+      display: none;
+    }
+
+    margin: 24px auto 0 auto;
+    text-align: center;
+
+    & .outputButton {
+      height: 36px;
+    }
+  }
+
   & #reportWrapper {
     @media print {
       margin: 8px auto 0 auto;
@@ -104,21 +117,6 @@
           }
         }
       }
-    }
-  }
-
-  & #exportControl {
-    margin-top: 50px;
-    @media print {
-      display: none;
-    }
-
-    margin: 10px auto 0 auto;
-    text-align: center;
-
-    & .outputButton {
-      height: 35px;
-      // margin-top: 5px;
     }
   }
 }
