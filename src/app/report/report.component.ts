@@ -13,10 +13,8 @@ export class ReportComponent implements OnInit {
   tableHeaders = {
     district: 'District',
     totalReports: 'Total Reports',
-    totalFloodedAreas: {
-      parent: 'Number of Flood Affected Kelurahan',
-      local: 'Number of Flood Affected RWs'
-    },
+    totalParent: 'Number of Flood Affected Kelurahan',
+    localAreas: 'Number of Flood Affected RWs',
     depthRange: 'Range of Flood Depths (cm)'
   };
 
@@ -27,6 +25,13 @@ export class ReportComponent implements OnInit {
     {id: 'bnpbLogo', src: '../../assets/images/bnpb_logo.png'},
     {id: 'urlLogo', src: '../../assets/images/url_logo.svg'}
   ];
+
+  floodStateMap = {
+    '1': 'Use caution',
+    '2': 'Minor: 10-70cm',
+    '3': 'Moderate: 71-150cm',
+    '4': 'Severe: Greater than 150cm'
+  };
 
   startDate: string;
   endDate: string;
@@ -43,17 +48,33 @@ export class ReportComponent implements OnInit {
         this.tableData.push({
           district: district.name,
           totalReports: district.reportsCount,
-          totalFloodedAreas: {
-            parent: district.parentAreaCount,
-            local: district.localAreaCount
-          },
-          depthRange: {
-            min: district.minDepth,
-            max: district.maxDepth
-          }
+          totalParent: district.parentAreasCount,
+          parentAreas: this.getParentAreas(district.parentAreas)
         });
       }
     }
+  }
+
+  getParentAreas(areas) {
+    const parent = [];
+    let highestState = null;
+
+    for (const area in areas) {
+      if (area) {
+        for (const local of areas[area].localAreas) {
+          if (highestState) {
+            if (local.maxState > highestState) {
+              highestState = local.maxState;
+            }
+          } else {
+            highestState = local.maxState;
+          }
+        }
+
+        parent.push({name: areas[area].name, maxState: highestState, areas: areas[area].localAreas});
+      }
+    }
+    return parent;
   }
 
   output(type) {

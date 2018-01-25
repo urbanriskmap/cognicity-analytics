@@ -47,8 +47,6 @@ export class LayersService {
     for (const district in districts) {
       if (districts[district]) {
         districts[district].reportsCount = 0;
-        districts[district].minDepth = null;
-        districts[district].maxDepth = null;
       }
     }
 
@@ -58,31 +56,10 @@ export class LayersService {
         reportsCount[report.properties.source] += 1;
 
         const districtId = report.properties.tags.district_id;
-
         if (districtId) {
           const currentDistrict = districts[districtId];
           // Increment reports count by districts
           currentDistrict.reportsCount += 1;
-
-          if (report.properties.report_data && report.properties.report_data.flood_depth) {
-            // Update min depth by district
-            if (currentDistrict.minDepth) {
-              if (report.properties.report_data.flood_depth < currentDistrict.minDepth) {
-                currentDistrict.minDepth = report.properties.report_data.flood_depth;
-              }
-            } else {
-              currentDistrict.minDepth = report.properties.report_data.flood_depth;
-            }
-
-            // Update max depth by district
-            if (currentDistrict.maxDepth) {
-              if (report.properties.report_data.flood_depth > currentDistrict.maxDepth) {
-                currentDistrict.maxDepth = report.properties.report_data.flood_depth;
-              }
-            } else {
-              currentDistrict.maxDepth = report.properties.report_data.flood_depth;
-            }
-          }
         }
       }
     }
@@ -137,9 +114,8 @@ export class LayersService {
     // Reset areas count by district to 0
     for (const district in districts) {
       if (districts[district]) {
-        districts[district].localAreaCount = 0;
-        districts[district].parentAreaCount = 0;
-        districts[district].parentAreaNames = [];
+        districts[district].parentAreasCount = 0;
+        districts[district].parentAreas = {};
       }
     }
 
@@ -156,7 +132,8 @@ export class LayersService {
           const localAreaId = floodAreas.features[area].properties.area_id;
 
           if (localAreaId === state.area_id) {
-            updatedData.features[area].properties.max_state = parseInt(state.max_state, 10);
+            const maxState = parseInt(state.max_state, 10);
+            updatedData.features[area].properties.max_state = maxState;
             floodAreasCount += 1;
 
             // Collect, compare and store lastUpdate property
@@ -168,21 +145,23 @@ export class LayersService {
               lastUpdate = new Date(state.last_updated);
             }
 
+            const localAreaName = floodAreas.features[area].properties.area_name;
             const parentAreaName = floodAreas.features[area].properties.parent_name;
             const districtId = floodAreas.features[area].properties.district_id;
             const currentDistrict = districts[districtId];
 
-            // Increment local area count
-            currentDistrict.localAreaCount += 1;
-
-            // Check if parentAreas array has current parent area
-            if (currentDistrict.parentAreaNames.indexOf(parentAreaName) === -1) {
-              // Parent name does not exist for current district
-              // Increment parent area count
-              currentDistrict.parentAreaCount += 1;
-              // Push parent area name
-              currentDistrict.parentAreaNames.push(parentAreaName);
+            // Check for existing parent area
+            if (!currentDistrict.parentAreas.hasOwnProperty(parentAreaName)) {
+              // Incement parent areas count
+              currentDistrict.parentAreasCount += 1;
+              currentDistrict.parentAreas[parentAreaName] = {name: parentAreaName, localAreas: []};
             }
+
+            // Register local area info against parent area
+            currentDistrict.parentAreas[parentAreaName].localAreas.push({
+              name: localAreaName,
+              maxState: maxState
+            });
           }
         }
       }

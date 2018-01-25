@@ -29,10 +29,10 @@
           {{tableHeaders.totalReports}}
         </td>
         <td>
-          {{tableHeaders.totalFloodedAreas.parent}}
+          {{tableHeaders.totalParent}}
         </td>
         <td>
-          {{tableHeaders.totalFloodedAreas.local}}
+          {{tableHeaders.localAreas}}
         </td>
         <td>
           {{tableHeaders.depthRange}}
@@ -49,20 +49,27 @@
           {{row.totalReports}}
         </td>
         <td>
-          {{row.totalFloodedAreas.parent}}
+          {{row.totalParent}}
         </td>
-        <td>
-          {{row.totalFloodedAreas.local}}
+
+        <td
+          *ngIf="row.totalParent > 0"
+          colspan="2">
+          <mat-list
+            *ngFor="let parent of row.parentAreas"
+            class="altTheme mat-caption">
+            <p class="maxState">{{floodStateMap[parent.maxState]}}</p>
+            <p>{{parent.name}}</p>
+            <mat-list-item
+              *ngFor="let local of parent.areas">
+              <p class="mat-caption">{{local.name}}</p>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
         </td>
         <td
-          *ngIf="row.depthRange.min">
-          Min: {{row.depthRange.min}} cm,
-          <br>
-          Max: {{row.depthRange.max}} cm
-        </td>
-        <td
-          *ngIf="!row.depthRange.min">
-          No depth value provided
+          *ngIf="row.totalParent === 0">
+          N/A
         </td>
       </tr>
     </table>
