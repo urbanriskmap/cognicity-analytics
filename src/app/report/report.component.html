@@ -1,3 +1,5 @@
+<div class="reportpaneWrapper">
+
 <div id="pageLogo">
   <img id="PetaLogo" class="logo" src="../../assets/images/petaLogo_dark.svg">
 </div>
@@ -11,6 +13,11 @@
     <b>Last RW status update:</b> {{lastUpdate}}<br>
     <b>Report generated on:</b> {{currentDate}}
   </p>
+
+      <p class="note">
+        Note: The number of flooded areas does not mean the whole area is flooded.
+        It shows that there are floods happening within those counted areas
+      </p>
 
   <div id="tableWrapper">
     <table>
@@ -78,4 +85,5 @@
     (click)="output('print')">
     Print
   </button>
+</div>
 </div>

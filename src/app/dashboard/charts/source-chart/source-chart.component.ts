@@ -46,7 +46,7 @@ export class SourceChartComponent implements OnInit, OnChanges {
       options: {
         legend: {
           display: true,
-          position: 'right',
+          position: 'left',
           labels: {
             fontColor: '#d0d0d0',
             fontFamily: '"Roboto-Medium", "Roboto", "Open Sans"'
