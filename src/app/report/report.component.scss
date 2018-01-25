@@ -15,6 +15,7 @@
 #reportWrapper {
   @media print {
     margin: 8px auto 0 auto;
+    overflow: visible;
   }
 
   @media screen {
@@ -45,7 +46,28 @@
 
     & td {
       padding: 10px;
-      text-align: center;
+      text-align: left;
+      vertical-align: top;
+      & mat-list {
+        padding: 0;
+        margin: 0;
+        & p {
+          margin: 0;
+          &.maxState {
+            float: right;
+          }
+        }
+
+        & mat-list-item {
+          color: $dark-gray;
+          padding: 0;
+          margin: 0;
+          height: 20px;
+          & p {
+            margin: 0;
+          }
+        }
+      }
     }
   }
 
