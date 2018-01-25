@@ -8,42 +8,41 @@
       class="outputButton"
       title="Click to print report"
       (click)="output('print')">
-      Print
+      {{ 'print_button' | translate }}
     </button>
   </div>
 
   <div id="reportWrapper">
     <h3 class="header mat-title">Flood Report</h3>
     <p class="mat-body-1">
-      <b>Time period</b><br>
-      Start: {{startDate}}<br>
-      End: {{endDate}}<br>
-      <b>Last RW status update:</b> {{lastUpdate}}<br>
-      <b>Report generated on:</b> {{currentDate}}
+      <b>{{ 'report.time_period' | translate }}</b><br>
+      {{ 'report.start' | translate }}: {{startDate}}<br>
+      {{ 'report.end' | translate }}: {{endDate}}<br>
+      <b>{{ 'report.last_updated' | translate }}</b> {{lastUpdate}}<br>
+      <b>{{ 'report.current_time' | translate }}</b> {{currentDate}}
     </p>
 
         <p class="note">
-          Note: The number of flooded areas does not mean the whole area is flooded.
-          It shows that there are floods happening within those counted areas
+          {{ 'note' | translate }}
         </p>
 
     <div id="tableWrapper">
       <table>
         <tr class="tableHeaders mat-body-2">
           <td>
-            {{tableHeaders.district}}
+            {{ 'table.district' | translate }}
           </td>
           <td>
-            {{tableHeaders.totalReports}}
+            {{ 'table.totalReports' | translate }}
           </td>
           <td>
-            {{tableHeaders.totalParent}}
+            {{ 'table.totalParent' | translate }}
           </td>
           <td>
-            {{tableHeaders.localAreas}}
+            {{ 'table.localAreas' | translate }}
           </td>
           <td>
-            {{tableHeaders.depthRange}}
+            {{ 'table.depthRange' | translate }}
           </td>
         </tr>
 

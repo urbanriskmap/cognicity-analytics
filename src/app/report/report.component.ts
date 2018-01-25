@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
+import { TranslateService } from '@ngx-translate/core';
 import { TableService } from '../services/table.service';
 
 @Component({
@@ -10,13 +10,7 @@ import { TableService } from '../services/table.service';
 })
 
 export class ReportComponent implements OnInit {
-  tableHeaders = {
-    district: 'District',
-    totalReports: 'Total Reports',
-    totalParent: 'Number of Flood Affected Kelurahan',
-    localAreas: 'Number of Flood Affected RWs',
-    depthRange: 'Range of Flood Depths (cm)'
-  };
+
 
   tableData = [];
 
@@ -40,6 +34,7 @@ export class ReportComponent implements OnInit {
 
   constructor(
     private tableService: TableService,
+    private translate: TranslateService
     private route: ActivatedRoute
   ) {
     for (const i in this.tableService.districts) {

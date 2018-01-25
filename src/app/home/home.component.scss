@@ -1,5 +1,8 @@
 @import "../../styles.scss";
 
+#prompt{
+  position: relative;
+  margin: 30px auto 0 auto;
 h4 {
   text-align: center;
 
@@ -7,4 +10,5 @@ h4 {
     color: $banjir-blue;
     cursor: pointer;
   }
+}
 }

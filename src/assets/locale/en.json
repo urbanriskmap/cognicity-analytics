@@ -1,17 +1,18 @@
 {
-  "logo_title": "  | Analytics dashboard",
+  "logo_title": " Analytics Dashboard ",
   "nav_buttons": {
       "dashboard": "Dashboard",
       "desilting": "Desilting",
       "log_in": "Log In",
       "log_out": "Log Out"
   },
-  "log_message":"You are not logged in! Please Log In to view dashboard.",
+  "login_propt":"You are not logged in! Please Log In to view dashboard.",
+  "login_confirmation":"You are logged in! Click <b>Dashboard</b> link from menu bar",
   "start_date": "Start Date",
   "end_date": "End Date",
   "legend": {
       "title": "Legend",
-      "report": "Flood Report",
+      "report": "Flood report",
       "level_1": "Alert Level 1",
       "level_2": "Alert Level 2",
       "level_3": "Alert Level 3",
@@ -28,17 +29,17 @@
       "area_count": "Flooded areas count",
       "generate_button": "Generate Report"
   },
-  "states": {
+  "stats": {
     "reports": "Reports",
     "areas": "Flood affected areas"
   },
-  "Report": {
+  "report": {
     "report_title": "Flood Report",
     "time_period": "Time period",
     "start": "Start",
     "end": "End",
     "last_updated":"Last RW status update:",
-    "report_time": "Report generated on:"
+    "current_time": "Report generated on:"
   },
   "table": {
     "district": "District",
@@ -52,5 +53,6 @@
       "3": "Moderate: 71-150cm",
       "4": "Severe: Greater than 150cm"
     }
-  }
+  },
+  "print_button": "Print"
 }
