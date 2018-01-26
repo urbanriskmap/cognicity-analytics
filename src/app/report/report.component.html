@@ -16,10 +16,10 @@
     <h3 class="header mat-title">Flood Report</h3>
     <p class="mat-body-1">
       <b>Time period</b><br>
-      Start: {{startDate}}<br>
-      End: {{endDate}}<br>
-      <b>Last RW status update:</b> {{lastUpdate}}<br>
-      <b>Report generated on:</b> {{currentDate}}
+      Start: {{timeService.reportParams.start}}<br>
+      End: {{timeService.reportParams.end}}<br>
+      <b>Last RW status update:</b> {{timeService.reportParams.lastUpdate}}<br>
+      <b>Report generated on:</b> {{timeService.reportParams.current}}
     </p>
 
         <p class="note">

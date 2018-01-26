@@ -32,12 +32,10 @@
   <div id="statsWrapper">
     <div id="reportTools">
       <a
-        *ngIf="!slider.generatingTableData && slider.selectedTimeframe"
+        *ngIf="!slider.generatingTableData && slider.timeService.selectedTimeframe"
         class="mat-body-1"
         [routerLink]="['/report']"
         [queryParams]="{
-          start: slider.selectedTimeframe.start,
-          end: slider.selectedTimeframe.end,
           updated: slider.lastAreaUpdate
         }">
         {{ 'chart_legend.generate_button' | translate }}

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { TableService } from '../services/table.service';
+import { TimeService } from '../services/time.service';
 
 @Component({
   selector: 'app-report',
@@ -33,13 +34,11 @@ export class ReportComponent implements OnInit {
     '4': 'Severe: Greater than 150cm'
   };
 
-  startDate: string;
-  endDate: string;
   lastUpdate: string;
-  currentDate: string;
 
   constructor(
     private tableService: TableService,
+    private timeService: TimeService,
     private route: ActivatedRoute
   ) {
     for (const i in this.tableService.districts) {
@@ -86,24 +85,9 @@ export class ReportComponent implements OnInit {
     }
   }
 
-  getDateTime(dateString, adjustOffset) {
-    let date;
-    if (adjustOffset) {
-      const milliseconds = Date.parse(dateString.replace('%2B', '.'));
-      const offsetMilliseconds = (new Date()).getTimezoneOffset() * 60 * 1000;
-      date = new Date(milliseconds - offsetMilliseconds);
-    } else {
-      date = new Date(dateString.replace('%2B', '.'));
-    }
-    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
-  }
-
   ngOnInit() {
-    this.currentDate = (new Date()).toLocaleDateString() + ' ' + (new Date()).toLocaleTimeString();
     this.route.queryParams.subscribe((params: Params) => {
-      this.startDate = this.getDateTime(params['start'], true);
-      this.endDate = this.getDateTime(params['end'], true);
-      this.lastUpdate = this.getDateTime(params['updated'], false);
+      this.timeService.setReportParams(params['updated']);
     });
   }
 }
