@@ -41,8 +41,8 @@ export class SliderComponent implements OnInit {
   constructor(
     private httpService: HttpService,
     private layersService: LayersService,
-    private timeService: TimeService,
-    private tableService: TableService
+    private tableService: TableService,
+    public timeService: TimeService
   ) { }
 
   ngOnInit() {
