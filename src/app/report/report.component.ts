@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
+import { TranslateService } from '@ngx-translate/core';
 import { TableService } from '../services/table.service';
 import { TimeService } from '../services/time.service';
 
@@ -11,14 +11,6 @@ import { TimeService } from '../services/time.service';
 })
 
 export class ReportComponent implements OnInit {
-  tableHeaders = {
-    district: 'District',
-    totalReports: 'Total Reports',
-    totalParent: 'Number of Flood Affected Kelurahan',
-    localAreas: 'Number of Flood Affected RWs',
-    depthRange: 'Range of Flood Depths (cm)'
-  };
-
   tableData = [];
 
   projectLogos = [
@@ -27,18 +19,14 @@ export class ReportComponent implements OnInit {
     {id: 'urlLogo', src: '../../assets/images/url_logo.svg'}
   ];
 
-  floodStateMap = {
-    '1': 'Use caution',
-    '2': 'Minor: 10-70cm',
-    '3': 'Moderate: 71-150cm',
-    '4': 'Severe: Greater than 150cm'
-  };
+  floodState: string;
 
   lastUpdate: string;
 
   constructor(
     private tableService: TableService,
     private timeService: TimeService,
+    private translate: TranslateService,
     private route: ActivatedRoute
   ) {
     for (const i in this.tableService.districts) {

@@ -33,6 +33,13 @@
         float: left;
         line-height: 16px;
       }
+
+      #iconSubtext{
+        margin-left: 10px;
+        padding-left: 10px;
+        border-left: solid 1px $snow-white;
+        @include textlight(12px, $snow-white);
+      }
     }
 
     & #linksBar {

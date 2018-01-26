@@ -1,17 +1,18 @@
 {
-  "logo_title": "  | Dashboard analytics",
+  "logo_title": " Analytics Dashboard ",
   "nav_buttons": {
       "dashboard": "Dashboard",
       "desilting": "Desilting",
       "log_in": "Log In",
       "log_out": "Log Out"
   },
-  "log_message":"You are not logged in! Please Log In to view dashboard.",
+  "login_propt":"You are not logged in! Please Log In to view dashboard.",
+  "login_confirmation":"You are logged in! Click <b>Dashboard</b> link from menu bar",
   "start_date": "Start Date",
   "end_date": "End Date",
   "legend": {
       "title": "Legend",
-      "report": "Flood Report",
+      "report": "Flood report",
       "level_1": "Alert Level 1",
       "level_2": "Alert Level 2",
       "level_3": "Alert Level 3",
@@ -26,19 +27,19 @@
   "chart_legend": {
       "count": "Report count",
       "area_count": "Flooded areas count",
-      "generate_button": "Report print"
+      "generate_button": "Generate Report"
   },
-  "states": {
+  "stats": {
     "reports": "Reports",
     "areas": "Flood affected areas"
   },
-  "Report": {
+  "report": {
     "report_title": "Flood Report",
     "time_period": "Time period",
     "start": "Start",
     "end": "End",
     "last_updated":"Last RW status update:",
-    "report_time": "Report generated on:"
+    "current_time": "Report generated on:"
   },
   "table": {
     "district": "District",
@@ -46,11 +47,12 @@
     "totalParent": "Number of Flood Affected Kelurahan",
     "localAreas": "Number of Flood Affected RWs",
     "depthRange": "Range of Flood Depths (cm)",
-    "floodStateMap":{
-      "1": "Use caution",
-      "2": "Minor: 10-70cm",
-      "3": "Moderate: 71-150cm",
-      "4": "Severe: Greater than 150cm"
+    "floodStates": {
+      "fs1": "Use caution",
+      "fs2": "Minor: 10-70cm",
+      "fs3": "Moderate: 71-150cm",
+      "fs4": "Severe: Greater than 150cm"
     }
-  }
+  },
+  "print_button": "Print"
 }

@@ -8,42 +8,41 @@
       class="outputButton"
       title="Click to print report"
       (click)="output('print')">
-      Print
+      {{ 'print_button' | translate }}
     </button>
   </div>
 
   <div id="reportWrapper">
     <h3 class="header mat-title">Flood Report</h3>
     <p class="mat-body-1">
-      <b>Time period</b><br>
-      Start: {{timeService.reportParams.start}}<br>
-      End: {{timeService.reportParams.end}}<br>
-      <b>Last RW status update:</b> {{timeService.reportParams.lastUpdate}}<br>
-      <b>Report generated on:</b> {{timeService.reportParams.current}}
+      <b>{{ 'report.time_period' | translate }}</b><br>
+      {{ 'report.start' | translate }}: {{timeService.reportParams.start}}<br>
+      {{ 'report.end' | translate }}: {{timeService.reportParams.end}}<br>
+      <b>{{ 'report.last_updated' | translate }}</b> {{timeService.reportParams.lastUpdate}}<br>
+      <b>{{ 'report.current_time' | translate }}</b> {{timeService.reportParams.current}}
     </p>
 
         <p class="note">
-          Note: The number of flooded areas does not mean the whole area is flooded.
-          It shows that there are floods happening within those counted areas
+          {{ 'note' | translate }}
         </p>
 
     <div id="tableWrapper">
       <table>
         <tr class="tableHeaders mat-body-2">
           <td>
-            {{tableHeaders.district}}
+            {{ 'table.district' | translate }}
           </td>
           <td>
-            {{tableHeaders.totalReports}}
+            {{ 'table.totalReports' | translate }}
           </td>
           <td>
-            {{tableHeaders.totalParent}}
+            {{ 'table.totalParent' | translate }}
           </td>
           <td>
-            {{tableHeaders.localAreas}}
+            {{ 'table.localAreas' | translate }}
           </td>
           <td>
-            {{tableHeaders.depthRange}}
+            {{ 'table.localAreas' | translate }}
           </td>
         </tr>
 
@@ -66,7 +65,7 @@
             <mat-list
               *ngFor="let parent of row.parentAreas"
               class="altTheme mat-caption">
-              <p class="maxState">{{floodStateMap[parent.maxState]}}</p>
+              <p class="maxState">{{ 'table.floodStates.fs' + parent.maxState | translate }}</p>
               <p>{{parent.name}}</p>
               <mat-list-item
                 *ngFor="let local of parent.areas">

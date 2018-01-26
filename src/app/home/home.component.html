@@ -1,5 +1,5 @@
 <br><br>
-
+<div id="prompt">
 <h4 class="mat-subheading-1" *ngIf="auth.isAuthenticated()">
   You are logged in! Click <b>Dashboard</b> link from menu bar
 </h4>
@@ -7,3 +7,4 @@
 <h4 class="mat-subheading-1" *ngIf="!auth.isAuthenticated()">
   You are not logged in! Please <a (click)="auth.login()">Log In</a> to view dashboard.
 </h4>
+</div>
