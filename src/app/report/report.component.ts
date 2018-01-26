@@ -25,9 +25,9 @@ export class ReportComponent implements OnInit {
 
   constructor(
     private tableService: TableService,
-    private timeService: TimeService,
     private translate: TranslateService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public timeService: TimeService
   ) {
     for (const i in this.tableService.districts) {
       if (this.tableService.districts[i]) {
