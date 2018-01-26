@@ -145,8 +145,8 @@ export class ActivityChartComponent implements OnInit, OnChanges {
         this.activityChart.options.scales.xAxes[0].time.max = this.scaleLimits.max;
 
         // Update date axis
-        this.activityChart.options.scales.xAxes[0].time.min = this.scaleLimits.min;
-        this.activityChart.options.scales.xAxes[0].time.max = this.scaleLimits.max;
+        this.activityChart.options.scales.xAxes[1].time.min = this.scaleLimits.min;
+        this.activityChart.options.scales.xAxes[1].time.max = this.scaleLimits.max;
 
         this.activityChart.update();
       }
