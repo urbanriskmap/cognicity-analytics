@@ -57,6 +57,8 @@ export class HttpService {
       + timePeriod.end + '&city='
       + environment.instance_region;
 
+      console.log(endpoint);
+
     return new Promise((resolve, reject) => {
       this.http
       .get(endpoint)

@@ -2,6 +2,8 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
 import * as Chart from 'chart.js';
 import * as $ from 'jquery';
 
+import { TimeService } from '../../../services/time.service';
+
 @Component({
   selector: 'app-activity-chart',
   templateUrl: './activity-chart.component.html',
@@ -13,7 +15,9 @@ export class ActivityChartComponent implements OnInit, OnChanges {
   @Input() floodsData: {t: string, y: number}[];
   @Input() scaleLimits: {max: number, min: number};
 
-  constructor() { }
+  constructor(
+    private timeService: TimeService
+  ) { }
 
   prepareCanvas() {
     $('#activityCanvasWrapper').empty();
@@ -86,6 +90,9 @@ export class ActivityChartComponent implements OnInit, OnChanges {
               unitStepSize: 1,
               displayFormats: {
                 hour: 'HH:mm'
+              },
+              parser: (time) => {
+                return this.timeService.adjustTimezone(time);
               }
             },
             position: 'bottom',
@@ -93,7 +100,7 @@ export class ActivityChartComponent implements OnInit, OnChanges {
               autoSkip: true,
               autoSkipPadding: 12,
               fontColor: '#d0d0d0',
-              fontFamily: '"Roboto-Medium", "Roboto", "Open Sans"'
+              fontFamily: '"Roboto Light", "Roboto", "Open Sans"'
             }
           },
           {
@@ -104,6 +111,9 @@ export class ActivityChartComponent implements OnInit, OnChanges {
               unitStepSize: 1,
               displayFormats: {
                 day: 'MMM D'
+              },
+              parser: (time) => {
+                return this.timeService.adjustTimezone(time);
               }
             },
             gridLines: {
@@ -114,7 +124,7 @@ export class ActivityChartComponent implements OnInit, OnChanges {
               autoSkip: true,
               autoSkipPadding: 12,
               fontColor: '#d0d0d0',
-              fontFamily: '"Roboto-Medium", "Roboto", "Open Sans"'
+              fontFamily: '"Roboto Medium", "Roboto", "Open Sans"'
             }
           }
         ],

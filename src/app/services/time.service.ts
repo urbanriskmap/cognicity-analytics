@@ -41,8 +41,16 @@ export class TimeService {
     this.setInitDates();
   }
 
+  cullSubHourUnits(timestamp: moment): moment {
+    return timestamp.minutes(0).seconds(0).milliseconds(0);
+  }
+
+  getMilliseconds(date: string): number {
+    return parseInt(moment(date).format('x'), 10);
+  }
+
   setInitDates(): void {
-    this.endDate = moment().add(1, 'hour').minutes(0).seconds(0).milliseconds(0);
+    this.endDate = this.cullSubHourUnits(moment().add(1, 'hour'));
     this.startDate = this.getCorrespondingDate('start', this.endDate);
   }
 
@@ -51,9 +59,9 @@ export class TimeService {
     date: moment
   ): moment {
     if (type === 'start') {
-      return moment(parseInt(date.format('x'), 10)).subtract(7, 'days');
+      return moment(this.getMilliseconds(date)).subtract(7, 'days');
     } else if (type === 'end') {
-      return moment(parseInt(date.format('x'), 10)).add(7, 'days');
+      return moment(this.getMilliseconds(date)).add(7, 'days');
     }
   }
 
@@ -61,7 +69,7 @@ export class TimeService {
     for (const report in reportsGeojson.features) {
       if (reportsGeojson.features[report]) {
         reportsGeojson.features[report].properties.created_at =
-          moment(reportsGeojson.features[report].properties.created_at).format('x');
+          this.getMilliseconds(reportsGeojson.features[report].properties.created_at);
       }
     }
     return reportsGeojson;
@@ -79,8 +87,9 @@ export class TimeService {
     const dateTimeMarks = [];
 
     for (let step = 0; step <= steps; step++) {
-      const start = moment(parseInt(this.startDate.format('x'), 10))
-        .minutes(0).seconds(0).milliseconds(0);
+      const start = this.cullSubHourUnits(
+        moment(this.getMilliseconds(this.startDate))
+      );
       if (start.hours() !== 0) {
         start.add(1, 'hour');
       }
@@ -105,10 +114,10 @@ export class TimeService {
     if (date && date >= min && date <= max) {
       // Autofill corresponding date
       if (inputDate === 'start') {
-        this.startDate = date;
+        this.startDate = this.cullSubHourUnits(date);
         this.endDate = this.getCorrespondingDate('end', date);
       } else if (inputDate === 'end') {
-        this.endDate = date;
+        this.endDate = this.cullSubHourUnits(date);
         this.startDate = this.getCorrespondingDate('start', date);
       }
     } else {
@@ -120,12 +129,20 @@ export class TimeService {
   setDateRange(
     isInitializing: boolean
   ): void {
+    const start = moment(this.startDate);
+    const end = moment(this.endDate);
+
     this.selectedDateRange = {
-      start: this.startDate.utc().format().replace('.', '%2B'),
-      end: this.endDate.utc().format().replace('.', '%2B')
+      start: start.utc().format().replace('.', '%2B'),
+      end: end.utc().format().replace('.', '%2B')
     };
 
     if (isInitializing) {
+      this.selectedDateRange = {
+        start: start.add(1, 'hour').utc().format().replace('.', '%2B'),
+        end: end.add(1, 'hour').utc().format().replace('.', '%2B')
+      };
+
       this.selectedTimeframe = this.selectedDateRange;
     }
   }
@@ -138,10 +155,6 @@ export class TimeService {
       start: start.utc().format().replace('.', '%2B'),
       end: end.utc().format().replace('.', '%2B')
     };
-  }
-
-  getMilliseconds(date: string): number {
-    return parseInt(moment(date).format('x'), 10);
   }
 
   setReportParams(lastUpdate) {
@@ -162,5 +175,15 @@ export class TimeService {
     }
 
     this.reportParams.current = moment().format(this.reportParams.timestampFormat);
+  }
+
+  adjustTimezone(time: string) {
+    // Get timezone offset for each timestamp, accounting for daylight saving times
+    // Negative for +GMT, positive for -GMT
+    const clientUtcOffset = (new Date(time)).getTimezoneOffset();
+
+    // Add client utc offset to Asia/Jakarta utc offset
+    const adjustmentMinutes = moment().utcOffset() + clientUtcOffset;
+    return moment(time).add(adjustmentMinutes, 'minutes');
   }
 }

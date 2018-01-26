@@ -160,7 +160,7 @@ export class SliderComponent implements OnInit {
     this.timeService.updateDates(type, event.value, event.target.min, event.target.max);
 
     // Format date values and set date range
-    this.timeService.setDateRange(true);
+    this.timeService.setDateRange(isInitializing);
 
     // Bind slider markings
     this.dateTimeMarks = this.timeService.getKnobDateTime(

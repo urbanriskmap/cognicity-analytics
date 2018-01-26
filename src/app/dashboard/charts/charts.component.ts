@@ -1,7 +1,8 @@
 import { Component, Input, Output, OnInit } from '@angular/core';
 import * as Chart from 'chart.js';
-import { HttpService } from '../../services/http.service';
 import * as $ from 'jquery';
+
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-charts',
@@ -84,8 +85,8 @@ export class ChartsComponent implements OnInit {
   // called on sliderChange
   updateScale(range) {
     this.scaleLimits = {
-      max: range.lower.dateMilliseconds,
-      min: range.upper.dateMilliseconds
+      max: range.lower.timestamp,
+      min: range.upper.timestamp
     };
   }
 }
