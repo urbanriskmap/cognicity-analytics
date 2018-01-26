@@ -14,7 +14,8 @@ export class ChartsComponent implements OnInit {
     labels: []
   };
   chartTypes = [
-    {id: 'activity', title: 'Reporting activity', class: 'tabButton selected'},//TODO: translate in Bahasa
+    // TODO: translate in Bahasa
+    {id: 'activity', title: 'Reporting activity', class: 'tabButton selected'},
     {id: 'source', title: 'Reporting source', class: 'tabButton'}
   ];
   selectedChart: string;

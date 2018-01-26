@@ -45,8 +45,8 @@
     "district": "District",
     "totalReports": "Total Reports",
     "totalParent": "Number of Flood Affected Kelurahan",
-    "localAreas": "Number of Flood Affected RWs",
-    "depthRange": "Range of Flood Depths (cm)",
+    "localAreas": "Flood Affected RWs",
+    "depthRange": "Range of Flood Depths",
     "floodStates": {
       "fs1": "Use caution",
       "fs2": "Minor: 10-70cm",

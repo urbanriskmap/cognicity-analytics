@@ -42,6 +42,7 @@
   & .knobHoverText {
     position: absolute;
     left: 46px;
+    width: 75px;
     @include textlight(12px, mat-color($mat-grey, 900));
     line-height: 12px;
     margin: 0;

@@ -25,20 +25,14 @@
         width: 150px;
         float: left;
       }
-      & p {
-        @include textlight(12px, $snow-white);
-        margin: 0;
-        margin-top: 27px;
-        padding: 0;
-        float: left;
-        line-height: 16px;
-      }
 
-      #iconSubtext{
-        margin-left: 10px;
+      & #iconSubtext {
+        float: left;
+        margin: 27px 0 0 10px;
         padding-left: 10px;
         border-left: solid 1px $snow-white;
         @include textlight(12px, $snow-white);
+        line-height: 16px;
       }
     }
 

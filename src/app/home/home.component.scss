@@ -1,14 +1,15 @@
 @import "../../styles.scss";
 
-#prompt{
+#homePrompt {
   position: relative;
-  margin: 30px auto 0 auto;
-h4 {
-  text-align: center;
+  margin: 80px auto 0 auto;
 
-  & a {
-    color: $banjir-blue;
-    cursor: pointer;
+  & h4 {
+    text-align: center;
+
+    & a {
+      color: $banjir-blue;
+      cursor: pointer;
+    }
   }
-}
 }

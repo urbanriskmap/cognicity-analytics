@@ -2,9 +2,9 @@
   <input matInput
     [matDatepicker]="startDatePicker"
     placeholder="Start Date"
-    [(value)]="startDate"
-    [min]="dateLimits.start.min"
-    [max]="dateLimits.start.max"
+    [value]="timeService.startDate"
+    [min]="timeService.dateLimits.start.min"
+    [max]="timeService.dateLimits.start.max"
     (dateChange)="dateInteraction('start', $event, false)">
   <mat-datepicker-toggle
     matSuffix
@@ -27,9 +27,9 @@
   <input matInput
     [matDatepicker]="endDatePicker"
     placeholder="End Date"
-    [(value)]="endDate"
-    [min]="dateLimits.end.min"
-    [max]="dateLimits.end.max"
+    [value]="timeService.endDate"
+    [min]="timeService.dateLimits.end.min"
+    [max]="timeService.dateLimits.end.max"
     (dateChange)="dateInteraction('end', $event, false)">
   <mat-datepicker-toggle
     matSuffix

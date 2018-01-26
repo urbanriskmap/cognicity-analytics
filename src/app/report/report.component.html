@@ -16,15 +16,15 @@
     <h3 class="header mat-title">{{ 'report.report_title' | translate }}</h3>
     <p class="mat-body-1">
       <b>{{ 'report.time_period' | translate }}</b><br>
-      {{ 'report.start' | translate }}: {{startDate}}<br>
-      {{ 'report.end' | translate }}: {{endDate}}<br>
-      <b>{{ 'report.last_updated' | translate }}</b> {{lastUpdate}}<br>
-      <b>{{ 'report.current_time' | translate }}</b> {{currentDate}}
+      {{ 'report.start' | translate }}: {{timeService.reportParams.start}}<br>
+      {{ 'report.end' | translate }}: {{timeService.reportParams.end}}<br>
+      <b>{{ 'report.last_updated' | translate }}</b> {{timeService.reportParams.lastUpdate}}<br>
+      <b>{{ 'report.current_time' | translate }}</b> {{timeService.reportParams.current}}
     </p>
 
-        <p class="note">
-          {{ 'note' | translate }}
-        </p>
+    <p class="note">
+      {{ 'note' | translate }}
+    </p>
 
     <div id="tableWrapper">
       <table>
@@ -42,7 +42,7 @@
             {{ 'table.localAreas' | translate }}
           </td>
           <td>
-            {{ 'table.localAreas' | translate }}
+            {{ 'table.depthRange' | translate }}
           </td>
         </tr>
 
@@ -63,15 +63,19 @@
             *ngIf="row.totalParent > 0"
             colspan="2">
             <mat-list
-              *ngFor="let parent of row.parentAreas"
+              *ngFor="let parent of row.parentAreas; let i = index"
               class="altTheme mat-caption">
               <p class="maxState">{{ 'table.floodStates.fs' + parent.maxState | translate }}</p>
-              <p>{{parent.name}}</p>
+              <p>{{i + 1}}. {{parent.name}}</p>
+
               <mat-list-item
                 *ngFor="let local of parent.areas">
                 <p class="mat-caption">{{local.name}}</p>
               </mat-list-item>
-              <mat-divider></mat-divider>
+
+              <mat-divider
+                *ngIf="i < (row.parentAreas.length - 1)">
+              </mat-divider>
             </mat-list>
           </td>
           <td

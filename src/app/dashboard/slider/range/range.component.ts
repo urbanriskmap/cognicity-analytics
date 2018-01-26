@@ -12,12 +12,11 @@ export class RangeComponent implements OnInit {
     intervalHours: number
   };
   @Input() markings: {
-    dateMilliseconds: number,
-    day: number,
-    month: string,
-    time: string
+    timestamp: any,
+    mark: string
   }[];
   @Input() knobStep: {knobUpper: number, knobLower: number};
+
   halfKnobHt: number;
   totalSteps: number;
   sliderTopOffset: number;
@@ -27,6 +26,7 @@ export class RangeComponent implements OnInit {
   isSliderActive: boolean;
   selectedKnobId: string;
   dragPosition: number;
+
   @Output() rangeChanged = new EventEmitter();
 
   constructor() {
