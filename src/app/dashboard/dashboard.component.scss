@@ -30,7 +30,7 @@
   bottom: 0px;
 
   & #chartsWrapper {
-    width: 75%;
+    width: 74%;
     background-color: $dark-gray;
     height: 300px;
     padding: 0;
@@ -42,6 +42,7 @@
     background-color: $dark-gray;
     height: 300px;
     float: left;
+    padding-left: 2px;
 
     & #reportTools {
       width: 100%;

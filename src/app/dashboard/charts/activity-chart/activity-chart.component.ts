@@ -62,7 +62,7 @@ export class ActivityChartComponent implements OnInit, OnChanges {
         },
         legend: {
           display: true,
-          position: 'bottom',
+          position: 'top',
           labels: {
             fontColor: '#d0d0d0',
             fontFamily: '"Roboto-Medium", "Roboto", "Open Sans"'
@@ -109,7 +109,7 @@ export class ActivityChartComponent implements OnInit, OnChanges {
             gridLines: {
               drawOnChartArea: false, // only want the grid lines for one axis to show up
             },
-            position: 'bottom',
+            position: 'top',
             ticks: {
               autoSkip: true,
               autoSkipPadding: 12,
