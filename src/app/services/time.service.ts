@@ -2,17 +2,19 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment-timezone';
 import 'moment/locale/id';
 
+import { environment as env } from '../../environments/environment';
+
 @Injectable()
 export class TimeService {
   // Date picker limits
   dateLimits = {
     start: {
       min: moment([2016, 11, 9]), // Database launch date
-      max: moment().tz('Asia/Jakarta').subtract(7, 'days')
+      max: moment().tz(env.timezones.tz).subtract(7, 'days')
     },
     end: {
       min: moment([2016, 11, 9]).add(7, 'days'),
-      max: moment().tz('Asia/Jakarta') // Today's date
+      max: moment().tz(env.timezones.tz) // Today's date
     }
   };
 
@@ -35,8 +37,8 @@ export class TimeService {
 
   constructor() {
     // Set locale to Indonesian
-    moment.locale('id');
-    moment.tz.setDefault('Asia/Jakarta');
+    moment.locale(env.timezones.locale);
+    moment.tz.setDefault(env.timezones.tz);
 
     this.setInitDates();
   }

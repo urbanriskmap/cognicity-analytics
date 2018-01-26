@@ -3,6 +3,7 @@ import * as mapboxgl from 'mapbox-gl';
 
 import { LayersService } from '../../services/layers.service';
 import { HttpService } from '../../services/http.service';
+import { environment as env } from '../../../environments/environment';
 
 @Component({
   selector: 'app-map',
@@ -40,7 +41,7 @@ export class MapComponent implements OnInit {
 
     self.map.on('style.load', () => {
       // Load neighborhood polygons
-      self.httpService.getFloodAreas('jbd')
+      self.httpService.getFloodAreas(env.instance_region)
       .then(geojsonData => {
         self.floodAreas = geojsonData;
         self.layersService.loadFloodAreas(self.floodAreas, self.map)

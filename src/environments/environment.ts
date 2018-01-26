@@ -14,5 +14,9 @@ export const environment = {
       {code: 'id', name: 'Bahasa'}
     ],
     defaultLanguage: 'en'
+  },
+  timezones: {
+    locale: 'id',
+    tz: 'Asia/Jakarta'
   }
 };
