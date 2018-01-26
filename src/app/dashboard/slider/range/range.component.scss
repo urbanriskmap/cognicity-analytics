@@ -28,7 +28,7 @@
     margin: 0;
     padding: 0;
     left: 15px;
-    min-width: 28px;
+    min-width: 29px;
     height: 12px;
     border-radius: 6px;
     &#knobUpper {
@@ -41,7 +41,7 @@
 
   & .knobHoverText {
     position: absolute;
-    left: 46px;
+    left: 48px;
     width: 75px;
     @include textlight(12px, mat-color($mat-grey, 900));
     line-height: 12px;

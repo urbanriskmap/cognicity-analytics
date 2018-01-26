@@ -1,32 +1,32 @@
 {
   "logo_title": " Dasbor Analitik",
   "nav_buttons": {
-      "dashboard": "Dasbor",
-      "log_in": "Masuk",
-      "log_out": "Keluar"
+    "dashboard": "Dasbor",
+    "log_in": "Masuk",
+    "log_out": "Keluar"
   },
   "login_propt":"Anda belum masuk! Silakan tekan Masuk untuk melihat dasbor.",
   "login_confirmation":"Anda berhasil masuk! Tekan tombol <b>Dasbor</b> dari menu",
   "start_date": "Tanggal Awal",
   "end_date": "Tanggal Akhir",
   "legend": {
-      "title": "Legenda",
-      "report": "Laporan Banjir",
-      "level_1": "Hati-hati",
-      "level_2": "Siaga 3",
-      "level_3": "Siaga 2",
-      "level_4": "Siaga 1"
+    "title": "Legenda",
+    "report": "Laporan Banjir",
+    "level_1": "Hati-hati",
+    "level_2": "Siaga 3",
+    "level_3": "Siaga 2",
+    "level_4": "Siaga 1"
   },
   "chart_menu": {
-      "activity": "Aktivitas Pelaporan",
-      "source": "Sumber Laporan",
-      "generate_button": "Buat Ringkasan"
+    "activity": "Aktivitas Pelaporan",
+    "source": "Sumber Laporan",
+    "generate_button": "Buat Ringkasan"
   },
   "note": "Catatan: Angka RW terdampak banjir tidak berarti seluruh wilayah dalam RW tersebut tergenang banjir. Ini menunjukkan terdapat banjir dalam sejumlah RW tersebut.",
   "chart_legend": {
-      "count": "Jumlah laporan",
-      "area_count": "Jumlah RW terdampak banjir",
-      "generate_button": "Buat Ringkasan"
+    "count": "Jumlah laporan/jam",
+    "area_count": "Jumlah RW terdampak banjir/jam",
+    "generate_button": "Buat Ringkasan"
   },
   "stats": {
     "reports": "Laporan",

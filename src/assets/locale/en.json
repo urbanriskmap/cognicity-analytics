@@ -1,33 +1,33 @@
 {
   "logo_title": " Analytics Dashboard ",
   "nav_buttons": {
-      "dashboard": "Dashboard",
-      "desilting": "Desilting",
-      "log_in": "Log In",
-      "log_out": "Log Out"
+    "dashboard": "Dashboard",
+    "desilting": "Desilting",
+    "log_in": "Log In",
+    "log_out": "Log Out"
   },
   "login_propt":"You are not logged in! Please Log In to view dashboard.",
   "login_confirmation":"You are logged in! Click <b>Dashboard</b> link from menu bar",
   "start_date": "Start Date",
   "end_date": "End Date",
   "legend": {
-      "title": "Legend",
-      "report": "Flood report",
-      "level_1": "Alert Level 1",
-      "level_2": "Alert Level 2",
-      "level_3": "Alert Level 3",
-      "level_4": "Alert Level 4"
+    "title": "Legend",
+    "report": "Flood report",
+    "level_1": "Alert Level 1",
+    "level_2": "Alert Level 2",
+    "level_3": "Alert Level 3",
+    "level_4": "Alert Level 4"
   },
   "chart_menu": {
-      "activity": "Reporting activity",
-      "source": "Reporting source",
-      "generate_button": "Generate Report"
+    "activity": "Reporting activity",
+    "source": "Reporting source",
+    "generate_button": "Generate Report"
   },
   "note": "Note: The number of flooded areas does not mean the whole area is flooded. It shows that there are floods happening within those counted areas",
   "chart_legend": {
-      "count": "Report count",
-      "area_count": "Flooded areas count",
-      "generate_button": "Generate Report"
+    "count": "Report count/hour",
+    "area_count": "Flooded affected RW/hour",
+    "generate_button": "Generate Report"
   },
   "stats": {
     "reports": "Reports",

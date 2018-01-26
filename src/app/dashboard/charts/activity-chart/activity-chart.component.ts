@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import * as Chart from 'chart.js';
 import * as $ from 'jquery';
+import { TranslateService } from '@ngx-translate/core';
 
 import { TimeService } from '../../../services/time.service';
 
@@ -16,7 +17,8 @@ export class ActivityChartComponent implements OnInit, OnChanges {
   @Input() scaleLimits: {max: number, min: number};
 
   constructor(
-    private timeService: TimeService
+    private timeService: TimeService,
+    private translate: TranslateService
   ) { }
 
   prepareCanvas() {
@@ -40,7 +42,7 @@ export class ActivityChartComponent implements OnInit, OnChanges {
       data: {
         datasets: [
           {
-            label: 'Reports count',
+            label: this.translate.get('chart_legend.count')['value'],
             xAxisId: 'x1',
             yAxisId: 'y1',
             borderWidth: 1,
@@ -49,7 +51,7 @@ export class ActivityChartComponent implements OnInit, OnChanges {
             data: this.reportsData
           },
           {
-            label: 'Flooded areas count',
+            label: this.translate.get('chart_legend.area_count')['value'],
             xAxisId: 'x1',
             yAxisId: 'y1',
             borderWidth: 1,

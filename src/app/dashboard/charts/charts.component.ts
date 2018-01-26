@@ -1,6 +1,7 @@
 import { Component, Input, Output, OnInit } from '@angular/core';
 import * as Chart from 'chart.js';
 import * as $ from 'jquery';
+import { TranslateService } from '@ngx-translate/core';
 
 import { HttpService } from '../../services/http.service';
 
@@ -14,17 +15,25 @@ export class ChartsComponent implements OnInit {
     aggregates: [],
     labels: []
   };
-  chartTypes = [
-    // TODO: translate in Bahasa
-    {id: 'activity', title: 'Reporting activity', class: 'tabButton selected'},
-    {id: 'source', title: 'Reporting source', class: 'tabButton'}
-  ];
+  chartTypes: {
+    id: string,
+    class: string
+  }[];
   selectedChart: string;
+
   @Output() scaleLimits: {max: number, min: number};
   @Output() reportsData: {t: string, y: number}[] = [];
   @Output() floodsData: {t: string, y: number}[] = [];
 
-  constructor(private httpService: HttpService) { }
+  constructor(
+    private httpService: HttpService,
+    private translate: TranslateService
+  ) {
+    this.chartTypes = [
+      {id: 'activity', class: 'tabButton selected'},
+      {id: 'source', class: 'tabButton'}
+    ];
+  }
 
   ngOnInit() {
     for (const type of this.chartTypes) {
