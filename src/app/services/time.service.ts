@@ -153,9 +153,13 @@ export class TimeService {
       this.selectedTimeframe.end.replace('%2B', '.')
     ).format(this.reportParams.timestampFormat);
 
-    this.reportParams.lastUpdate = moment(
-      lastUpdate.replace('%2B', '.')
-    ).format(this.reportParams.timestampFormat);
+    if (lastUpdate === 'N/A') {
+      this.reportParams.lastUpdate = lastUpdate;
+    } else {
+      this.reportParams.lastUpdate = moment(
+        lastUpdate.replace('%2B', '.')
+      ).format(this.reportParams.timestampFormat);
+    }
 
     this.reportParams.current = moment().format(this.reportParams.timestampFormat);
   }

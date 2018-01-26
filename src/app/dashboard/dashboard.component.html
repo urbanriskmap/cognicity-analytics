@@ -32,7 +32,7 @@
   <div id="statsWrapper">
     <div id="reportTools">
       <a
-        *ngIf="!slider.generatingTableData && slider.timeService.selectedTimeframe"
+        *ngIf="!slider.generatingTableData && slider.reports"
         class="mat-body-1"
         [routerLink]="['/report']"
         [queryParams]="{

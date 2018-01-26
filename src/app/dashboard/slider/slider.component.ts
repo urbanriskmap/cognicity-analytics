@@ -113,7 +113,7 @@ export class SliderComponent implements OnInit {
       this.refreshingStats.reports = false;
       this.generatingTableData = false;
       this.tableService.allowReport = false;
-      throw JSON.stringify(error);
+      console.log(error);
     });
   }
 
@@ -147,12 +147,11 @@ export class SliderComponent implements OnInit {
       this.refreshingStats.floodAreas = false;
       this.generatingTableData = false;
       this.tableService.allowReport = false;
-      throw JSON.stringify(error);
+      console.log(error);
     });
   }
 
   dateInteraction(type: string, event: any, isInitializing: boolean) {
-    console.log(event.value);
     // Disable dependent components
     this.refreshingLayers = {reports: true, floodAreas: true};
     this.generatingTableData = true;

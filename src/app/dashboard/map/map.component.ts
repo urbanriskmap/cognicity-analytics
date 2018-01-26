@@ -46,11 +46,10 @@ export class MapComponent implements OnInit {
         self.layersService.loadFloodAreas(self.floodAreas, self.map)
         .then(() => {
           self.finishedLoading.emit();
-        });
+        })
+        .catch(error => console.log(error));
       })
-      .catch(error => {
-        throw JSON.stringify(error);
-      });
+      .catch(error => console.log(error));
     });
   }
 }

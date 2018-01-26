@@ -174,7 +174,7 @@ export class LayersService {
     return {
       total: floodAreasCount,
       districts: districts,
-      lastUpdate: lastUpdate.toISOString().replace('.', '%2B')
+      lastUpdate: lastUpdate ? lastUpdate.toISOString().replace('.', '%2B') : 'N/A'
     };
   }
 

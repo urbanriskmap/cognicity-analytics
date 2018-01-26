@@ -5,9 +5,14 @@
     *ngIf="isRefreshing">
   </mat-spinner>
   <p
-    *ngIf="!isRefreshing"
+    *ngIf="!isRefreshing && reportsCount"
     class="mat-headline">
     {{reportsCount}}
+  </p>
+  <p
+    *ngIf="!isRefreshing && !reportsCount"
+    class="mat-headline">
+    0
   </p>
   <p class="mat-body-1">
     {{ 'stats.reports' | translate }}
@@ -21,9 +26,14 @@
     *ngIf="isRefreshing">
   </mat-spinner>
   <p
-    *ngIf="!isRefreshing"
+    *ngIf="!isRefreshing && floodAreasCount"
     class="mat-headline">
     {{floodAreasCount}}
+  </p>
+  <p
+    *ngIf="!isRefreshing && !floodAreasCount"
+    class="mat-headline">
+    0
   </p>
   <p class="mat-body-1">
     {{ 'stats.areas' | translate }}
