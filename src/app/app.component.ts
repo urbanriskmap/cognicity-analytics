@@ -10,7 +10,7 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Dashboard | PetaBencana.id';
+  title = 'PetaBencana.id | Dashboard';
   languages = env.locales.supportedLanguages;
   selectLang = env.locales.defaultLanguage;
 

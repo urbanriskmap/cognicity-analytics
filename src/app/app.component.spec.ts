@@ -5,7 +5,26 @@ import { By } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AuthService } from './services/auth.service';
 
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader, TranslatePipe } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpLoaderFactory } from './app.module';
+
 describe('AppComponent when authenticated', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule,
+        TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      })
+      ]
+    });
+  });
+
   let fixture: ComponentFixture<AppComponent>;
   let de: DebugElement;
   let app;
@@ -56,22 +75,21 @@ describe('AppComponent when authenticated', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'CogniCity Dashboard'`, async(() => {
-    expect(app.title).toEqual('CogniCity Dashboard');
+  it(`should have as title 'PetaBencana.id | Dashboard'`, async(() => {
+    expect(app.title).toEqual('PetaBencana.id | Dashboard');
   }));
 
   it('should render title in navigation bar', async(() => {
     fixture.detectChanges(); // Calls ngOnInit
     const textLogo = de.query(By.css('#logoBar>p')).nativeElement.textContent;
-    expect(textLogo).toContain(app.title);
+    expect(textLogo).toContain('Analytics Dashboard');
   }));
 
   it('should render page links and logout link when authenticated', async(() => {
     fixture.detectChanges();
-    const linkHome = de.query(By.css('#linksBar>a:first-child')).nativeElement.textContent;
-    const linkDashboard = de.query(By.css('#linksBar>a:nth-child(2)')).nativeElement.textContent;
-    const linkLogout = de.query(By.css('#linksBar>a:last-child')).nativeElement.textContent;
-    expect(linkHome).toContain('Home');
+    const linkHome = de.query(By.css('#homeLink')).nativeElement.textContent;
+    const linkDashboard = de.query(By.css('#dashboardLink')).nativeElement.textContent;
+    const linkLogout = de.query(By.css('#logoutLink')).nativeElement.textContent;
     expect(linkDashboard).toContain('Dashboard');
     expect(linkLogout).toContain('Log Out');
   }));
@@ -82,6 +100,20 @@ describe('AppComponent when authenticated', () => {
 });
 
 describe('AppComponent when not authenticated', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule,
+        TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      })
+      ]
+    });
+  });
+
   let fixture: ComponentFixture<AppComponent>;
   let de: DebugElement;
   let app;

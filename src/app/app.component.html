@@ -1,7 +1,7 @@
 <mat-toolbar id="navBar" color="background">
   <mat-toolbar-row>
     <div id="logoBar">
-      <a href="https://petabencana.id">
+      <a id="homeLink" href="https://petabencana.id">
         <img src="assets/images/petaLogo.svg">
       </a>
       <p id="iconSubtext">{{ 'logo_title' | translate }}</p>
@@ -12,9 +12,9 @@
       </p>
 
       <ng-template #thenBlock>
-        <a routerLink="/dashboard" routerLinkActive="active">{{ 'nav_buttons.dashboard' | translate }}</a>
+        <a id="dashboardLink" routerLink="/dashboard" routerLinkActive="active">{{ 'nav_buttons.dashboard' | translate }}</a>
         &nbsp;&#124;&nbsp;
-        <a (click)="auth.logout()">{{ 'nav_buttons.log_out' | translate }}</a>
+        <a id="logoutLink" (click)="auth.logout()">{{ 'nav_buttons.log_out' | translate }}</a>
       </ng-template>
 
       <ng-template #elseBlock>
