@@ -1,0 +1,23 @@
+<div id="rainfallMap">
+</div>
+
+<div id="rainSliderWrapper">
+  <div (click)="changeSlider(-1)">
+    &#9664;
+  </div>
+
+  <mat-slider
+    min="0"
+    max="143"
+    [(value)]="selValue"
+    (change)="rainSlider($event)">
+  </mat-slider>
+
+  <div (click)="changeSlider(1)">
+    &#9654;
+  </div>
+
+  <div (click)="animateRainfall()">
+    &#10144;
+  </div>
+</div>

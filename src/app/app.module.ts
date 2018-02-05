@@ -15,6 +15,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AuthService } from './services/auth.service';
 import { TableService } from './services/table.service';
+import { RainfallComponent } from './rainfall/rainfall.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -25,7 +26,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     HomeComponent,
     CallbackComponent,
-    ReportComponent
+    ReportComponent,
+    RainfallComponent
   ],
   imports: [
     BrowserModule,

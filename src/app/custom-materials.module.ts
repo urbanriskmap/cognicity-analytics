@@ -23,6 +23,7 @@ import {
   MatInputModule,
   MatRadioModule,
   MatSelectModule,
+  MatSliderModule,
   MatProgressSpinnerModule,
   MatToolbarModule
 } from '@angular/material';
@@ -43,6 +44,7 @@ import {
     MatMomentDateModule,
     MatRadioModule,
     MatSelectModule,
+    MatSliderModule,
     MatProgressSpinnerModule,
     MatToolbarModule
   ],
