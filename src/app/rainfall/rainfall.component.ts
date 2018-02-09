@@ -153,6 +153,13 @@ export class RainfallComponent implements OnInit {
       ['all', ['>', 'created_at', startMilliseconds], ['<=', 'created_at', endMilliseconds]]);
   }
 
+  get currentTime() {
+    return moment(
+      parseInt(this.startDate.format('x'), 10)
+      + (this.selValue * this.intervalMilliseconds)
+    ).format();
+  }
+
   rainSlider(e) {
     // this.selValue = e.value;
   }
