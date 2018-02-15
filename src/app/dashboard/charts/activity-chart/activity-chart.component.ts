@@ -45,8 +45,9 @@ export class ActivityChartComponent implements OnInit, OnChanges {
             label: this.translate.get('chart_legend.count')['value'],
             xAxisId: 'x1',
             yAxisId: 'y1',
-            borderWidth: 1,
+            borderWidth: 2,
             borderColor: '#31aade',
+            backgroundColor: 'rgba(49, 170, 222, 0.1)',
             pointRadius: 0,
             data: this.reportsData
           },
@@ -54,7 +55,7 @@ export class ActivityChartComponent implements OnInit, OnChanges {
             label: this.translate.get('chart_legend.area_count')['value'],
             xAxisId: 'x1',
             yAxisId: 'y1',
-            borderWidth: 1,
+            borderWidth: 2,
             borderColor: '#c1272d',
             pointRadius: 0,
             data: this.floodsData

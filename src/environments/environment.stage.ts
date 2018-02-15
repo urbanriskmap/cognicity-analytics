@@ -2,7 +2,7 @@ export const environment = {
   envName: 'stage',
   production: false,
 
-  data_server: 'https://data-dev.petabencana.id/',
+  data_server: 'https://data.petabencana.id/',
   instance_region: 'jbd',
 
   auth0_client_id: 'KoKRTjjUC7CpdS770rp29WZyeS73mR1x',
