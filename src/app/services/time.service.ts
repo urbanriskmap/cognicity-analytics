@@ -126,6 +126,8 @@ export class TimeService {
       // Reset dates to init values
       this.setInitDates();
     }
+
+    this.updateTimeframe(this.startDate, this.endDate);
   }
 
   setDateRange(
