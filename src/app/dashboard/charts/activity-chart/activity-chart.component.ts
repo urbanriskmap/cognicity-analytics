@@ -64,6 +64,7 @@ export class ActivityChartComponent implements OnInit, OnChanges {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         title: {
           display: false
         },
