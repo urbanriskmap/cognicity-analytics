@@ -44,6 +44,15 @@
       padding-top: 10px;
       text-align: right;
 
+      & #langMenu {
+        margin-top: -2px;
+        margin-left: 10px;
+        float: right;
+        width: 80px;
+        font-size: 12px;
+        height: 38px;
+      }
+
       & a {
         @include textlight(12px, $snow-white);
         text-decoration: none;
@@ -55,15 +64,6 @@
         &.active {
           color: mat-color($mat-light-blue, 300);
         }
-      }
-
-      & #langMenu {
-        margin-top: -2px;
-        margin-left: 10px;
-        float: right;
-        width: 80px;
-        font-size: 12px;
-        height: 38px;
       }
     }
   }

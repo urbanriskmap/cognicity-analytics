@@ -8,19 +8,6 @@
     </div>
 
     <div id="linksBar">
-      <p *ngIf="auth.isAuthenticated(); then thenBlock else elseBlock">
-      </p>
-
-      <ng-template #thenBlock>
-        <a id="dashboardLink" routerLink="/dashboard" routerLinkActive="active">{{ 'nav_buttons.dashboard' | translate }}</a>
-        &nbsp;&#124;&nbsp;
-        <a id="logoutLink" (click)="auth.logout()">{{ 'nav_buttons.log_out' | translate }}</a>
-      </ng-template>
-
-      <ng-template #elseBlock>
-        <a (click)="auth.login()">{{ 'nav_buttons.log_in' | translate }}</a>
-      </ng-template>
-
       <mat-form-field id="langMenu">
         <mat-select
           placeholder="Language"
@@ -33,6 +20,19 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+
+      <p *ngIf="auth.isAuthenticated(); then thenBlock else elseBlock">
+      </p>
+
+      <ng-template #thenBlock>
+        <a id="dashboardLink" routerLink="/dashboard" routerLinkActive="active">{{ 'nav_buttons.dashboard' | translate }}</a>
+        &nbsp;&#124;&nbsp;
+        <a id="logoutLink" (click)="auth.logout()">{{ 'nav_buttons.log_out' | translate }}</a>
+      </ng-template>
+
+      <ng-template #elseBlock>
+        <a (click)="auth.login()">{{ 'nav_buttons.log_in' | translate }}</a>
+      </ng-template>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

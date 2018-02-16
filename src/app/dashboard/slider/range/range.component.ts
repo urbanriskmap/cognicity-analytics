@@ -102,7 +102,7 @@ export class RangeComponent implements OnInit {
 
   touchStart(event) {
     this.isSliderActive = true;
-    this.selectedKnobId = event.srcElement.id;
+    this.selectedKnobId = event.target.id;
   }
 
   dragStart(event) {
