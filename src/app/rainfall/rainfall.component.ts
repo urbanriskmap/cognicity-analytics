@@ -74,23 +74,24 @@ export class RainfallComponent implements OnInit {
         14, 3840
       ]
     },
-    filter: ['==', 'timestamp', '2017-11-03T12:00:00']
-  };
-
-  circleProperties = {
-    id: 'rainfall2',
-    type: 'circle',
-    source: {
-      type: 'vector',
-      url: 'mapbox://asbarve.8zkt523e'
-    },
-    'source-layer': 'rainfall',
-    paint: {
-      'circle-color': '#ff0000',
-      'circle-radius': 5
-    },
     filter: ['==', 'timestamp', '2017-11-02T00:00:00']
   };
+
+  // Test rain data pixels
+  // circleProperties = {
+  //   id: 'rainfall2',
+  //   type: 'circle',
+  //   source: {
+  //     type: 'vector',
+  //     url: 'mapbox://asbarve.8zkt523e'
+  //   },
+  //   'source-layer': 'rainfall',
+  //   paint: {
+  //     'circle-color': '#ff0000',
+  //     'circle-radius': 5
+  //   },
+  //   filter: ['==', 'timestamp', '2017-11-02T00:00:00']
+  // };
 
   constructor(
     private httpService: HttpService,
@@ -119,7 +120,7 @@ export class RainfallComponent implements OnInit {
     self.map.on('style.load', () => {
       // render rainfall data
       self.map.addLayer(self.heatmapProperties);
-      // self.map.addLayer(self.circleProperties);
+      // self.map.addLayer(self.circleProperties); // test rain data pixels
 
       self.httpService.getReportsArchive({
         start: '2017-11-01T18%3A30%3A00%2B0530', // 2 Nov 00:00, IST
@@ -137,27 +138,41 @@ export class RainfallComponent implements OnInit {
       })
       .catch(error => console.log(error));
     });
+
+    self.map.on('click', 'reports', e => {
+      const coordinates = e.features[0].geometry.coordinates.slice();
+      const prop = e.features[0].properties;
+
+      new mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML(
+            'Flood height: ' + JSON.parse(prop.report_data).flood_depth + 'cm' +
+            '<br>Time: ' + moment(prop['created_at']).format('DD MMM HH:mm') +
+            '<br>Text: ' + prop.text
+          )
+          .addTo(self.map);
+      });
   }
 
   updateHeatmap(timestamp) {
-    const filterString = timestamp.format().substring(0, 19);
+    const filterString = moment(timestamp).subtract(5.5, 'hours').format().substring(0, 19);
 
     this.map.setFilter('rainfall', ['==', 'timestamp', filterString]);
   }
 
   updateReports(timestamp) {
-    const endMilliseconds = parseInt(timestamp.format('x'), 10);
-    const startMilliseconds = endMilliseconds - (30 * 60 * 1000);
+    const endMilliseconds = timestamp;
+    const startMilliseconds = endMilliseconds - (30 * 60 * 1000); // subtract half hour
+    const filter = ['all', ['>', 'created_at', startMilliseconds], ['<=', 'created_at', endMilliseconds]];
 
-    this.map.setFilter('reports',
-      ['all', ['>', 'created_at', startMilliseconds], ['<=', 'created_at', endMilliseconds]]);
+    this.map.setFilter('reports', filter);
   }
 
   get currentTime() {
     return moment(
       parseInt(this.startDate.format('x'), 10)
       + (this.selValue * this.intervalMilliseconds)
-    ).format();
+    ).format('DD MMM YY HH:mm');
   }
 
   rainSlider(e) {
@@ -171,10 +186,8 @@ export class RainfallComponent implements OnInit {
       n++;
       this.selValue = n;
 
-      const timestamp = moment(
-        parseInt(moment(this.startDate).format('x'), 10)
-        + (n * this.intervalMilliseconds)
-      );
+      const timestamp = parseInt(moment(this.startDate).format('x'), 10)
+        + (n * this.intervalMilliseconds);
 
       this.updateHeatmap(timestamp);
       this.updateReports(timestamp);
@@ -184,10 +197,8 @@ export class RainfallComponent implements OnInit {
   changeSlider(val) {
     this.selValue += val;
 
-    const timestamp = moment(
-      parseInt(moment(this.startDate).format('x'), 10)
-      + (this.selValue * this.intervalMilliseconds)
-    );
+    const timestamp = parseInt(moment(this.startDate).format('x'), 10)
+      + (this.selValue * this.intervalMilliseconds);
 
     this.updateHeatmap(timestamp);
     this.updateReports(timestamp);

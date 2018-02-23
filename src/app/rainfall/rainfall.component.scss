@@ -29,4 +29,9 @@
     width: 480px;
     float: left;
   }
+
+  & #time{
+    @include textlight(12px, $snow-white);
+    margin-left: 10px;
+  }
 }
