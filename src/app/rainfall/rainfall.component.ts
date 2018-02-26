@@ -49,8 +49,8 @@ export class RainfallComponent implements OnInit {
         0, 'rgba(255, 255, 255, 0)',
         0.125, 'rgba(83, 149, 255, 0.7)',
         0.25, 'rgba(6, 62, 197, 0.85)',
-        0.5, 'rgba(129, 15, 124, 1)',
-        1, 'rgba(255, 226, 7, 1)'
+        0.5, 'rgba(129, 15, 124, 0.9)',
+        1, 'rgba(255, 226, 7, 0.9)'
       ],
       'heatmap-radius': [
         'interpolate',
@@ -79,7 +79,7 @@ export class RainfallComponent implements OnInit {
 
   // Test rain data pixels
   // circleProperties = {
-  //   id: 'rainfall2',
+  //   id: 'rainfall',
   //   type: 'circle',
   //   source: {
   //     type: 'vector',
@@ -87,7 +87,16 @@ export class RainfallComponent implements OnInit {
   //   },
   //   'source-layer': 'rainfall',
   //   paint: {
-  //     'circle-color': '#ff0000',
+  //     'circle-color': [
+  //       'interpolate',
+  //       ['exponential', 1],
+  //       ['get', 'gpm'],
+  //       0, 'rgba(255, 255, 255, 0)',
+  //       0.125, 'rgba(83, 149, 255, 0.7)',
+  //       0.25, 'rgba(6, 62, 197, 0.85)',
+  //       0.5, 'rgba(129, 15, 124, 0.9)',
+  //       1, 'rgba(255, 226, 7, 0.9)'
+  //     ],
   //     'circle-radius': 5
   //   },
   //   filter: ['==', 'timestamp', '2017-11-02T00:00:00']
@@ -176,7 +185,9 @@ export class RainfallComponent implements OnInit {
   }
 
   rainSlider(e) {
-    // this.selValue = e.value;
+     this.selValue = e.value;
+
+     this.updateRainfallMap();
   }
 
   animateRainfall() {
@@ -197,6 +208,10 @@ export class RainfallComponent implements OnInit {
   changeSlider(val) {
     this.selValue += val;
 
+    this.updateRainfallMap();
+  }
+
+  updateRainfallMap() {
     const timestamp = parseInt(moment(this.startDate).format('x'), 10)
       + (this.selValue * this.intervalMilliseconds);
 

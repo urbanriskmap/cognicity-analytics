@@ -26,7 +26,7 @@ export class MapComponent implements OnInit {
     const self = this;
     mapboxgl.accessToken = 'pk.eyJ1IjoidXJiYW5yaXNrbWFwIiwiYSI6ImNpdmVhc2VwZTAwNmYydXFrOThrMWxmcGIifQ.Dl07iYeyvtqJxOVXa9_A0A';
     self.map = new mapboxgl.Map({
-      attributionControl: false,
+      attributionControl: true,
       container: 'mapContainer',
       center: [106.86, -6.17],
       zoom: 11,
