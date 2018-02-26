@@ -124,7 +124,7 @@ export class RainfallComponent implements OnInit {
 
       self.httpService.getReportsArchive({
         start: '2017-11-01T18%3A30%3A00%2B0530', // 2 Nov 00:00, IST
-        end: '2017-11-03T18%3A30%3A00%2B0530'  // 4 Nov 00:00, IST
+        end: '2017-11-05T18%3A30%3A00%2B0530'  // 6 Nov 00:00, IST
       })
       .then(geojsonData => {
         // pass to map, charts & stats

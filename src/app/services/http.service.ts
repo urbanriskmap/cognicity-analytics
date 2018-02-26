@@ -55,8 +55,8 @@ export class HttpService {
   }> {
     const endpoint = environment.data_server + 'reports/archive?start='
       + timePeriod.start + '&end='
-      + timePeriod.end + '&city='
-      + environment.instance_region;
+      + timePeriod.end /*+ '&city='
+      + environment.instance_region*/;
 
     return new Promise((resolve, reject) => {
       this.http
