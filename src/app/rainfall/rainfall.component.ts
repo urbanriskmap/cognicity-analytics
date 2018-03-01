@@ -18,6 +18,7 @@ export class RainfallComponent implements OnInit {
   selValue = 0;
   startDate: moment;
   intervalMilliseconds = 1800 * 1000; // half hour
+  prop: any;
 
   heatmapProperties = {
     id: 'rainfall',
@@ -77,31 +78,6 @@ export class RainfallComponent implements OnInit {
     filter: ['==', 'timestamp', '2017-11-02T00:00:00']
   };
 
-  // Test rain data pixels
-  // circleProperties = {
-  //   id: 'rainfall',
-  //   type: 'circle',
-  //   source: {
-  //     type: 'vector',
-  //     url: 'mapbox://asbarve.8zkt523e'
-  //   },
-  //   'source-layer': 'rainfall',
-  //   paint: {
-  //     'circle-color': [
-  //       'interpolate',
-  //       ['exponential', 1],
-  //       ['get', 'gpm'],
-  //       0, 'rgba(255, 255, 255, 0)',
-  //       0.125, 'rgba(83, 149, 255, 0.7)',
-  //       0.25, 'rgba(6, 62, 197, 0.85)',
-  //       0.5, 'rgba(129, 15, 124, 0.9)',
-  //       1, 'rgba(255, 226, 7, 0.9)'
-  //     ],
-  //     'circle-radius': 5
-  //   },
-  //   filter: ['==', 'timestamp', '2017-11-02T00:00:00']
-  // };
-
   constructor(
     private httpService: HttpService,
     private layersService: LayersService,
@@ -152,14 +128,23 @@ export class RainfallComponent implements OnInit {
       const coordinates = e.features[0].geometry.coordinates.slice();
       const prop = e.features[0].properties;
 
+      let htmlString;
+
+      if (prop.image_url != "null") {
+        htmlString = '<image src="' + prop.image_url + '" width="200px">' +
+        '<br>Flood height: ' + JSON.parse(prop.report_data).flood_depth + 'cm' +
+        '<br>Time: ' + moment(prop['created_at']).format('DD MMM HH:mm') +
+        '<br>Text: ' + prop.text;
+      } else {
+        htmlString = 'Flood height: ' + JSON.parse(prop.report_data).flood_depth + 'cm' +
+        '<br>Time: ' + moment(prop['created_at']).format('DD MMM HH:mm') +
+        '<br>Text: ' + prop.text;
+      };
+
       new mapboxgl.Popup()
-          .setLngLat(coordinates)
-          .setHTML(
-            'Flood height: ' + JSON.parse(prop.report_data).flood_depth + 'cm' +
-            '<br>Time: ' + moment(prop['created_at']).format('DD MMM HH:mm') +
-            '<br>Text: ' + prop.text
-          )
-          .addTo(self.map);
+        .setLngLat(coordinates)
+        .setHTML(htmlString)
+        .addTo(self.map);
       });
   }
 
@@ -181,7 +166,7 @@ export class RainfallComponent implements OnInit {
     return moment(
       parseInt(this.startDate.format('x'), 10)
       + (this.selValue * this.intervalMilliseconds)
-    ).format('DD MMM YY HH:mm');
+    ).format('ddd DD-MMM-YYYY, hh:mm A');
   }
 
   rainSlider(e) {
@@ -202,7 +187,7 @@ export class RainfallComponent implements OnInit {
 
       this.updateHeatmap(timestamp);
       this.updateReports(timestamp);
-    }, 100);
+    }, 250); //framerate in milliseconds
   }
 
   changeSlider(val) {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment-timezone';
-import 'moment/locale/id';
+import 'moment/locale/en-ie';
 
 import { environment as env } from '../../environments/environment';
 

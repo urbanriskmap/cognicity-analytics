@@ -11,12 +11,12 @@ export const environment = {
   locales: {
     supportedLanguages: [
       {code: 'en', name: 'English'},
-      {code: 'id', name: 'Bahasa'}
+      // {code: 'id', name: 'Bahasa'}
     ],
     defaultLanguage: 'en'
   },
   timezones: {
-    locale: 'id',
+    locale: 'en-ie',
     tz: 'Asia/Kolkata'
   }
 };

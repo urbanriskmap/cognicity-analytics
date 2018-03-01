@@ -6,6 +6,11 @@
   height: 100%;
 }
 
+
+.mapboxgl-popup-content{
+    width: 200px;
+}
+
 #rainSliderWrapper {
   position: absolute;
   top: 12px;
@@ -29,9 +34,15 @@
     width: 480px;
     float: left;
   }
-
+  & #animate_button {
+    @include textregular(12px, $snow-white);
+    margin: 0 10px 0 10px;
+    padding: 5px;
+    border: solid 1px $banjir-blue;
+    border-radius: 3px;
+  }
   & #time{
-    @include textlight(12px, $snow-white);
+    @include textregular(12px, $snow-white);
     margin-left: 10px;
   }
 }
