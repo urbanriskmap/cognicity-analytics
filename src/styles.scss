@@ -53,3 +53,25 @@ html, body {
   width: 100%;
   height: 100%;
 }
+
+.mapboxgl-popup-content {
+    max-width: 200px;
+    background-color: #212121;
+    @include textregular(12px, $snow-white);
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  border-top-color: #212121;
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+  border-bottom-color: #212121;
+}
+
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+  border-right-color: #212121;
+}
+
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+  border-left-color: #212121;
+}

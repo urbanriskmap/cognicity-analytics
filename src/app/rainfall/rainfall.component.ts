@@ -132,12 +132,12 @@ export class RainfallComponent implements OnInit {
 
       if (prop.image_url != "null") {
         htmlString = '<image src="' + prop.image_url + '" width="200px">' +
-        '<br>Flood height: ' + JSON.parse(prop.report_data).flood_depth + 'cm' +
-        '<br>Time: ' + moment(prop['created_at']).format('DD MMM HH:mm') +
+        '<br><b>Flood height: ' + JSON.parse(prop.report_data).flood_depth + 'cm</b>' +
+        '<br>Time: ' + moment(prop['created_at']).format('ddd DD-MMM, hh:mm A') +
         '<br>Text: ' + prop.text;
       } else {
-        htmlString = 'Flood height: ' + JSON.parse(prop.report_data).flood_depth + 'cm' +
-        '<br>Time: ' + moment(prop['created_at']).format('DD MMM HH:mm') +
+        htmlString = '<b>Flood height: ' + JSON.parse(prop.report_data).flood_depth + 'cm</b>' +
+        '<br>Time: ' + moment(prop['created_at']).format('ddd DD-MMM, hh:mm A') +
         '<br>Text: ' + prop.text;
       };
 
@@ -150,7 +150,7 @@ export class RainfallComponent implements OnInit {
 
   updateHeatmap(timestamp) {
     const filterString = moment(timestamp).subtract(5.5, 'hours').format().substring(0, 19);
-
+    console.log(filterString);
     this.map.setFilter('rainfall', ['==', 'timestamp', filterString]);
   }
 
