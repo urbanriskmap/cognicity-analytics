@@ -127,7 +127,7 @@ export class RainfallComponent implements OnInit {
     self.map.on('click', 'reports', e => {
       const coordinates = e.features[0].geometry.coordinates.slice();
       const prop = e.features[0].properties;
-
+      console.log( prop);
       let htmlString;
 
       if (prop.image_url != "null") {
@@ -150,7 +150,6 @@ export class RainfallComponent implements OnInit {
 
   updateHeatmap(timestamp) {
     const filterString = moment(timestamp).subtract(5.5, 'hours').format().substring(0, 19);
-    console.log(filterString);
     this.map.setFilter('rainfall', ['==', 'timestamp', filterString]);
   }
 
@@ -175,6 +174,7 @@ export class RainfallComponent implements OnInit {
      this.updateRainfallMap();
   }
 
+  //Animate rainfall tiles
   animateRainfall() {
     let n = 0;
 

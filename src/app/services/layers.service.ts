@@ -19,10 +19,15 @@ export class LayersService {
         data: reportsGeojson
       },
       paint: {
-        'circle-color': '#ff0000',
         'circle-radius': 4,
-        'circle-stroke-width': 1,
-        'circle-stroke-color': '#ffffff'
+        'circle-stroke-width': 2,
+        'circle-color': '#f05022',
+        'circle-stroke-color': [
+           'match',
+           ['get', 'image_url'],
+            'null', '#000000',
+            '#31aade'
+          ]
       }
     };
 
