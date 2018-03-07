@@ -28,7 +28,7 @@ export class TimeService {
   selectedTimeframe: {start: string, end: string};
 
   reportParams = {
-    timestampFormat: 'HH:mm DD MMM',
+    timestampFormat: 'HH:mm DD MMM YYYY',
     start: null,
     end: null,
     lastUpdate: null,
@@ -126,6 +126,8 @@ export class TimeService {
       // Reset dates to init values
       this.setInitDates();
     }
+
+    this.updateTimeframe(this.startDate, this.endDate);
   }
 
   setDateRange(

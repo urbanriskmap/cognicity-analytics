@@ -45,8 +45,8 @@ export class ChartsComponent implements OnInit {
 
   changeChart(e) {
     $('.tabButton').removeClass('selected');
-    $('#' + e.srcElement.id).addClass('selected');
-    this.selectedChart = e.srcElement.id.substring(0, e.srcElement.id.length - 6);
+    $('#' + e.target.id).addClass('selected');
+    this.selectedChart = e.target.id.substring(0, e.target.id.length - 6);
 
     // Use jQuery to show / hide, using *ngIf destroys component, & thus current graphics
     $('.charts:not(#' + this.selectedChart + 'Wrapper)').hide();

@@ -62,21 +62,37 @@
           <td
             *ngIf="row.totalParent > 0"
             colspan="2">
-            <mat-list
-              *ngFor="let parent of row.parentAreas; let i = index"
-              class="altTheme mat-caption">
-              <p class="maxState">{{ 'table.floodStates.fs' + parent.maxState | translate }}</p>
-              <p>{{i + 1}}. {{parent.name}}</p>
 
-              <mat-list-item
-                *ngFor="let local of parent.areas">
-                <p class="mat-caption">{{local.name}}</p>
-              </mat-list-item>
+            <ul
+              class="altTheme groupList"
+              *ngFor="let group of row.stateGroups; let i = index">
+              <li
+                class="mat-caption groupHeader">
+                {{ 'table.floodStates.fs' + group.state | translate }}
+              </li>
 
-              <mat-divider
-                *ngIf="i < (row.parentAreas.length - 1)">
-              </mat-divider>
-            </mat-list>
+              <li>
+                <ul
+                  *ngFor="let parent of group.parentAreas"
+                  class="altTheme">
+                  <li
+                    class="mat-caption parentHeader">
+                    {{parent.name}}
+                  </li>
+
+                  <li
+                    *ngFor="let local of parent.localAreas"
+                    class="mat-caption localItem">
+                    {{local}}
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </td>
+
+          <td
+            *ngIf="row.totalParent === 0">
+            N/A
           </td>
           <td
             *ngIf="row.totalParent === 0">

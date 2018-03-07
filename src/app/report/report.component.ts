@@ -36,32 +36,77 @@ export class ReportComponent implements OnInit {
           district: district.name,
           totalReports: district.reportsCount,
           totalParent: district.parentAreasCount,
-          parentAreas: this.getParentAreas(district.parentAreas)
+          stateGroups: this.getFloodStateGroups(district.parentAreas)
         });
       }
     }
   }
 
-  getParentAreas(areas) {
-    const parent = [];
-    let highestState = null;
+  getFloodStateGroups(areas) {
+    const stateGroups = [];
 
+    // Iterate over parent areas
     for (const area in areas) {
       if (area) {
+
+        // Iterate over local areas in each parent
         for (const local of areas[area].localAreas) {
-          if (highestState) {
-            if (local.maxState > highestState) {
-              highestState = local.maxState;
+
+          // Check for existing stateGroup
+          let stateGroupStored = false;
+          if (stateGroups.length) {
+            for (const group of stateGroups) {
+              if (group.state === local.maxState) {
+                stateGroupStored = true;
+              }
             }
-          } else {
-            highestState = local.maxState;
+          }
+
+          // Push stateGroup if not already stored
+          if (!stateGroups.length || !stateGroupStored) {
+            stateGroups.push({
+              state: local.maxState,
+              parentAreas: []
+            });
+          }
+
+          for (const group of stateGroups) {
+            // Select group by state
+            if (group.state === local.maxState) {
+
+              // Check for existing parentArea
+              let parentAreaStored = false;
+              if (group.parentAreas.length) {
+                for (const parent of group.parentAreas) {
+                  if (parent.name === areas[area].name) {
+                    parentAreaStored = true;
+                  }
+                }
+              }
+
+              // Push parentArea if not already stored
+              if (!group.parentAreas.length || !parentAreaStored) {
+                group.parentAreas.push({
+                  name: areas[area].name,
+                  localAreas: []
+                });
+              }
+
+              // Check for object with same parent area name, push local area
+              for (const storedParent of group.parentAreas) {
+                // Select parentArea by name
+                if (storedParent.name === areas[area].name) {
+                  // Push local area name
+                  storedParent.localAreas.push(local.name);
+                }
+              }
+            }
           }
         }
-
-        parent.push({name: areas[area].name, maxState: highestState, areas: areas[area].localAreas});
       }
     }
-    return parent;
+
+    return stateGroups;
   }
 
   output(type) {

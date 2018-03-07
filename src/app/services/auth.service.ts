@@ -21,9 +21,15 @@ export class AuthService implements CanActivate {
   }
 
   public handleAuthentication(): void {
+    // Verifies above auth0 settings against those
+    // returned in the callback url hash
     this.auth0.parseHash((err, authResult) => {
+      // Following block runs after user enters auth0 credentials
+      // and auth0 redirects to callback route
       if (authResult && authResult.accessToken && authResult.idToken) {
-        window.location.hash = '';
+        // Do not clear url hash, race condition
+        // redirects page back to callback route
+        // window.location.hash = '';
         this.setSession(authResult);
         this.router.navigate(['/dashboard']);
       } else if (err) {
@@ -59,7 +65,7 @@ export class AuthService implements CanActivate {
   }
 
   canActivate() {
-    if (this.isAuthenticated()) {
+    if (environment.envName === 'dev' || this.isAuthenticated()) {
       return true;
     }
 
