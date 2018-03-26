@@ -147,7 +147,7 @@ export class LayersService {
 
             const localAreaName = floodAreas.features[area].properties.area_name;
             const parentAreaName = floodAreas.features[area].properties.parent_name;
-            const districtId = floodAreas.features[area].properties.district_id;
+            const districtId = floodAreas.features[area].properties.attributes.district_id;
             const currentDistrict = districts[districtId];
 
             // Check for existing parent area
