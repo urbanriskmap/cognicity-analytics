@@ -19,6 +19,7 @@
     "level_4": "Alert Level 4"
   },
   "chart_menu": {
+    "ads": "Ads",
     "activity": "Reporting activity",
     "source": "Reporting source",
     "generate_button": "Generate Report"

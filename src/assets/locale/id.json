@@ -18,6 +18,7 @@
     "level_4": "Siaga 1"
   },
   "chart_menu": {
+    "ads": "Iklan",
     "activity": "Aktivitas Pelaporan",
     "source": "Sumber Laporan",
     "generate_button": "Buat Ringkasan"

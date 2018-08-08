@@ -30,15 +30,17 @@ export class ChartsComponent implements OnInit {
     private translate: TranslateService
   ) {
     this.chartTypes = [
-      {id: 'activity', class: 'tabButton selected'},
+      {id: 'ads', class: 'tabButton selected'},
+      {id: 'activity', class: 'tabButton'},
       {id: 'source', class: 'tabButton'}
     ];
   }
 
   ngOnInit() {
-    for (const type of this.chartTypes) {
-      if (type.class.indexOf('selected', 10) === 10) {
-        this.selectedChart = type.id;
+    for (const typ of this.chartTypes) {
+      // find the selected element and write to selectedChart
+      if (typ.class.indexOf('selected') !== -1) {
+        this.selectedChart = typ.id;
       }
     }
   }
@@ -46,6 +48,7 @@ export class ChartsComponent implements OnInit {
   changeChart(e) {
     $('.tabButton').removeClass('selected');
     $('#' + e.target.id).addClass('selected');
+    // remove string 'Button' from activity/charts/Button
     this.selectedChart = e.target.id.substring(0, e.target.id.length - 6);
 
     // Use jQuery to show / hide, using *ngIf destroys component, & thus current graphics

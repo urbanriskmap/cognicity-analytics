@@ -8,16 +8,20 @@
   </button>
 </div>
 
-<div id="activityWrapper" class="charts">
+<div id="adsWrapper" *ngIf="selectedChart==='ads'">
+  <app-fb-ads>
+  </app-fb-ads>
+</div>
+
+<div id="activityWrapper" class="charts" *ngIf="(reportsData.length || floodsData.length) && selectedChart==='activity'">
   <app-activity-chart
-    *ngIf="(reportsData.length || floodsData.length) && selectedChart==='activity'"
     [reportsData]="reportsData"
     [floodsData]="floodsData"
     [scaleLimits]="scaleLimits">
   </app-activity-chart>
 </div>
 
-<div id="sourceWrapper" class="charts">
+<div id="sourceWrapper" class="charts" >
   <app-source-chart
     *ngIf="(reportsSource && reportsSource.aggregates.length) && selectedChart==='source'"
     [reportsSource]="reportsSource">
