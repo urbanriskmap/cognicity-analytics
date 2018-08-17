@@ -8,6 +8,50 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
+  submitAdForApproval(ad: any): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      console.log('http Submit');
+      console.log(ad.id);
+      const adEndpoint = 'http://localhost:4000/submit';
+      const bod = {
+        "name": "test integration",
+        "geo": {
+          "lat": 41,
+          "lng": 71,
+          "radius": 10
+        },
+        "adCreativeId": ad.id
+      }
+      this.http
+        .post(adEndpoint, bod)
+        .subscribe( response => {
+          if (response['statusCode'] === 200) {
+            resolve(true);
+          }
+          else {
+            reject(response);
+          }
+        })
+    });
+  }
+
+  getAllAdCreatives(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const creativeAdEndpoint = 'http://localhost:4000/adCreatives';
+
+      this.http
+        .get(creativeAdEndpoint)
+        .subscribe( (response) => {
+          if (response['statusCode'] === 200) {
+            resolve(response['result']);
+          }
+          else {
+            reject(response);
+          }
+        });
+    });
+  }
+
   getFloodAreas(city: string): Promise<{
     type: string,
     features: {
