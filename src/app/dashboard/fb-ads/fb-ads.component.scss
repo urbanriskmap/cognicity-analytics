@@ -1,13 +1,14 @@
 #adsContentWrapper {
   color: white;
   height: 250px;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: scroll;
+  display: -webkit-flex; /* Safari */
+      -webkit-flex-wrap: wrap; /* Safari 6.1+ */
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   .adContainer {
     // float: left;
-    flex: 0 0 auto;
+    // flex: 0 0 auto;
     margin-left: 10px;
   }
 }
