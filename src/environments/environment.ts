@@ -3,6 +3,8 @@ export const environment = {
   production: false,
 
   data_server: 'https://data-dev.petabencana.id/',
+  ad_server: 'http://localhost:4000/',
+  mock_data: true,
   instance_region: 'jbd',
 
   auth0_client_id: 'KoKRTjjUC7CpdS770rp29WZyeS73mR1x',

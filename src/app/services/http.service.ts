@@ -13,7 +13,7 @@ export class HttpService {
     return new Promise((resolve, reject) => {
       console.log('http Submit');
       console.log(ad.id);
-      const adEndpoint = 'http://localhost:4000/submit';
+      const endpoint = environment.ad_server + 'submit';
       const bod = {
         "name": "test integration",
         "geo": {
@@ -24,7 +24,7 @@ export class HttpService {
         "adCreativeId": ad.id
       }
       this.http
-        .post(adEndpoint, bod)
+        .post(endpoint, bod)
         .subscribe( response => {
           if (response['statusCode'] === 200) {
             resolve(true);
@@ -39,15 +39,14 @@ export class HttpService {
   getAllAdCreatives(): Promise<any> {
     return new Promise((resolve, reject) => {
       // TODO put in env variable
-      const creativeAdEndpoint = 'http://localhost:4000/adCreatives';
-      const mockData = true;
-      if (mockData) {
+      const endpoint = environment.ad_server + 'adCreatives';
+      if (environment.mock_data) {
         resolve(mock.ads);
         return;
       }
 
       this.http
-        .get(creativeAdEndpoint)
+        .get(endpoint)
         .subscribe( (response) => {
           if (response['statusCode'] === 200) {
             resolve(response['result']);
