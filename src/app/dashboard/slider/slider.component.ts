@@ -184,7 +184,7 @@ export class SliderComponent implements OnInit {
     }
   }
 
-  initData() {
+  initData(e) {
     // Mock date selection while DOM elements initialize
     const event = {
       target: {

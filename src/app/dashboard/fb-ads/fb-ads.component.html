@@ -1,9 +1,9 @@
 <div id="adsContentWrapper" class="adsScroll">
   <div class="adContainer" *ngFor="let adCreative of adCreatives">
-    <app-ad 
+    <app-ad-creative
       [id]="adCreative.id" 
       [message]="adCreative.message" 
       [image_url]="adCreative.image_url">
-    </app-ad>
+    </app-ad-creative>
   </div>
 </div>

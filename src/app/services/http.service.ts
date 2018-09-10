@@ -15,24 +15,23 @@ export class HttpService {
       console.log(ad.id);
       const endpoint = environment.ad_server + 'submit';
       const bod = {
-        "name": "test integration",
-        "geo": {
-          "lat": 41,
-          "lng": 71,
-          "radius": 10
+        'name': 'test integration',
+        'geo': {
+          'lat': 41,
+          'lng': 71,
+          'radius': 10
         },
-        "adCreativeId": ad.id
-      }
+        'adCreativeId': ad.id
+      };
       this.http
         .post(endpoint, bod)
         .subscribe( response => {
           if (response['statusCode'] === 200) {
             resolve(true);
-          }
-          else {
+          } else {
             reject(response);
           }
-        })
+        });
     });
   }
 
@@ -50,8 +49,7 @@ export class HttpService {
         .subscribe( (response) => {
           if (response['statusCode'] === 200) {
             resolve(response['result']);
-          }
-          else {
+          } else {
             reject(response);
           }
         });

@@ -6,7 +6,7 @@ import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { DashboardComponent } from './dashboard.component';
 import { ChartsComponent } from './charts/charts.component';
 import { FbAdsComponent } from './fb-ads/fb-ads.component';
-import { AdComponent } from './fb-ads/ad/ad.component';
+import { AdCreativeComponent } from './fb-ads/ad-creative/ad-creative.component';
 import { StatsComponent } from './stats/stats.component';
 import { SliderComponent } from './slider/slider.component';
 import { MapComponent } from './map/map.component';
@@ -19,6 +19,7 @@ import { CustomMaterialsModule } from '../custom-materials.module';
 
 import { HttpService } from '../services/http.service';
 import { LayersService } from '../services/layers.service';
+import { CircleService } from '../services/circle.service';
 import { TimeService } from '../services/time.service';
 
 
@@ -32,6 +33,7 @@ import { TimeService } from '../services/time.service';
   providers: [
     HttpService,
     LayersService,
+    CircleService,
     TimeService,
     TranslatePipe
   ],
@@ -46,7 +48,7 @@ import { TimeService } from '../services/time.service';
     SourceChartComponent,
     LegendComponent,
     FbAdsComponent,
-    AdComponent
+    AdCreativeComponent
   ]
 })
 export class DashboardModule { }

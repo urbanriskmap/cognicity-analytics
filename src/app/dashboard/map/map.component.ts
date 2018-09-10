@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 
 import { LayersService } from '../../services/layers.service';
+import { CircleService } from '../../services/circle.service';
 import { HttpService } from '../../services/http.service';
 import { environment as env } from '../../../environments/environment';
 
@@ -15,11 +16,12 @@ import { environment as env } from '../../../environments/environment';
 export class MapComponent implements OnInit {
   @Output() floodAreas: object;
   @Output() map: mapboxgl.Map;
-  @Output() finishedLoading = new EventEmitter();
+  @Output() finishedLoading = new EventEmitter<object>();
 
   constructor(
     private layersService: LayersService,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private circleService: CircleService
   ) { }
 
   ngOnInit() {
@@ -46,7 +48,8 @@ export class MapComponent implements OnInit {
         self.floodAreas = geojsonData;
         self.layersService.loadFloodAreas(self.floodAreas, self.map)
         .then(() => {
-          self.finishedLoading.emit();
+          self.circleService.registerMap(self.map);
+          self.finishedLoading.emit(self.map);
         })
         .catch(error => console.log(error));
       })
