@@ -1,5 +1,5 @@
 <div id="adlistWrapper">
-  <p id="reviewHeading">Review<p>
+  <p *ngIf="ads.length>0" id="reviewHeading">Review<p>
   <p *ngFor=" let ad of ads">
     ad {{ad.adCreativeId}} at (lat: {{ ad.circle.getCenter().lat }}, lng: {{ ad.circle.getCenter().lng }}, radius: {{ ad.circle.getRadius() }} meters)
       <button (click)="submit(ad)">Submit For Approval</button>
