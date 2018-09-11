@@ -29,7 +29,7 @@
     </app-charts>
   </div>
 
-  <div id="statsWrapper">
+  <div id="statsWrapper" *ngIf="chartsComponent.selectedChart!='ads'">
     <div id="reportTools">
       <a
         *ngIf="!slider.generatingTableData && slider.reports"
@@ -53,5 +53,9 @@
       [floodAreasCount]="slider.floodAreasCount"
       [reportsCount]="slider.reportsCount">
     </app-stats>
+  </div>
+  <div id="adListWrapper" *ngIf="chartsComponent.selectedChart=='ads'">
+    <app-ad-list>
+    </app-ad-list>
   </div>
 </div>

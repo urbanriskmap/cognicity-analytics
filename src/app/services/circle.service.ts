@@ -1,19 +1,28 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { ConnectableObservable } from 'rxjs';
+import { ConnectableObservable, Observable } from 'rxjs';
 import { filter, publish } from 'rxjs/operators';
 import * as MapboxCircle from 'mapbox-gl-circle';
 
 @Injectable()
 export class CircleService {
   mapChanges: ConnectableObservable<object>;
+  currentAds: object[];
 
   map: object;
 
   constructor() {
+    this.currentAds = [];
     this.mapChanges = new Observable( observer => {
       observer.next(this.map);
     }).pipe(publish()) as ConnectableObservable<object>;
+  }
+
+  getAds() {
+    return this.currentAds;
+  }
+
+  addAd(ad) {
+    this.currentAds.push(ad);
   }
 
   getMap() {

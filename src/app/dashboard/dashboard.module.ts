@@ -21,6 +21,7 @@ import { HttpService } from '../services/http.service';
 import { LayersService } from '../services/layers.service';
 import { CircleService } from '../services/circle.service';
 import { TimeService } from '../services/time.service';
+import { AdListComponent } from './ad-list/ad-list.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { TimeService } from '../services/time.service';
     SourceChartComponent,
     LegendComponent,
     FbAdsComponent,
-    AdCreativeComponent
+    AdCreativeComponent,
+    AdListComponent
   ]
 })
 export class DashboardModule { }
