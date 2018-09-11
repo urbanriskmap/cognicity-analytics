@@ -28,7 +28,8 @@
   position: absolute;
   width: 100%;
   bottom: 0px;
-  
+  background-color: $dark-gray;
+
   & #chartsWrapper {
     width: 75%;
     background-color: $dark-gray;

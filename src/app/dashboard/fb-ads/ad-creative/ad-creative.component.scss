@@ -65,6 +65,7 @@
   }
 
   & button:disabled {
-    background-color: black;
+    background-color: $steel-gray;
+    color: $snow-white;
   }
 }

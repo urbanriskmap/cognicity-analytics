@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpService } from '../../../services/http.service';
 import { CircleService } from '../../../services/circle.service';
-import { AdComponent } from './ad/ad.component';
+// import { AdComponent } from './ad/ad.component';
 
 @Component({
   selector: 'app-ad-creative',
