@@ -1,0 +1,8 @@
+<div class="adCreativeWrapper">
+  <img class="adCreativeImage" [src]="image_url">
+  <p id="messageContainer">
+  {{message}}
+  </p>
+  <br>
+    <button [disabled]="!map" (click)="select()">Select Location</button>
+</div>

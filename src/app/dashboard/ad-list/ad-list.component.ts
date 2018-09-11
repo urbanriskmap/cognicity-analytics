@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CircleService } from '../../services/circle.service';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-ad-list',
@@ -7,9 +8,21 @@ import { CircleService } from '../../services/circle.service';
   styleUrls: ['./ad-list.component.scss']
 })
 export class AdListComponent implements OnInit {
+  submittedAd: {
+    name: string,
+    geo: {
+      lat: number,
+      lng: number,
+      radius: number,
+    },
+    adCreativeId: number
+  };
   ads: object[];
 
-  constructor(private circleService: CircleService) { }
+  constructor(
+    private circleService: CircleService,
+    private httpService: HttpService
+  ) { }
 
   ngOnInit() {
     // need to fill in the ads that are in play right now
@@ -17,4 +30,18 @@ export class AdListComponent implements OnInit {
     this.ads = this.circleService.getAds();
   }
 
+  submit(ad) {
+    let adToSubmit = {
+      name: 'test',
+      geo: {
+        lat: ad.circle.getCenter().lat,
+        lng: ad.circle.getCenter().lng,
+        radius: ad.circle.getRadius()/1000 //make it km
+      },
+      adCreativeId: ad.adCreativeId
+    }
+    console.log('Ad Submitted');
+    console.log(adToSubmit);
+    this.httpService.submitAdForApproval(adToSubmit);
+  }
 }

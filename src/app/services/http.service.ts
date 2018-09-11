@@ -12,19 +12,10 @@ export class HttpService {
   submitAdForApproval(ad: any): Promise<boolean> {
     return new Promise((resolve, reject) => {
       console.log('http Submit');
-      console.log(ad.id);
+      console.log(ad.adCreativeId);
       const endpoint = environment.ad_server + 'submit';
-      const bod = {
-        'name': 'test integration',
-        'geo': {
-          'lat': 41,
-          'lng': 71,
-          'radius': 10
-        },
-        'adCreativeId': ad.id
-      };
       this.http
-        .post(endpoint, bod)
+        .post(endpoint, ad)
         .subscribe( response => {
           if (response['statusCode'] === 200) {
             resolve(true);
