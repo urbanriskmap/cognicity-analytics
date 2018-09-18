@@ -2,21 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { CircleService } from '../../services/circle.service';
 import { HttpService } from '../../services/http.service';
 
+interface SubmittedAd {
+  name: string,
+  geo: {
+    lat: number,
+    lng: number,
+    radius: number,
+  },
+  adCreativeId: number
+}
+
 @Component({
   selector: 'app-ad-list',
   templateUrl: './ad-list.component.html',
   styleUrls: ['./ad-list.component.scss']
 })
 export class AdListComponent implements OnInit {
-  submittedAd: {
-    name: string,
-    geo: {
-      lat: number,
-      lng: number,
-      radius: number,
-    },
-    adCreativeId: number
-  };
   ads: object[];
 
   constructor(
@@ -31,7 +32,7 @@ export class AdListComponent implements OnInit {
   }
 
   submit(ad) {
-    let adToSubmit = {
+    let adToSubmit = <SubmittedAd>{
       name: 'test',
       geo: {
         lat: ad.circle.getCenter().lat,

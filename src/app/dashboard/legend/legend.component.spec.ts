@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule, TranslatePipe, TranslateService, TranslateLoader, TranslateFakeLoader } from '@ngx-translate/core';
 
 import { LegendComponent } from './legend.component';
 
@@ -8,7 +9,12 @@ describe('LegendComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LegendComponent ]
+      declarations: [ LegendComponent ],
+      imports: [
+        TranslateModule.forRoot({
+          loader: { provide: TranslateLoader, useClass: TranslateFakeLoader }
+        })
+      ]
     })
     .compileComponents();
   }));

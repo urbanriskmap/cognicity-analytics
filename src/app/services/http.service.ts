@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { mock } from './mockData';
+import  mockAdCreatives from './mock-ad-creatives';
 import * as topojson from 'topojson-client';
 
 @Injectable()
@@ -31,7 +31,7 @@ export class HttpService {
       // TODO put in env variable
       const endpoint = environment.ad_server + 'adCreatives';
       if (environment.mock_data) {
-        resolve(mock.ads);
+        resolve(mockAdCreatives.ads);
         return;
       }
 

@@ -23,9 +23,9 @@ export class TimeService {
   endDate: moment;
 
   // Date range object storing values as formatted strings for http queries
-  selectedDateRange: {start: string, end: string};
+  selectedDateRange: {start: string, end: string} = { start: '', end: '' };
   // Date-time object storing formatted values, bound to range slider
-  selectedTimeframe: {start: string, end: string};
+  selectedTimeframe: {start: string, end: string}  = { start: '', end: '' };;
 
   reportParams = {
     timestampFormat: 'HH:mm DD MMM YYYY',

@@ -25,6 +25,7 @@ export class FbAdsComponent implements OnInit {
     // store in this.adCreatives.
     // Will automatically show up when it resolves.
     this.http.getAllAdCreatives()
-      .then((res) => this.adCreatives = res);
+      .then((res) => this.adCreatives = res)
+      .catch((err) => console.error(err));
   }
 }

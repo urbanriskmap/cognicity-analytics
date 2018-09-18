@@ -1,5 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { LayersService } from '../../services/layers.service';
+import { MockLayersService } from '../../services/mock-layers.service';
+import { HttpService } from '../../services/http.service';
+import { MockHttpService } from '../../services/mock-http.service';
+import { CircleService } from '../../services/circle.service';
+import { MockCircleService } from '../../services/mock-circle.service';
+
 import { MapComponent } from './map.component';
 
 describe('MapComponent', () => {
@@ -8,7 +15,11 @@ describe('MapComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapComponent ]
+      declarations: [ MapComponent ],
+      providers: [{ provide: LayersService, useClass: MockLayersService},
+        { provide: HttpService, useClass: MockHttpService},
+        { provide: CircleService, useClass: MockCircleService},
+      ]
     })
     .compileComponents();
   }));

@@ -10,12 +10,26 @@ export class RangeComponent implements OnInit {
   @Input() rangeSettings: {
     totalDays: number,
     intervalHours: number
+  } = {
+    totalDays: 7,
+    intervalHours: 4
   };
+
   @Input() markings: {
     timestamp: any,
     mark: string
-  }[];
-  @Input() knobStep: {knobUpper: number, knobLower: number};
+  }[] = [{
+    timestamp: '',
+    mark: ''
+  }];
+
+  @Input() knobStep: {
+    knobUpper: number,
+    knobLower: number
+  } = {
+    knobUpper: 0,
+    knobLower: 7*(24/4)
+  };
 
   halfKnobHt: number;
   totalSteps: number;

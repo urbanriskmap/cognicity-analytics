@@ -54,6 +54,4 @@ export class CircleService {
     }).addTo(this.map);
     return myCircle;
   }
-
-
 }

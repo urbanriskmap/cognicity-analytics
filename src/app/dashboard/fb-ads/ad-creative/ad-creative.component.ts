@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpService } from '../../../services/http.service';
 import { CircleService } from '../../../services/circle.service';
-// import { AdComponent } from './ad/ad.component';
 
 @Component({
   selector: 'app-ad-creative',
@@ -9,10 +8,10 @@ import { CircleService } from '../../../services/circle.service';
   styleUrls: ['./ad-creative.component.scss']
 })
 export class AdCreativeComponent implements OnInit {
-  @Input() id: number;
-  @Input() message: string;
-  @Input() link: string;
-  @Input() image_url: string;
+  @Input() id: number = 0;
+  @Input() message: string = '';
+  @Input() link: string = '';
+  @Input() image_url: string = '';
   map: object;
 
   ableToSelect: boolean;
@@ -33,8 +32,6 @@ export class AdCreativeComponent implements OnInit {
   select() {
     console.log('select clicked');
     this.circleService.getMap().subscribe((map) => {
-      console.log('ad-creative got a map');
-      console.log(map);
       this.ableToSelect = true;
       const cir = this.circleService.drawCircle({lat: -6.1751, lng: 106.8650}, 2000);
       // call circle.getCenter to get the center
@@ -61,8 +58,6 @@ export class AdCreativeComponent implements OnInit {
 
   ngOnInit() {
     this.circleService.getMap().subscribe((map) => {
-      console.log('ad-creative got a map');
-      console.log(map);
       this.ableToSelect = true;
       this.map = map;
     },

@@ -12,8 +12,8 @@ import { TableService } from '../../services/table.service';
   styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent implements OnInit {
-  @Input() map: object;
-  @Input() floodAreas: object;
+  @Input() map: object = {};
+  @Input() floodAreas: object = {};
 
   lastAreaUpdate: string; // TODO: store in LayersService ??
 
