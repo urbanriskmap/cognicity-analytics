@@ -28,10 +28,10 @@ export class MapComponent implements OnInit {
     self.map = new mapboxgl.Map({
       attributionControl: true,
       container: 'mapContainer',
-      center: [106.86, -6.17],
+      center: [80.2, 13],
       zoom: 11,
       minZoom: 10,
-      style: 'mapbox://styles/urbanriskmap/cjcta37vx0vue2rnxg3z6qynz',
+      style: 'mapbox://styles/mapbox/light-v9',
       hash: false,
       preserveDrawingBuffer: true
     });

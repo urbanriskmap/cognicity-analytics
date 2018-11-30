@@ -48,6 +48,7 @@ export class ActivityChartComponent implements OnInit, OnChanges {
             borderWidth: 1,
             borderColor: '#31aade',
             pointRadius: 0,
+            lineTension: 0,
             data: this.reportsData
           },
           {

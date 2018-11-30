@@ -20,13 +20,13 @@ export class LayersService {
       },
       paint: {
         'circle-radius': 4,
-        'circle-stroke-width': 2,
-        'circle-color': '#f05022',
+        'circle-stroke-width': 1,
+        'circle-color': '#31aade',
         'circle-stroke-color': [
            'match',
            ['get', 'image_url'],
             'null', '#000000',
-            '#31aade'
+            '#ffffff'
           ]
       }
     };
