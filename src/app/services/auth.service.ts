@@ -9,7 +9,6 @@ export class AuthService implements CanActivate {
     clientID: environment.auth0_client_id,
     domain: environment.auth0_domain,
     responseType: 'token id_token',
-    audience: `https://${environment.auth0_domain}/userinfo`,
     redirectUri: environment.auth0_callbackURL,
     scope: 'openid'
   });
