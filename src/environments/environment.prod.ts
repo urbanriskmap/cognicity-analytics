@@ -3,7 +3,7 @@ export const environment = {
   production: true,
 
   data_server: 'https://data.petabencana.id/',
-  instance_region: 'jbd',
+  instance_region: 'ID-JK',
 
   auth0_client_id: 'ApdfZvV1BrxXmwdg6Djrle4m2nav5ub9',
   auth0_domain: 'auth.petabencana.id',
