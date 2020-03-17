@@ -31,7 +31,7 @@ export class MapComponent implements OnInit {
       center: [106.86, -6.17],
       zoom: 11,
       minZoom: 10,
-      style: 'mapbox://styles/mapbox/dark-v10',
+      style: 'mapbox://styles/mapbox/streets-v8',
       hash: false,
       preserveDrawingBuffer: true
     });
