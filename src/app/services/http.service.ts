@@ -19,7 +19,7 @@ export class HttpService {
       properties: object
     }[]
   }> {
-    const endpoint = environment.data_server + 'floods?city=' + city;
+    const endpoint = environment.data_server + 'floods?admin=' + city;
 
     return new Promise((resolve, reject) => {
       this.http
@@ -54,7 +54,7 @@ export class HttpService {
   }> {
     const endpoint = environment.data_server + 'reports/archive?start='
       + timePeriod.start + '&end='
-      + timePeriod.end + '&city='
+      + timePeriod.end + '&admin='
       + environment.instance_region;
 
     return new Promise((resolve, reject) => {
@@ -84,7 +84,7 @@ export class HttpService {
   }[]> {
     const endpoint = environment.data_server + 'floods/archive?start='
       + timePeriod.start + '&end='
-      + timePeriod.end + '&city='
+      + timePeriod.end + '&admin='
       + environment.instance_region;
 
     return new Promise((resolve, reject) => {
@@ -111,7 +111,7 @@ export class HttpService {
     }[]> {
     const endpoint = environment.data_server + dataType + '/timeseries?start='
       + timePeriod.start + '&end='
-      + timePeriod.end + '&city='
+      + timePeriod.end + '&admin='
       + environment.instance_region;
 
     return new Promise((resolve, reject) => {
