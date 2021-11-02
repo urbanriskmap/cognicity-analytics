@@ -23,3 +23,12 @@
     [reportsSource]="reportsSource">
   </app-source-chart>
 </div>
+
+<div id="jakartaWrapper" class="charts">
+  <app-jakarta-chart
+    *ngIf="(reportsData.length || floodsData.length) && selectedChart==='jakarta'"
+    [reportsData]="reportsData"
+    [floodsData]="floodsData"
+    [scaleLimits]="scaleLimits">
+  </app-jakarta-chart>
+</div>

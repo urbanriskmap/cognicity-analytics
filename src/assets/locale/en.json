@@ -21,6 +21,7 @@
   "chart_menu": {
     "activity": "Reporting activity",
     "source": "Reporting source",
+    "jakarta": "Reporting jakarta",
     "generate_button": "Generate Report"
   },
   "note": "Note: The number of flooded areas does not mean the whole area is flooded. It shows that there are floods happening within those counted areas",

@@ -18,6 +18,7 @@ import { CustomMaterialsModule } from '../custom-materials.module';
 import { HttpService } from '../services/http.service';
 import { LayersService } from '../services/layers.service';
 import { TimeService } from '../services/time.service';
+import { JakartaChartComponent } from './charts/jakarta-chart/jakarta-chart.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { TimeService } from '../services/time.service';
     RangeComponent,
     ActivityChartComponent,
     SourceChartComponent,
-    LegendComponent
+    LegendComponent,
+    JakartaChartComponent
   ]
 })
 export class DashboardModule { }

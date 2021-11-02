@@ -20,6 +20,7 @@
   "chart_menu": {
     "activity": "Aktivitas Pelaporan",
     "source": "Sumber Laporan",
+    "jakarta": "Laporan Jakarta",
     "generate_button": "Buat Ringkasan"
   },
   "note": "Catatan: Angka RW terdampak banjir tidak berarti seluruh wilayah dalam RW tersebut tergenang banjir. Ini menunjukkan terdapat banjir dalam sejumlah RW tersebut.",

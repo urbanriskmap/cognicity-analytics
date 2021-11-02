@@ -31,7 +31,8 @@ export class ChartsComponent implements OnInit {
   ) {
     this.chartTypes = [
       {id: 'activity', class: 'tabButton selected'},
-      {id: 'source', class: 'tabButton'}
+      {id: 'source', class: 'tabButton'},
+      {id: 'jakarta', class: 'tabButton'}
     ];
   }
 
