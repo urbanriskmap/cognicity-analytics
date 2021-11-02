@@ -1,5 +1,6 @@
 import { Component, Input, Output, OnInit } from '@angular/core';
 import * as Chart from 'chart.js';
+import * as mapboxgl from 'mapbox-gl';
 import * as $ from 'jquery';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -17,22 +18,24 @@ export class ChartsComponent implements OnInit {
   };
   chartTypes: {
     id: string,
-    class: string
+    class: string,
+    center: Array<Number>,
+    zoom: number
   }[];
   selectedChart: string;
+  @Input() map: mapboxgl.Map;
 
   @Output() scaleLimits: {max: number, min: number};
   @Output() reportsData: {t: string, y: number}[] = [];
   @Output() floodsData: {t: string, y: number}[] = [];
-
   constructor(
     private httpService: HttpService,
     private translate: TranslateService
   ) {
     this.chartTypes = [
-      {id: 'activity', class: 'tabButton selected'},
-      {id: 'source', class: 'tabButton'},
-      {id: 'jakarta', class: 'tabButton'}
+      {id: 'activity', class: 'tabButton selected', center: [120, -2], zoom: 4.5},
+      {id: 'source', class: 'tabButton', center: [120, -2], zoom: 4.5},
+      {id: 'jakarta', class: 'tabButton', center: [106.86, -6.17], zoom: 11}
     ];
   }
 
@@ -41,6 +44,14 @@ export class ChartsComponent implements OnInit {
       if (type.class.indexOf('selected', 10) === 10) {
         this.selectedChart = type.id;
       }
+    }
+  }
+
+  changeCenter(coords, zoom) {
+    if (this.map) {
+      this.map.setCenter(coords);
+      this.map.setMinZoom(zoom);
+      this.map.setZoom(zoom);
     }
   }
 

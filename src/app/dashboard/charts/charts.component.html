@@ -3,6 +3,7 @@
     *ngFor="let type of chartTypes"
     [id]="type.id + 'Button'"
     [class]="type.class + ' mat-body-1'"
+    (click)="changeCenter(type.center, type.zoom)"
     (click)="changeChart($event)">
     {{ 'chart_menu.' + type.id | translate }}
   </button>
