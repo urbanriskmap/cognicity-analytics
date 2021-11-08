@@ -41,7 +41,7 @@ export class MapComponent implements OnInit {
 
     self.map.on('style.load', () => {
       // Load neighborhood polygons
-      self.httpService.getFloodAreas(env.instance_region)
+      self.httpService.getFloodAreas(env.instance_region[12])
       .then(geojsonData => {
         self.floodAreas = geojsonData;
         self.layersService.loadFloodAreas(self.floodAreas, self.map)

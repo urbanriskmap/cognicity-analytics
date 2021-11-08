@@ -55,7 +55,7 @@ export class HttpService {
     const endpoint = environment.data_server + 'reports/archive?start='
       + timePeriod.start + '&end='
       + timePeriod.end + '&admin='
-      + environment.instance_region;
+      + environment.instance_region[12];
 
     return new Promise((resolve, reject) => {
       this.http
@@ -85,7 +85,7 @@ export class HttpService {
     const endpoint = environment.data_server + 'floods/archive?start='
       + timePeriod.start + '&end='
       + timePeriod.end + '&admin='
-      + environment.instance_region;
+      + environment.instance_region[12];
 
     return new Promise((resolve, reject) => {
       this.http
@@ -112,7 +112,7 @@ export class HttpService {
     const endpoint = environment.data_server + dataType + '/timeseries?start='
       + timePeriod.start + '&end='
       + timePeriod.end + '&admin='
-      + environment.instance_region;
+      + environment.instance_region[12];
 
     return new Promise((resolve, reject) => {
       this.http
