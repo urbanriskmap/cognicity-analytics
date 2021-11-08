@@ -19,10 +19,26 @@ export class LayersService {
         data: reportsGeojson
       },
       paint: {
-        'circle-color': '#31aade',
+        'circle-color': [
+          'match', 
+          ['get', 'disaster_type'],
+          'flood',
+          'Aqua',
+          'earthquake',
+          'SaddleBrown',
+          'wind',
+          'PaleGreen',
+          'haze',
+          'SlateGrey',
+          'fire',
+          'DarkOrange',
+          'volcano',
+          'Red',
+          'white'
+        ],
         'circle-radius': 4,
         'circle-stroke-width': 1,
-        'circle-stroke-color': '#ffffff'
+        'circle-stroke-color': 'Gray'
       }
     };
 

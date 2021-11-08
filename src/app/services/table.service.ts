@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class TableService {
+  regions = this.makeRegions();
+
   districts = {
     '3171': { name: 'Jakarta Selatan',
       reportsCount: 0, parentAreasCount: 0, parentAreas: {}},
@@ -20,6 +22,23 @@ export class TableService {
   allowReport = false;
 
   constructor(public router: Router) { }
+
+  makeRegions() {
+    let reports = [];
+    for (let i = 0; i < environment.region_name.length; i++) {
+      reports.push({
+        name: environment.region_name[i],
+        floodCount: 0,
+        earthquakeCount: 0,
+        windCount: 0,
+        hazeCount: 0,
+        fireCount: 0,
+        volcanoCount: 0,
+        areaCount: 0
+      }) 
+    }
+    return reports;
+  }
 
   canActivate() {
     if (this.allowReport) {
