@@ -12,7 +12,12 @@
   "end_date": "End Date",
   "legend": {
     "title": "Legend",
-    "report": "Flood report",
+    "earthquake": "Earthquake",
+    "haze": "Haze",
+    "wind": "Wind",
+    "fire": "Fire",
+    "volcano": "Volcano",
+    "flood": "Flood",
     "level_1": "Alert Level 1",
     "level_2": "Alert Level 2",
     "level_3": "Alert Level 3",

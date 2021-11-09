@@ -11,7 +11,12 @@
   "end_date": "Tanggal Akhir",
   "legend": {
     "title": "Legenda",
-    "report": "Laporan Banjir",
+    "earthquake": "Gempa",
+    "haze": "Angin Kencang",
+    "wind": "Kabut Asap",
+    "fire": "Kebakaran",
+    "volcano": "Gunung Api",
+    "flood": "Banjir",
     "level_1": "Hati-hati",
     "level_2": "Siaga 3",
     "level_3": "Siaga 2",
