@@ -92,8 +92,8 @@ export class SliderComponent implements OnInit {
     this.tableService.districts = counts.districts;
   }
 
-  updateReports(range): void {
-    this.httpService.getReportsArchive(range)
+  updateReports(range, region): void {
+    this.httpService.getReportsArchive(range, region)
     .then(geojsonData => {
       // pass to map, charts & stats
       this.reports = this.timeService.formatTimestamp(geojsonData);
@@ -151,7 +151,13 @@ export class SliderComponent implements OnInit {
     });
   }
 
-  dateInteraction(type: string, event: any, isInitializing: boolean) {
+  updateStats(region) {
+    this.refreshingStats.reports = true;
+    this.updateReports(this.timeService.selectedDateRange, region);
+    this.updateFloodAreas(this.timeService.selectedDateRange);
+  }
+
+  dateInteraction(type: string, event: any, isInitializing: boolean, region: string) {
     // Disable dependent components
     this.refreshingLayers = {reports: true, floodAreas: true};
     this.generatingTableData = true;
@@ -171,7 +177,7 @@ export class SliderComponent implements OnInit {
     // Set knob positions to full scale
     this.resetKnobs();
 
-    this.updateReports(this.timeService.selectedDateRange);
+    this.updateReports(this.timeService.selectedDateRange, region);
     this.updateFloodAreas(this.timeService.selectedDateRange);
 
     // Inject timeService in charts, don't pass
@@ -195,7 +201,7 @@ export class SliderComponent implements OnInit {
     };
 
     // Trigger get reports, flood areas, draw charts
-    this.dateInteraction('end', event, true);
+    this.dateInteraction('end', event, true, '');
   }
 
   updateRange(range) {

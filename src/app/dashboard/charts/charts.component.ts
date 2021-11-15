@@ -1,9 +1,9 @@
-import { Component, Input, Output, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import * as Chart from 'chart.js';
 import * as mapboxgl from 'mapbox-gl';
 import * as $ from 'jquery';
 import { TranslateService } from '@ngx-translate/core';
-
+import { TimeService } from '../../services/time.service';
 import { HttpService } from '../../services/http.service';
 
 @Component({
@@ -25,12 +25,15 @@ export class ChartsComponent implements OnInit {
   selectedChart: string;
   @Input() map: mapboxgl.Map;
 
+  @Output() updateStats = new EventEmitter();
   @Output() scaleLimits: {max: number, min: number};
   @Output() reportsData: {t: string, y: number}[] = [];
   @Output() floodsData: {t: string, y: number}[] = [];
+  @Output() jakartaData: {t: string, y: number}[] = [];
   constructor(
     private httpService: HttpService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private timeService: TimeService
   ) {
     this.chartTypes = [
       {id: 'activity', class: 'tabButton selected', center: [120, -2], zoom: 4.5},
@@ -63,29 +66,43 @@ export class ChartsComponent implements OnInit {
     // Use jQuery to show / hide, using *ngIf destroys component, & thus current graphics
     $('.charts:not(#' + this.selectedChart + 'Wrapper)').hide();
     $('#' + this.selectedChart + 'Wrapper').show();
+
+    const region = this.selectedChart == 'jakarta' ? 'ID-JK' : '';
+    this.updateStats.emit(region);
   }
 
   prepareActivityData(timePeriod) {
     this.reportsData = [];
     this.floodsData = [];
+    this.jakartaData = [];
     this.httpService.getTimeseries('reports', timePeriod)
     .then(reports => {
       this.httpService.getTimeseries('floods', timePeriod)
       .then(floods => {
+        this.httpService.getJakartaTimeseries(timePeriod)
+        .then(jakarta => {
+          for (const report of reports) {
+            this.reportsData.push({
+              t: report.ts,
+              y: report.count
+            });
+          }
 
-        for (const report of reports) {
-          this.reportsData.push({
-            t: report.ts,
-            y: report.count
-          });
-        }
+          for (const area of floods) {
+            this.floodsData.push({
+              t: area.ts,
+              y: area.count
+            });
+          }
 
-        for (const area of floods) {
-          this.floodsData.push({
-            t: area.ts,
-            y: area.count
-          });
-        }
+          for (const report of jakarta) {
+            this.jakartaData.push({
+              t: report.ts,
+              y: report.count
+            });
+          }
+        })
+        .catch(error => console.log(error));
       })
       .catch(error => console.log(error));
     })

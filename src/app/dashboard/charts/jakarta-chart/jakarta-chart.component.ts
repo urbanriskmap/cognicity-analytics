@@ -12,7 +12,7 @@ import { TimeService } from '../../../services/time.service';
 })
 export class JakartaChartComponent implements OnInit, OnChanges {
   jakartaChart: Chart;
-  @Input() reportsData: {t: string, y: number}[];
+  @Input() jakartaData: {t: string, y: number}[];
   @Input() floodsData: {t: string, y: number}[];
   @Input() scaleLimits: {max: number, min: number};
 
@@ -49,7 +49,7 @@ export class JakartaChartComponent implements OnInit, OnChanges {
             borderColor: '#31aade',
             backgroundColor: 'rgba(49, 170, 222, 0.1)',
             pointRadius: 0,
-            data: this.reportsData
+            data: this.jakartaData
           },
           {
             label: this.translate.get('chart_legend.area_count')['value'],

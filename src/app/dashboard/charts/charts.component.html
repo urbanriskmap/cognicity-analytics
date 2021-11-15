@@ -28,7 +28,7 @@
 <div id="jakartaWrapper" class="charts">
   <app-jakarta-chart
     *ngIf="(reportsData.length || floodsData.length) && selectedChart==='jakarta'"
-    [reportsData]="reportsData"
+    [jakartaData]="jakartaData"
     [floodsData]="floodsData"
     [scaleLimits]="scaleLimits">
   </app-jakarta-chart>

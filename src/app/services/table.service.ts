@@ -6,6 +6,15 @@ import { environment } from '../../environments/environment';
 export class TableService {
   regions = this.makeRegions();
 
+  totalDisaster = {
+    floodCount: 0,
+    earthquakeCount: 0,
+    windCount: 0,
+    hazeCount: 0,
+    fireCount: 0,
+    volcanoCount: 0
+  };
+
   districts = {
     '3171': { name: 'Jakarta Selatan',
       reportsCount: 0, parentAreasCount: 0, parentAreas: {}},

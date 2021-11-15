@@ -26,6 +26,7 @@
     <app-charts
       [map]="map.map"
       [reportsSource]="slider.reportsSource"
+      (updateStats)="slider.updateStats($event)"
       #chart>
     </app-charts>
   </div>

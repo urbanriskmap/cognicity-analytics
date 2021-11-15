@@ -6,6 +6,7 @@ import { environment as env } from '../../environments/environment';
 
 @Injectable()
 export class TimeService {
+  dataAnalysis = [];
   // Date picker limits
   dateLimits = {
     start: {
@@ -148,6 +149,16 @@ export class TimeService {
       };
 
       this.selectedTimeframe = this.selectedDateRange;
+      this.dataAnalysis = [];
+      this.makeDataTS();
+    }
+  }
+
+  makeDataTS() {
+    const start = moment(this.startDate);
+    const end = moment(this.endDate);
+    for (let i = 1; start <= end; i++) {
+      this.dataAnalysis.push({ts: start.add(1, 'hour').utc().format().replace('.', '%2B'), count: 0})
     }
   }
 
