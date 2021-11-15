@@ -11,7 +11,7 @@
 
 <div id="activityWrapper" class="charts">
   <app-activity-chart
-    *ngIf="(reportsData.length || floodsData.length) && selectedChart==='activity'"
+    *ngIf="(reportsData.length || floodsData.length) && tableService.selectedChart==='activity'"
     [reportsData]="reportsData"
     [floodsData]="floodsData"
     [scaleLimits]="scaleLimits">
@@ -20,14 +20,14 @@
 
 <div id="sourceWrapper" class="charts">
   <app-source-chart
-    *ngIf="(reportsSource && reportsSource.aggregates.length) && selectedChart==='source'"
+    *ngIf="(reportsSource && reportsSource.aggregates.length) && tableService.selectedChart==='source'"
     [reportsSource]="reportsSource">
   </app-source-chart>
 </div>
 
 <div id="jakartaWrapper" class="charts">
   <app-jakarta-chart
-    *ngIf="(reportsData.length || floodsData.length) && selectedChart==='jakarta'"
+    *ngIf="(reportsData.length || floodsData.length) && tableService.selectedChart==='jakarta'"
     [jakartaData]="jakartaData"
     [floodsData]="floodsData"
     [scaleLimits]="scaleLimits">

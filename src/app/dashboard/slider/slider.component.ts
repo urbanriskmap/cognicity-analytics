@@ -5,6 +5,7 @@ import { HttpService } from '../../services/http.service';
 import { LayersService } from '../../services/layers.service';
 import { TimeService } from '../../services/time.service';
 import { TableService } from '../../services/table.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-slider',
@@ -67,6 +68,34 @@ export class SliderComponent implements OnInit {
     const start = this.timeService.getMilliseconds(range.start);
     const end = this.timeService.getMilliseconds(range.end);
 
+    let regions = [];
+    let disaster = {
+      floodCount: 0,
+      earthquakeCount: 0,
+      windCount: 0,
+      hazeCount: 0,
+      fireCount: 0,
+      volcanoCount: 0,
+      totalCount: 0
+    };
+
+    for (let i = 0; i < environment.region_name.length; i++) {
+      const regionCounts = this.layersService.getDisasterCount(
+        this.map,
+        {start: start, end: end},
+        environment.instance_region[i]
+      );
+      regions.push(this.makeRegionReports(i, regionCounts));
+      disaster.floodCount += regionCounts.aggregates.flood;
+      disaster.earthquakeCount += regionCounts.aggregates.earthquake;
+      disaster.windCount += regionCounts.aggregates.wind;
+      disaster.hazeCount += regionCounts.aggregates.haze;
+      disaster.fireCount += regionCounts.aggregates.fire;
+      disaster.volcanoCount += regionCounts.aggregates.volcano;
+    }
+    disaster.totalCount = disaster.floodCount + disaster.earthquakeCount + disaster.windCount + disaster.hazeCount + disaster.fireCount + disaster.volcanoCount;
+    console.log(disaster)
+
     const counts = this.layersService.getReportsCount(
       this.map,
       {start: start, end: end},
@@ -90,6 +119,22 @@ export class SliderComponent implements OnInit {
 
     // Update districts with reports count breakdown
     this.tableService.districts = counts.districts;
+    this.tableService.regions = regions;
+    this.tableService.totalDisaster = disaster;
+  }
+
+  makeRegionReports(i, count): Object {
+    const district = {
+      name: environment.region_name[i],
+      floodCount: count.aggregates.flood,
+      earthquakeCount: count.aggregates.earthquake,
+      windCount: count.aggregates.wind,
+      hazeCount: count.aggregates.haze,
+      fireCount: count.aggregates.fire,
+      volcanoCount: count.aggregates.volcano,
+      areaCount: count.aggregates.total
+    }
+    return district;  
   }
 
   updateReports(range, region): void {

@@ -11,7 +11,9 @@ import { TimeService } from '../services/time.service';
 })
 
 export class ReportComponent implements OnInit {
-  tableData = [];
+  regionData = [];
+  districtData = [];
+  disaster = this.tableService.totalDisaster;
 
   projectLogos = [
     {id: 'usaidLogo', src: '../../assets/images/usaid_logo.png'},
@@ -32,11 +34,27 @@ export class ReportComponent implements OnInit {
     for (const i in this.tableService.districts) {
       if (this.tableService.districts[i]) {
         const district = this.tableService.districts[i];
-        this.tableData.push({
+        this.districtData.push({
           district: district.name,
           totalReports: district.reportsCount,
           totalParent: district.parentAreasCount,
           stateGroups: this.getFloodStateGroups(district.parentAreas)
+        });
+      }
+    }
+    for (const i in this.tableService.regions) {
+      if (this.tableService.regions[i]) {
+        const district = this.tableService.regions[i];
+        
+        this.regionData.push({
+          name: district.name,
+          floodCount: district.floodCount,
+          earthquakeCount: district.earthquakeCount,
+          windCount: district.windCount,
+          hazeCount: district.hazeCount,
+          fireCount: district.fireCount,
+          volcanoCount: district.volcanoCount,
+          areaCount: district.areaCount
         });
       }
     }

@@ -44,7 +44,7 @@
     @media screen {
       margin: 24px auto 0 auto;
     }
-    max-width: 800px;
+    max-width: 1000px;
     border-top: 2px solid $dark-gray;
     border-bottom: 2px solid $dark-gray;
 
@@ -76,13 +76,14 @@
 
         & tr.tableData td {
           padding: 10px;
-          text-align: left;
           vertical-align: top;
           border-bottom: 1px solid $dark-gray;
-          &:first-child, &:nth-child(2), &:nth-child(3) {
+          &:first-child {
             width: 140px;
           }
-
+          &.count { 
+            text-align:center;
+          }
           & ul {
             padding-left: 0;
             list-style-type: none;

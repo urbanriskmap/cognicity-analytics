@@ -86,6 +86,33 @@ export class LayersService {
     };
   }
 
+  getDisasterCount(map, {start, end}, region): {
+    aggregates: {
+      flood: number,
+      earthquake: number,
+      wind: number,
+      haze: number,
+      fire: number,
+      volcano: number,
+      total: number
+    }
+  } {
+    const reports = map.getSource('reports')._data.features;
+    // Reset reports count by source to 0
+    const reportsCount = {flood: 0, earthquake: 0, wind: 0, haze: 0, fire: 0, volcano: 0, total: 0};
+    // Reset reports count by district to 0
+    
+    for (const report of reports) {
+      if (report.properties.created_at >= start && report.properties.created_at <= end && report.properties.tags.instance_region_code == region) {
+        // Increment total reports count
+        reportsCount[report.properties.disaster_type] += 1;
+        reportsCount.total += 1;
+      }
+    }
+    return {
+      aggregates: reportsCount
+    };
+  }
 
   loadFloodAreas(floodAreasGeojson, map) {
     const floodAreas = {

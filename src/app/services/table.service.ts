@@ -4,6 +4,8 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class TableService {
+  selectedChart:string;
+
   regions = this.makeRegions();
 
   totalDisaster = {
@@ -12,7 +14,8 @@ export class TableService {
     windCount: 0,
     hazeCount: 0,
     fireCount: 0,
-    volcanoCount: 0
+    volcanoCount: 0,
+    totalCount: 0
   };
 
   districts = {

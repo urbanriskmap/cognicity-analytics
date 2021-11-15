@@ -3,8 +3,8 @@ import * as Chart from 'chart.js';
 import * as mapboxgl from 'mapbox-gl';
 import * as $ from 'jquery';
 import { TranslateService } from '@ngx-translate/core';
-import { TimeService } from '../../services/time.service';
 import { HttpService } from '../../services/http.service';
+import { TableService } from '../../services/table.service';
 
 @Component({
   selector: 'app-charts',
@@ -22,7 +22,6 @@ export class ChartsComponent implements OnInit {
     center: Array<Number>,
     zoom: number
   }[];
-  selectedChart: string;
   @Input() map: mapboxgl.Map;
 
   @Output() updateStats = new EventEmitter();
@@ -33,7 +32,7 @@ export class ChartsComponent implements OnInit {
   constructor(
     private httpService: HttpService,
     private translate: TranslateService,
-    private timeService: TimeService
+    private tableService: TableService
   ) {
     this.chartTypes = [
       {id: 'activity', class: 'tabButton selected', center: [120, -2], zoom: 4.5},
@@ -45,7 +44,7 @@ export class ChartsComponent implements OnInit {
   ngOnInit() {
     for (const type of this.chartTypes) {
       if (type.class.indexOf('selected', 10) === 10) {
-        this.selectedChart = type.id;
+        this.tableService.selectedChart = type.id;
       }
     }
   }
@@ -61,13 +60,13 @@ export class ChartsComponent implements OnInit {
   changeChart(e) {
     $('.tabButton').removeClass('selected');
     $('#' + e.target.id).addClass('selected');
-    this.selectedChart = e.target.id.substring(0, e.target.id.length - 6);
+    this.tableService.selectedChart = e.target.id.substring(0, e.target.id.length - 6);
 
     // Use jQuery to show / hide, using *ngIf destroys component, & thus current graphics
-    $('.charts:not(#' + this.selectedChart + 'Wrapper)').hide();
-    $('#' + this.selectedChart + 'Wrapper').show();
+    $('.charts:not(#' + this.tableService.selectedChart + 'Wrapper)').hide();
+    $('#' + this.tableService.selectedChart + 'Wrapper').show();
 
-    const region = this.selectedChart == 'jakarta' ? 'ID-JK' : '';
+    const region = this.tableService.selectedChart == 'jakarta' ? 'ID-JK' : '';
     this.updateStats.emit(region);
   }
 

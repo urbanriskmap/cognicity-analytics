@@ -39,12 +39,14 @@
     "areas": "RW terdampak banjir"
   },
   "report": {
-    "report_title": "Ringkasan Kejadian Banjir",
+    "report_title": "Ringkasan Kejadian Bencana",
+    "jakarta_report_title": "Ringkasan Kejadian Banjir",
     "time_period": "Rentang waktu kejadian:",
     "start": "Awal",
     "end": "Akhir",
     "last_updated":"Waktu pembaharuan status RW terakhir:",
-    "current_time": "Waktu pembuatan ringkasan:"
+    "current_time": "Waktu pembuatan ringkasan:",
+    "total_report": "Total Laporan"
   },
   "table": {
     "district": "Kota",
@@ -57,7 +59,15 @@
       "fs2": "Rendah: 10-70 cm",
       "fs3": "Sedang: 71-150 cm",
       "fs4": "Tinggi: Lebih dari 150 cm"
-    }
+    },
+    "province": "Provinsi",
+    "flood": "Laporan Banjir",
+    "earthquake": "Laporan Gempa",
+    "wind": "Laporan Angin Kencang",
+    "haze": "Laporan Kabut Asap",
+    "fire": "Laporan Kebakaran",
+    "volcano": "Laporan Gunung Api",
+    "disaster": "Total Bencana / Provinsi"
   },
   "print_button": "Cetak"
 }

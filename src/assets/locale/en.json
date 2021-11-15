@@ -40,12 +40,14 @@
     "areas": "Flood affected areas"
   },
   "report": {
-    "report_title": "Flood Report",
+    "report_title": "Disaster Reports",
+    "jakarta_report_title": "Flood Report",
     "time_period": "Time period",
     "start": "Start",
     "end": "End",
     "last_updated":"Last RW status update:",
-    "current_time": "Report generated on:"
+    "current_time": "Report generated on:",
+    "total_report": "Total Reports"
   },
   "table": {
     "district": "District",
@@ -58,7 +60,15 @@
       "fs2": "Minor: 10-70cm",
       "fs3": "Moderate: 71-150cm",
       "fs4": "Severe: Greater than 150cm"
-    }
+    },
+    "province": "Province",
+    "flood": "Flood Reports",
+    "earthquake": "Earthquake Reports",
+    "wind": "Wind Reports",
+    "haze": "Haze Reports",
+    "fire": "Fire Reports",
+    "volcano": "Volcano Reports",
+    "disaster": "Total Disaster / Province"
   },
   "print_button": "Print"
 }

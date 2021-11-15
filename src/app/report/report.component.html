@@ -13,7 +13,8 @@
   </div>
 
   <div id="reportWrapper">
-    <h3 class="header mat-title">{{ 'report.report_title' | translate }}</h3>
+    <h3 *ngIf="tableService.selectedChart==='jakarta'" class="header mat-title">{{ 'report.jakarta_report_title' | translate }}</h3>
+    <h3 *ngIf="tableService.selectedChart==='activity' || tableService.selectedChart==='source'" class="header mat-title">{{ 'report.report_title' | translate }}</h3>
     <p class="mat-body-1">
       <b>{{ 'report.time_period' | translate }}</b><br>
       {{ 'report.start' | translate }}: {{timeService.reportParams.start}}<br>
@@ -27,7 +28,7 @@
     </p>
 
     <div id="tableWrapper">
-      <table>
+      <table *ngIf="tableService.selectedChart==='jakarta'">
         <tr class="tableHeaders mat-body-2">
           <td>
             {{ 'table.district' | translate }}
@@ -47,7 +48,7 @@
         </tr>
 
         <tr
-          *ngFor="let row of tableData"
+          *ngFor="let row of districtData"
           class="tableData mat-body-1">
           <td>
             {{row.district}}
@@ -97,6 +98,118 @@
           <td
             *ngIf="row.totalParent === 0">
             N/A
+          </td>
+        </tr>
+      </table>
+
+      <table *ngIf="tableService.selectedChart==='activity' || tableService.selectedChart==='source'">
+        <tr class="tableHeaders mat-body-2">
+          <td>
+            {{ 'table.province' | translate }}
+          </td>
+          <td>
+            {{ 'table.flood' | translate }}
+          </td>
+          <td>
+            {{ 'table.earthquake' | translate }}
+          </td>
+          <td>
+            {{ 'table.wind' | translate }}
+          </td>
+          <td>
+            {{ 'table.haze' | translate }}
+          </td>
+          <td>
+            {{ 'table.fire' | translate }}
+          </td>
+          <td>
+            {{ 'table.volcano' | translate }}
+          </td>
+          <td>
+            {{ 'table.disaster' | translate }}
+          </td>
+        </tr>
+
+        <tr *ngFor="let row of regionData" class="tableData mat-body-1">
+          <ng-container *ngIf="row.areaCount != 0">
+            <td class="province">
+              {{row.name}}
+            </td>
+            <td class="count">
+              {{row.floodCount}}
+            </td>
+            <td class="count">
+              {{row.earthquakeCount}}
+            </td>
+            <td class="count">
+              {{row.windCount}}
+            </td>
+            <td class="count">
+              {{row.hazeCount}}
+            </td>
+            <td class="count">
+              {{row.fireCount}}
+            </td>
+            <td class="count">
+              {{row.volcanoCount}}
+            </td>
+            <td class="count">
+              {{row.areaCount}}
+            </td>
+          </ng-container>
+
+          <td *ngIf="row.totalParent > 0" colspan="2">
+
+            <ul class="altTheme groupList" *ngFor="let group of row.stateGroups; let i = index">
+              <li class="mat-caption groupHeader">
+                {{ 'table.floodStates.fs' + group.state | translate }}
+              </li>
+
+              <li>
+                <ul *ngFor="let parent of group.parentAreas" class="altTheme">
+                  <li class="mat-caption parentHeader">
+                    {{parent.name}}
+                  </li>
+
+                  <li *ngFor="let local of parent.localAreas" class="mat-caption localItem">
+                    {{local}}
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </td>
+
+          <td *ngIf="row.totalParent === 0">
+            N/A
+          </td>
+          <td *ngIf="row.totalParent === 0">
+            N/A
+          </td>
+        </tr>
+        <tr class="tableHeaders mat-body-2">
+          <td>
+            {{ 'report.total_report' | translate }}
+          </td>
+          <td>
+            {{ disaster.floodCount }}
+          </td>
+          <td>
+            {{ disaster.earthquakeCount }}
+          </td>
+          <td>
+            {{ disaster.windCount }}
+          </td>
+          <td>
+            {{ disaster.hazeCount }}
+          </td>
+          <td>
+            {{ disaster.fireCount }}
+          </td>
+          <td>
+            {{ disaster.volcanoCount }}
+          </td>
+          <td>
+            {{ disaster.totalCount }}
           </td>
         </tr>
       </table>
